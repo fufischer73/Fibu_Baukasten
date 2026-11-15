@@ -14,7 +14,7 @@
 konten:
   - {nr: "0700", name: "Anlagen und Maschinen", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
   - {nr: "0840", name: "Fuhrpark", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
-  - {nr: "0870", name: "BGA", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "0870", name: "BGA", art: bestand, alias: ["Büromöbel", "Büromöbel und sonstige Geschäftsausstattung"], quelle: "Schulplan (Lehrkraft)", status: verifiziert}
   - {nr: "2000", name: "Rohstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
   - {nr: "2001", name: "Bezugskosten Rohstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
   - {nr: "2002", name: "Nachlässe Rohstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
@@ -83,3 +83,10 @@ konten:
   - {nr: "8000", name: "EBK (Eröffnungsbilanzkonto)", art: abschluss, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
   - {nr: "8010", name: "SBK (Schlussbilanzkonto)", art: abschluss, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
   - {nr: "8020", name: "GuV-Konto", art: abschluss, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "0500", name: "Unbebaute Grundstücke", art: bestand, quelle: "IKR (Kontenrahmen 15.12.2015), Cornelsen LS 54 und Kapitel 8, IHK-Aufgaben Anlagenwirtschaft; Lehrkraft bestätigt 2026-11-15", status: verifiziert}
+  - {nr: "0530", name: "Betriebsgebäude", art: bestand, quelle: "IKR (Kontenrahmen 15.12.2015), Cornelsen LS 54 und Kapitel 8, IHK-Aufgaben Anlagenwirtschaft; Lehrkraft bestätigt 2026-11-15", status: verifiziert}
+  - {nr: "0830", name: "Lager- und Transporteinrichtungen", art: bestand, quelle: "IKR (Kontenrahmen 15.12.2015), Cornelsen LS 54 und Kapitel 8, IHK-Aufgaben Anlagenwirtschaft; Lehrkraft bestätigt 2026-11-15", status: verifiziert}
+  - {nr: "0860", name: "Büromaschinen", art: bestand, quelle: "IKR (Kontenrahmen 15.12.2015), Cornelsen LS 54 und Kapitel 8, IHK-Aufgaben Anlagenwirtschaft; Lehrkraft bestätigt 2026-11-15", status: verifiziert}
+  - {nr: "5410", name: "Sonstige Erlöse", art: erfolg, alias: ["Erlöse aus Anlagenabgängen"], quelle: "IKR (Kontenrahmen 15.12.2015), Cornelsen LS 54 und Kapitel 8, IHK-Aufgaben Anlagenwirtschaft; Lehrkraft bestätigt 2026-11-15", status: verifiziert}
+  - {nr: "6520", name: "Abschreibungen auf Sachanlagen", art: erfolg, quelle: "IKR (Kontenrahmen 15.12.2015), Cornelsen LS 54 und Kapitel 8, IHK-Aufgaben Anlagenwirtschaft; Lehrkraft bestätigt 2026-11-15", status: verifiziert}
+  - {nr: "6979", name: "Anlagenabgänge", art: erfolg, quelle: "IKR (Kontenrahmen 15.12.2015), Cornelsen LS 54 und Kapitel 8, IHK-Aufgaben Anlagenwirtschaft; Lehrkraft bestätigt 2026-11-15", status: verifiziert}

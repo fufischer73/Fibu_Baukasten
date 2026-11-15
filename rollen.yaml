@@ -12,6 +12,10 @@ rollen:
   - {muster: "6(000|010|020|030|080)", rolle: AUFW,      name: "Aufwendungen für Werkstoffe und Waren (aufwandsorientiert)"}
   - {muster: "6(001|011|021|031|081)", rolle: BEZUG_A,   name: "Unterkonto Bezugskosten (Aufwand)"}
   - {muster: "6(002|012|022|032|082)", rolle: NACHL_A,   name: "Unterkonto Nachlässe (Aufwand)"}
+  - {muster: "0\\d{3}", rolle: ANLAGE,    name: "Anlagekonto (Sachanlagen und Grundstücke)"}
+  - {muster: "6520", rolle: ABSCHR,    name: "Abschreibungen auf Sachanlagen"}
+  - {muster: "5410", rolle: ANLERLOES, name: "Sonstige Erlöse (Erlös aus Anlagenverkauf)"}
+  - {muster: "6979", rolle: ANLABGANG, name: "Anlagenabgänge (Buchwertabgang)"}
   - {muster: "2600", rolle: VST,       name: "Vorsteuer"}
   - {muster: "4800", rolle: UST,       name: "Umsatzsteuer"}
   - {muster: "4400", rolle: VERB,      name: "Verbindlichkeiten a. L. L."}

@@ -6,3 +6,4 @@ themen:
   - {id: umsatzsteuer, titel: "Umsatzsteuer prüfen", lernfeld: "", repository: "Umsatzsteuer-", stand: gebaut, datum: "2026-11-06", hinweis: "Check-Pfad, erster Pfad des Baukastens. Lernfeld bitte ergänzen."}
   - {id: beschaffung, titel: "Buchungen im Beschaffungsprozess", lernfeld: "5", repository: "Fibu_Beschaffung", stand: freigegeben, datum: "2026-11-09", hinweis: "aufwands- und bestandsorientiert, Skonto, Gutschriften, Abschluss"}
   - {id: absatz, titel: "Absatzprozesse buchen", lernfeld: "5", repository: "Absatz_Fibu", stand: freigegeben, datum: "2026-11-15", hinweis: "Förderstufe, Überprüfung, Abschlusstest, Nachschlagen, Hilfsblatt"}
+  - {id: anlagen, titel: "Anlagenwirtschaft: Abschreibungen und Anlagenverkauf", lernfeld: "5", repository: "Anlagenwirtschaft_Fibu", stand: im_bau, datum: "2026-11-15", hinweis: "Anschaffungskosten, lineare, Leistungs- und degressive Abschreibung, Anlagenverkauf, digitale Wirtschaftsgüter, Abschreibungskreislauf"}
