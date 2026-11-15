@@ -263,7 +263,8 @@ def beleg_html(b):
                    f'<td style="vertical-align:top"><table style="border-collapse:collapse;font-size:.9em">{info}</table></td></tr></table>')
     sp = b.get("spalten") or []
     if sp:
-        rechts = [all(_beleg_rechts(z[i]) for z in b.get("zeilen") or [[""] * len(sp)]) and bool(b.get("zeilen")) for i in range(len(sp))]
+        zl_ = b.get("zeilen") or []
+        rechts = [any(str(z[i]).strip() for z in zl_) and all(not str(z[i]).strip() or _beleg_rechts(z[i]) for z in zl_) for i in range(len(sp))]
         head = "".join(f'<th style="text-align:{"right" if rechts[i] else "left"};padding:.25em .5em;border:1px solid #999;background:#eef1f4;font-size:.85em">{e(s)}</th>' for i, s in enumerate(sp))
         rows = "".join("<tr>" + "".join(f'<td style="padding:.25em .5em;border:1px solid #ccc;text-align:{"right" if rechts[i] else "left"};{"white-space:nowrap;" if rechts[i] else ""}">{e(c)}</td>' for i, c in enumerate(z)) + "</tr>" for z in b.get("zeilen") or [])
         out.append(f'<table style="width:100%;border-collapse:collapse;margin-bottom:.6em"><tr>{head}</tr>{rows}</table>')

@@ -167,3 +167,15 @@
   quelle: Pfad Umsatzsteuer, Modul U3
   status: verifiziert
   thema: umsatzsteuer
+- muster: S:ERLOES+UST > H:FORD
+  name: Gutschrift nach Rücksendung (Erlöse und Umsatzsteuer sinken)
+  technik: '-'
+  quelle: LS 53 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 4f; Arbeitsblatt 53.2 und 53.4; Lehrbuch S. 433
+  status: verifiziert
+  thema: absatz
+- muster: S:ERLBER+UST > H:FORD
+  name: Nachträglicher Preisnachlass (Mängelrüge, Bonus) über Erlösberichtigungen
+  technik: '-'
+  quelle: LS 53 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 1d, 2, 4g, 4h und 5b; Arbeitsblatt 53.2 und 53.4; Lehrbuch S. 433 und 434
+  status: verifiziert
+  thema: absatz

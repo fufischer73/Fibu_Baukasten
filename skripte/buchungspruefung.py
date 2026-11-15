@@ -32,7 +32,8 @@ ROLLEN = [  # Kontonummer-Muster → Rolle im Buchungssatz (IKR, Werkstoffkonten
     (r"2(000|010|020|030|280)", "BESTAND"), (r"2(001|011|021|031|281)", "BEZUG_B"), (r"2(002|012|022|032|282)", "NACHL_B"),
     (r"6(000|010|020|030|080)", "AUFW"), (r"6(001|011|021|031|081)", "BEZUG_A"), (r"6(002|012|022|032|082)", "NACHL_A"),
     (r"2600", "VST"), (r"4800", "UST"), (r"4400", "VERB"), (r"2400", "FORD"), (r"2800", "BANK"), (r"2880", "KASSE"),
-    (r"8000", "EBK"), (r"8010", "SBK"), (r"8020", "GUV"), (r"5[01]\d\d", "ERLOES"),
+    (r"8000", "EBK"), (r"8010", "SBK"), (r"8020", "GUV"), (r"5(001|101)", "ERLBER"), (r"5[01]\d\d", "ERLOES"),
+    (r"6040", "VERPACK"), (r"6140", "FRACHT"), (r"6150", "PROVISION"),
 ]
 
 
