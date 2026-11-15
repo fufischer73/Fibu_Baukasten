@@ -177,10 +177,17 @@ def anleitung(kurs, b, version, mbz_name):
         return " **oder** ".join(teile)
 
     z = [f"# {kurs.titel} – Moodle-Kurs von Hand einrichten", "",
-         "Normalerweise geht es schneller mit der Kurssicherung:",
-         f"**Kurs › Mehr › Wiederverwendung › Wiederherstellen** → `{mbz_name}` hochladen → „In diesen Kurs, "
-         "Inhalte hinzufügen“ → durchklicken. Diese Anleitung ist die Rückfallebene, falls Wiederherstellen "
-         "nicht erlaubt ist.", "",
+         "**Empfohlener Weg:** Abschnitt und Unterabschnitte im Zielkurs selbst anlegen und nur die Lernpakete (und den Test) "
+         "als Aktivitäten einfügen. So muss nichts verschoben und kein Unterabschnitt gezählt werden. Bei Änderungen "
+         "tauschst du später nur die Paketdatei im vorhandenen Lernpaket aus (Einstellungen › Paketdatei), der Fortschritt "
+         "der Schüler:innen bleibt, solange die Modul-IDs gleich bleiben.", "",
+         "**Tipp zum Zeitsparen:** Das erste Lernpaket vollständig einrichten (Einstellungen siehe unten), dann im Kurs "
+         "**duplizieren** (Drei-Punkte-Menü › Duplizieren), den Namen ändern und die ZIP austauschen. Bitte zuerst im "
+         "Testkurs ausprobieren. Den Test entweder von Hand einrichten (Fragen-XML importieren) oder aus der Sicherung "
+         "wiederherstellen und im Schritt „Schema“ nur den Test ankreuzen.", "",
+         f"**Alternative:** Kurssicherung wiederherstellen (**Kurs › Mehr › Wiederverwendung › Wiederherstellen** → "
+         f"`{mbz_name}` → „In diesen Kurs, Inhalte hinzufügen“, nur **einmal**). Dabei entstehen die Unterabschnitte im "
+         "ersten Abschnitt und müssen an den richtigen Ort verschoben werden.", "",
          "## Vorbereitung", "",
          "- Kurs › Einstellungen › **Abschlussverfolgung: Ja**",
          "- Kursformat: Themen (Moodle 5 oder Moodle 4.5 mit Plugin: Unterabschnitte müssen verfügbar sein)", "",

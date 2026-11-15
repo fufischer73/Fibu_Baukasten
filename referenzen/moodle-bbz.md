@@ -24,7 +24,18 @@ moodle:
 
 Mit `stufen` heißen die Unterabschnitte „Übungs-Lernpfad <Thema> – 🌱 Schritt für Schritt“ und „… – 🎯 Überprüfung“. Mit `einer` heißt der eine Unterabschnitt „Übungs-Lernpfad <Thema>“. Hat der Pfad nur eine Stufe, wird der Name nicht ergänzt.
 
-## Ablauf der Übergabe
+## Empfohlener Weg: vorbereitete Unterabschnitte, nur Lernpakete einfügen
+
+Seit dem Absatz-Pfad ist das der Hauptweg (die Klickanleitung `ausgabe/moodle/ANLEITUNG_moodle4.md` beschreibt ihn): Abschnitt und Unterabschnitte im Zielkurs selbst anlegen, dann die Lernpakete als Aktivitäten einfügen. Es muss nichts aus dem ersten Abschnitt verschoben und kein versteckter Unterabschnitt gezählt werden.
+
+1. Das erste Lernpaket vollständig einrichten (Einstellungen in der Klickanleitung).
+2. Im Kurs **duplizieren** und bei jedem Duplikat Namen ändern und die ZIP aus `download/lernpakete/` austauschen (Einstellungen › Paketdatei). Erst im Testkurs ausprobieren.
+3. Den Abschlusstest von Hand einrichten (Fragen-XML) oder aus der Sicherung nur den Test wiederherstellen (Schritt „Schema“, nur den Test ankreuzen).
+4. Änderungen später: nur die Paketdatei tauschen.
+
+Die Kurssicherung (`…_moodle4.mbz`) bleibt als Alternative. Der folgende Ablauf gilt für sie.
+
+## Ablauf der Übergabe mit der Kurssicherung
 
 1. **Testkurs:** neuen, leeren Kurs anlegen. *Mehr › Wiederverwendung › Wiederherstellen*, `…_moodle4.mbz` hochladen, „In diesen Kurs, Inhalte hinzufügen“. Kontrollieren: Abschnitt mit den Unterabschnitten, Lernpakete öffnen sich, Test zeigt Belege und Buchungssätze als Tabelle.
 2. **Echter Kurs:** vorher **Kurs sichern** (*Mehr › Wiederverwendung › Sichern*). Dann die Sicherung wiederherstellen (**einmal**).
