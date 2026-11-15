@@ -92,6 +92,7 @@ Siehe `referenzen/moodle-bbz.md`. Kurz:
 ### Technik
 - **Belege auf dem Handy:** höchstens 3 bis 4 Spalten. Spalte „Pos.“ weglassen, Menge und Rabatt in die Bezeichnung („3 Stück Küchenzeile, 10 % Rabatt“), kurze Zeilentitel („Verpackung“ statt „Verpackungskosten“). Leere Zellen in Zahlenspalten sind jetzt erlaubt.
 - **Raster:** 19 % Umsatzsteuer und Prozentsätze führen schnell zu drei Nachkommastellen. Preise in Zehnerschritten, Mengen in Fünferschritten, Nettobeträge als ganze Euro. Die Umsatzsteuer auf einen Bonus darf kaufmännisch gerundet werden, dann in der Aufgabe sagen.
+- **Rechenfragen im Test mit Beleg und festen Zahlen:** `typ: zahl` darf ohne `parameter:` stehen (dann eine Antwort, kein Zufall) und kann einen `beleg:` tragen. Das ist näher an der Prüfung als Zufallszahlen. Zufallszahlen eignen sich eher für Übungen. Auch Multiple-Choice-Sachverhalte profitieren von einem Beleg (hier Frage 8 und 9 im Absatz-Test).
 - **Punkte je Testfrage:** optionales Feld `punkte` (Auswahl, Zuordnung, Reihenfolge, offen). Standard ist 1. Rechenfragen zählen je Feld 1.
 - **Selbsttest** löst jetzt auch Aufgaben mit Zahllast und Erfolg. Aufgaben mit Steuerart lässt er aus.
 - **Browser-Test in Python:** `pip install playwright`, der vorhandene Browser unter `/opt/pw-browsers` wird genutzt.

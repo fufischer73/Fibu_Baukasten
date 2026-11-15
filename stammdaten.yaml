@@ -20,7 +20,7 @@ lieferanten:
   - {name: "Öl-Kontor Elbe GmbH", plz_ort: "Hamburg", liefert: "Betriebsstoffe", kreditor: "44040", gruppe: einkauf}
   - {name: "Küchenzubehör Bergmann KG", strasse: "Gewerbering 9", plz_ort: "24534 Neumünster", liefert: "Handelswaren", kreditor: "44050", gruppe: einkauf}
   - {name: "Nord-Express Spedition GmbH", strasse: "Kanalweg 5", plz_ort: "24768 Rendsburg", liefert: "Fracht und Transport", kreditor: "44060", gruppe: vertrieb}
-  - {name: "Verpackungstechnik Brandt GmbH", plz_ort: "Neumünster", liefert: "Verpackungsmaterial", kreditor: "44070", gruppe: vertrieb}
+  - {name: "Verpackungstechnik Brandt GmbH", strasse: "Industriestraße 7", plz_ort: "24537 Neumünster", liefert: "Verpackungsmaterial", kreditor: "44070", gruppe: vertrieb}
   - {name: "Jan Petersen e. K.", strasse: "Dorfstraße 12", plz_ort: "24340 Eckernförde", liefert: "Vermittlung von Verkäufen (Handelsvertreter)", kreditor: "44080", gruppe: vertrieb}
 
 # Debitoren (Sammelkonto 2400)

@@ -47,9 +47,17 @@ def frage_zu_block(a):
     if typ == "zahl":
         par = {k: {"von": v["min"], "bis": v["max"], "schritt": v.get("schritt", 1)} for k, v in (a.get("parameter") or {}).items()}
         felder = []
+        ergebnis = {}
         for x in a.get("antworten") or []:
             f = {"id": x.get("id"), "label": x.get("label") or "Ergebnis", "formel": str(x.get("formel")), "runden": x.get("runden", 2),
                  "hinweis": ""}
+            if not par:
+                # feste Zahlen (kein parameter:): die Formel wird jetzt ausgerechnet, die Übung bekommt die fertige Antwort
+                import bausteine
+                wert = round(bausteine.formel_wert(f.pop("formel"), ergebnis), int(f["runden"]))
+                f["antwort"] = wert
+                if x.get("id"):
+                    ergebnis[x["id"]] = wert
             if x.get("einheit"):
                 f["einheit"] = x["einheit"]
             felder.append(f)
