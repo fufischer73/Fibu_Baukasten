@@ -31,6 +31,8 @@ Du baust zusammen mit einer Lehrkraft einen Übungs- und Überprüfungspfad zu e
 - **Zwei Stufen:** 🌱 **Schritt für Schritt** (Förderbereich, 1 bis 3 Module) und 🎯 **Überprüfung** (3 bis 4 Module).
 - **Abschlusstest** am Ende der Überprüfung: Moodle-Test aus `fragen/` und Web-Seite.
 - **Seiten** (`seiten/`): Unternehmen, Kontenübersicht, Merkzettel, bei Bedarf Schemata. Sie kommen als `:::hilfe` in die Module.
+- **Optional eine dritte Stufe 📚 Nachschlagen** (Modul `n1` ohne Aufgaben): alle Hilfsseiten als `:::hilfe` plus ein **DOCX-Hilfsblatt** zum Ausdrucken (Vorlage: `bibliothek/hilfsblatt_erzeugen_absatz.py`, Skript in `werkzeuge/` ablegen, nicht in `material/`). Die Hilfen bleiben zusätzlich in den Aufgabenmodulen.
+- **`PRUEFUNGSBEZUG.md`** im Themenordner: welche Aufgabenart der prüfungsnahen Aufgaben wo im Pfad vorkommt und was bewusst fehlt.
 - **Moodle:** ein Abschnitt, je Stufe ein Unterabschnitt, ohne Start-Lernpaket.
 - Modellunternehmen: Wiesengrund Küchenmöbel GmbH.
 
@@ -103,7 +105,7 @@ Die Lehrkraft testet die Web-Version und die Moodle-Datei im Testkurs. Gib ihr e
 
 ### 8 Moodle übergeben
 
-Siehe `referenzen/moodle-bbz.md`: Testkurs, Kurs sichern, wiederherstellen, Unterabschnitt verschieben, Lernpakete bei Änderungen austauschen. **Nie zweimal wiederherstellen.**
+Siehe `referenzen/moodle-bbz.md`. **Hauptweg:** Abschnitt und Unterabschnitte im Zielkurs selbst anlegen, Lernpakete einfügen (erstes einrichten, dann duplizieren), bei Änderungen nur die Paketdatei tauschen. **Alternative:** Kurssicherung wiederherstellen und Unterabschnitte verschieben. **Nie zweimal wiederherstellen.**
 
 ### 9 Wissen sichern
 
