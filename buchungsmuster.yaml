@@ -131,8 +131,8 @@
   quelle: Arbeitsblatt 52.2 und 52.3
   status: verifiziert
   thema: beschaffung
-- muster: S:0700+VST > H:VERB
-  name: Kauf einer Maschine auf Ziel
+- muster: S:ANLAGE+VST > H:VERB
+  name: Kauf eines Anlagegutes auf Ziel (auch Nebenkosten einzeln)
   technik: '-'
   quelle: Pfad Umsatzsteuer, Modul U3
   status: verifiziert
@@ -209,3 +209,107 @@
   quelle: LS 53 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 4e
   status: verifiziert
   thema: absatz
+- muster: S:VERB > H:ANLAGE+VST
+  name: Gutschrift zum Anlagegut (Anschaffungspreisminderung)
+  technik: '-'
+  quelle: LS 54 Arbeitsauftrag 1, Nr. 2; Aufgabe 1a3; IHK 230002.2 („4 an 1;3“)
+  status: verifiziert
+  thema: anlagen
+- muster: S:VERB > H:ANLAGE+BANK+VST
+  name: Rechnungsausgleich eines Anlagegutes unter Abzug von Skonto (Nettomethode)
+  technik: '-'
+  quelle: LS 54 Folgesituation 2, Beleg 3, Nr. 2; Aufgabe 8d; Alles klar 3b; IHK-Beispiel
+    Skonto auf Anlage 210002.2
+  status: verifiziert
+  thema: anlagen
+- muster: S:VERB > H:BANK
+  name: Rechnungsausgleich eines Anlagegutes ohne Skonto
+  technik: '-'
+  quelle: LS 54 Folgesituation 2, Beleg 1, Nr. 2; IHK 220001.7 („6 an 5“)
+  status: verifiziert
+  thema: anlagen
+- muster: S:ANLAGE+VST > H:KASSE
+  name: Barzahlung von Anschaffungsnebenkosten
+  technik: '-'
+  quelle: Aufgabe 4e (Zulassungskosten), Aufgabe 8c (Lieferung)
+  status: verifiziert
+  thema: anlagen
+- muster: S:ABSCHR > H:ANLAGE
+  name: Abschreibung auf Sachanlagen (direkt)
+  technik: '-'
+  quelle: Lehrbuch S. 443; LS 54 Beleg-Lösungen; Aufgabe 3; Alles klar 3d, 4b; IHK
+    202101.6, 212201.5, 240002.4 („4 an 1“)
+  status: verifiziert
+  thema: anlagen
+- muster: S:GUV > H:ABSCHR
+  name: Abschluss des Abschreibungskontos über das GuV-Konto
+  technik: '-'
+  quelle: Lehrbuch S. 443; LS 54 Arbeitsblatt 54.1 Nr. 4
+  status: verifiziert
+  thema: anlagen
+- muster: S:SBK > H:ANLAGE
+  name: Abschluss des Anlagekontos über das Schlussbilanzkonto
+  technik: '-'
+  quelle: Lehrbuch S. 443; LS 54 Arbeitsblatt 54.1 Nr. 3
+  status: verifiziert
+  thema: anlagen
+- muster: S:FORD > H:ANLERLOES+UST
+  name: Verkauf eines Anlagegutes auf Ziel (Erlös)
+  technik: '-'
+  quelle: Lehrbuch S. 444; Alles klar 9a; IHK 202102.1, 222302.5, 220002.1 („2 an
+    [5;6]“)
+  status: verifiziert
+  thema: anlagen
+- muster: S:KASSE > H:ANLERLOES+UST
+  name: Verkauf eines Anlagegutes gegen bar (Erlös)
+  technik: '-'
+  quelle: LS 54 Folgesituation 1, Nr. 3 (zusammen mit dem Buchwertabgang)
+  status: verifiziert
+  thema: anlagen
+- muster: S:ANLABGANG > H:ANLAGE
+  name: Buchwertabgang beim Anlagenverkauf
+  technik: '-'
+  quelle: Lehrbuch S. 444; Alles klar 9b; IHK 202102.2, 222302.6, 232401.7, 220002.2
+    („6 an 1“)
+  status: verifiziert
+  thema: anlagen
+- muster: S:6800+ANLAGE+VST > H:VERB
+  name: Kauf von Anlagegut und Verbrauchsmaterial in einer Rechnung
+  technik: '-'
+  quelle: LS 54 Arbeitsblatt 54.2 Nr. 1
+  status: verifiziert
+  thema: anlagen
+- muster: S:VERB > H:6800+ANLAGE+BANK+VST
+  name: Rechnungsausgleich mit Skonto bei Anlagegut und Verbrauchsmaterial
+  technik: '-'
+  quelle: LS 54 Arbeitsblatt 54.2 Nr. 2
+  status: verifiziert
+  thema: anlagen
+- muster: S:BANK > H:ANLERLOES+UST
+  name: Verkauf eines Anlagegutes, Zahlung sofort per Bank (Erlös)
+  technik: '-'
+  quelle: Ergänzendes Material der Lehrkraft (Lernsituation 11, Vertiefende Übung
+    2 „gegen Bankscheck“, ohne Lösung); gleiches Muster wie Verkauf bar und auf Ziel
+  status: verifiziert
+  thema: anlagen
+- muster: S:ANLERLOES > H:GUV
+  name: Abschluss des Erlöskontos 5410 über das GuV-Konto
+  technik: '-'
+  quelle: 'Ergänzendes Material der Lehrkraft (Lernsituation 11, Info-Box: Abschluss
+    über das GuV-Konto); keine Lösung zu den Aufgaben'
+  status: verifiziert
+  thema: anlagen
+- muster: S:GUV > H:ANLABGANG
+  name: Abschluss des Kontos 6979 Anlagenabgänge über das GuV-Konto
+  technik: '-'
+  quelle: 'Ergänzendes Material der Lehrkraft (Lernsituation 11, Info-Box: Abschluss
+    über das GuV-Konto); keine Lösung zu den Aufgaben'
+  status: verifiziert
+  thema: anlagen
+- muster: S:GUV > H:3000
+  name: Gewinn aus dem GuV-Konto auf das Eigenkapital übertragen
+  technik: '-'
+  quelle: Ergänzendes Material der Lehrkraft (Lernsituation 11, Info-Box zeigt „3000
+    EK“ im GuV-Konto beim Verlust, umgekehrt beim Gewinn)
+  status: verifiziert
+  thema: anlagen

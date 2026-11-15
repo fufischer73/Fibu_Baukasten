@@ -23,6 +23,8 @@ GRUPPEN = {
     "einkauf": ("Lieferanten in den Aufgaben", "lieferanten", "Lieferant", "Liefert", "Kreditor"),
     "vertrieb": ("Dienstleister für den Vertrieb", "lieferanten", "Dienstleister", "Leistung", "Kreditor"),
     "kunden": ("Kunden in den Aufgaben", "kunden", "Kunde", "Kauft", "Debitor"),
+    "anlagen": ("Lieferanten für Anlagegüter", "lieferanten", "Lieferant", "Liefert", "Kreditor"),
+    "anlagenkaeufer": ("Käufer gebrauchter Anlagegüter", "kunden", "Käufer", "Kauft", "Debitor"),
 }
 
 
@@ -37,7 +39,12 @@ def tabellen(gruppen=("einkauf", "vertrieb", "kunden"), daten=None):
     z = []
     for g in gruppen:
         titel, schluessel, spalte1, spalte2, nummer = GRUPPEN[g]
-        eintraege = [e for e in d.get(schluessel) or [] if schluessel == "kunden" or e.get("gruppe") == g]
+        if g == "kunden":
+            eintraege = [e for e in d.get("kunden") or [] if e.get("gruppe") != "anlagen"]
+        elif g == "anlagenkaeufer":
+            eintraege = [e for e in d.get("kunden") or [] if e.get("gruppe") == "anlagen"]
+        else:
+            eintraege = [e for e in d.get(schluessel) or [] if e.get("gruppe") == g]
         if not eintraege:
             continue
         z += [f"## {titel}", "", f"| {spalte1} | {spalte2} | {nummer} |", "| --- | --- | --- |"]
@@ -47,10 +54,10 @@ def tabellen(gruppen=("einkauf", "vertrieb", "kunden"), daten=None):
             was = e.get("liefert") or e.get("kauft") or ""
             z.append(f"| {e['name']}, {ort} | {was} | {nr} |" if ort else f"| {e['name']} | {was} | {nr} |")
         z.append("")
-        if g == "kunden":
+        if g in ("kunden", "anlagenkaeufer"):
             z += ["Die Debitorennummern stehen nur auf den Belegen. Gebucht wird in den Aufgaben auf dem Sammelkonto "
                   "**2400 Forderungen a. L. L.**", ""]
-        elif g == "vertrieb" or (g == "einkauf" and "vertrieb" not in gruppen):
+        elif g == "anlagen" or g == "vertrieb" or (g == "einkauf" and "vertrieb" not in gruppen):
             z += ["Die Kreditorennummern stehen nur auf den Belegen. Gebucht wird in den Aufgaben auf dem Sammelkonto "
                   "**4400 Verbindlichkeiten a. L. L.**", ""]
     return "\n".join(z).rstrip() + "\n"

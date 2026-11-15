@@ -22,6 +22,13 @@ lieferanten:
   - {name: "Nord-Express Spedition GmbH", strasse: "Kanalweg 5", plz_ort: "24768 Rendsburg", liefert: "Fracht und Transport", kreditor: "44060", gruppe: vertrieb}
   - {name: "Verpackungstechnik Brandt GmbH", strasse: "Industriestraße 7", plz_ort: "24537 Neumünster", liefert: "Verpackungsmaterial", kreditor: "44070", gruppe: vertrieb}
   - {name: "Jan Petersen e. K.", strasse: "Dorfstraße 12", plz_ort: "24340 Eckernförde", liefert: "Vermittlung von Verkäufen (Handelsvertreter)", kreditor: "44080", gruppe: vertrieb}
+  - {name: "Maschinenbau Nordland GmbH", strasse: "Gewerbepark 3", plz_ort: "24539 Neumünster", liefert: "Maschinen und Fertigungsanlagen", kreditor: "44090", gruppe: anlagen}
+  - {name: "Autohaus Förde GmbH", strasse: "Kieler Straße 90", plz_ort: "24768 Rendsburg", liefert: "Fahrzeuge (Pkw, Lkw)", kreditor: "44100", gruppe: anlagen}
+  - {name: "Büroausstattung Ostsee GmbH", strasse: "Marktplatz 6", plz_ort: "24376 Kappeln", liefert: "Büromöbel, Kopierer und Büromaschinen", kreditor: "44110", gruppe: anlagen}
+  - {name: "IT-Systemhaus Nord GmbH", strasse: "Technologiestraße 2", plz_ort: "24106 Kiel", liefert: "Computer und Software", kreditor: "44120", gruppe: anlagen}
+  - {name: "Lagertechnik Brinkmann GmbH", strasse: "Industriekamp 11", plz_ort: "24534 Neumünster", liefert: "Regale und Lagereinrichtung", kreditor: "44130", gruppe: anlagen}
+  - {name: "Tankstelle Förde-Energie", strasse: "Hamburger Straße 120", plz_ort: "24768 Rendsburg", liefert: "Kraftstoff (Betriebsstoff, kein Anlagegut)", kreditor: "44150", gruppe: anlagen}
+  - {name: "Notariat Lorenz und Kruse", strasse: "Königstraße 5", plz_ort: "24768 Rendsburg", liefert: "Beurkundung beim Grundstückskauf", kreditor: "44140", gruppe: anlagen}
 
 # Debitoren (Sammelkonto 2400)
 kunden:
@@ -30,3 +37,6 @@ kunden:
   - {name: "Küchenwelt Holstein GmbH", strasse: "Gerberstraße 5", plz_ort: "24534 Neumünster", kauft: "Schränke, Spülen, Armaturen", debitor: "20030"}
   - {name: "Einrichtungshaus Weser KG", strasse: "Langenstraße 18", plz_ort: "28195 Bremen", kauft: "Küchenzeilen, Küchenzubehör", debitor: "20040"}
   - {name: "Baumarkt Nordkette AG", strasse: "Industrieweg 40", plz_ort: "22525 Hamburg", kauft: "Handelswaren", debitor: "20050"}
+  - {name: "Maschinenhandel Weser GmbH", strasse: "Überseestraße 14", plz_ort: "28217 Bremen", kauft: "gebrauchte Maschinen", debitor: "20060", gruppe: anlagen}
+  - {name: "Autohaus Küstenmobil GmbH", strasse: "Husumer Straße 40", plz_ort: "25746 Heide", kauft: "gebrauchte Fahrzeuge", debitor: "20070", gruppe: anlagen}
+  - {name: "Restposten-Handel Nord GmbH", strasse: "Hafenstraße 8", plz_ort: "24937 Flensburg", kauft: "gebrauchte Büro- und Lagereinrichtung", debitor: "20080", gruppe: anlagen}

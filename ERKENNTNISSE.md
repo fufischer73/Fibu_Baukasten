@@ -108,6 +108,28 @@ Siehe `referenzen/moodle-bbz.md`. Kurz:
 ### Moodle
 - **Hauptweg am BBZ (Wunsch der Lehrkraft, 15.11.2026):** alles fertig vorbereiten. Kurssicherung `.mbz` einmal wiederherstellen, Unterabschnitt verschieben, leeren Abschnitt löschen. Die Lehrkraft hat beide Wege ausprobiert und das Vorbereitete bevorzugt, weil das Einrichten jeder Aktivität von Hand und das spätere Austauschen mühsamer ist. Änderungen später: nur Lernpakete (Paketdatei) tauschen. Nur ein geänderter Test: kleine Test-Sicherung `<test-id>_moodle4.mbz` (alten Test samt Fragen vorher löschen). Von Hand einrichten bleibt Alternative; Duplizieren der Lernpakete am BBZ ungetestet. **Moodle kennt keine Unterabschnitte in Unterabschnitten:** Arbeitet die Lehrkraft in einem vorhandenen Unterabschnitt, muss die Sicherung die Aktivitäten ohne eigenen Unterabschnitt liefern (`unterabschnitte: direkt`). Das wird im Interview abgefragt (SKILL.md, Frage 7).
 
+## 9 Erkenntnisse aus dem Anlagen-Pfad (15.11.2026)
+
+### Zusammenarbeit und Material
+- **Widersprüche zwischen Quellen sofort melden und entscheiden lassen.** Beim Verkaufsmonat rechnet das Lehrbuch anders als die IHK-Lösung und das ergänzende Material. Die Lehrkraft hat die steuerliche Regel (bis zum Vormonat) festgelegt und die Cornelsen-Regel ausdrücklich verworfen (IHK und ein anderes Schulbuch rechnen anders). Bis zur Entscheidung habe ich Randtage (Verkauf am Monatsersten oder -letzten) gemieden. Wenn Cornelsen-Lösungen im Verkaufsjahr abweichen, steht ein Hinweis im Pfad.
+- **Lösungen nachrechnen lohnt sich:** Gefunden wurden vier Fehler (Aufgabe 1b mit falschen Anschaffungskosten, ein Tippfehler ,89 statt ,80 mit Folgefehlern, ein falscher Haben-Betrag, die Zuordnung 8 bei AB 54.3). Der Cornelsen-Unterschied zeigt sich auch beim Verkaufsjahr.
+- **Ergänzendes Material (hier Lernsituation 11) ist kein Maßstab:** Es hat keine Lösungen. Daraus abgeleitete Muster (Abschluss über das GuV-Konto, Gewinn auf das Eigenkapital) bleiben „neu“.
+- **Gliederung und Konten gleichzeitig vorlegen:** Mit Voreinstellungen (degressiv, digitale Wirtschaftsgüter, Gegenstand) spart das eine Runde. Ein Satz „Passt das so?“ genügt.
+- **Abschreibungskreislauf:** Erst gewünscht (Material von N. Böing, nboeing.de, eigene SVG-Grafik und Reihenfolge-Übung gebaut), dann von der Lehrkraft wieder herausgenommen: Er kommt später im Lernfeld Finanzierung. Gegenstand mit der Lehrkraft festlegen, bevor Zusatzwünsche gebaut werden. Die SVG-Idee und der Aufbau stehen in der Git-Historie des Anlagen-Pfads.
+
+### Didaktik
+- **Eine degressive Aufgabe** mit Wechsel zur linearen Abschreibung ist als Einzelaufgabe möglich: Der Satz wird vorgegeben, so braucht es kein Gesetz. Die Regel bleibt „nicht bestätigt“.
+- **Reihenfolge-Übung** (`typ: reihenfolge`) funktioniert in Modulen und im Test für Abläufe (im Anlagen-Pfad zuerst für den Abschreibungskreislauf gebaut, später entfernt).
+- **Direktabschreibung:** Die Technik-Frage (aufwands- oder bestandsorientiert) entfällt bei Anlagen.
+
+### Technik
+- **Neue Rolle ANLAGE** (`0\d{3}` in `rollen.yaml`): Ein Muster gilt für alle Anlagekonten. Das alte Muster „0700 + Vorsteuer an Verbindlichkeiten“ wurde auf ANLAGE verallgemeinert.
+- **Stammdaten:** Neue Gruppen `anlagen` (Lieferanten) und `anlagenkaeufer` (Kunden mit `gruppe: anlagen`) in `stammdaten.yaml` und `stammdaten.py --seite --gruppen anlagen anlagenkaeufer`.
+- **YAML:** Auch `erklaerung:` und `titel:` im Kopf einer Übung brauchen Anführungszeichen, wenn „: “ vorkommt (zum Beispiel „Zeitanteilig im Kaufjahr: …“). Danach `pruefen.py`.
+- **Zahlenraster für Anlagen:** AK = Vielfaches von 1.440 bei 6 Jahren Nutzungsdauer (mal 9 oder 5 Monate), Verkaufspreise als Formel (Buchwert plus 1.400), damit Gewinn und Verlust ohne negative Beträge in den Feldern auskommen.
+- **SVG in Seiten** (inline im Markdown ohne Leerzeilen) funktioniert, auch im Handy-Layout. Beschriftungen im Ellipsenradius halten (Texte kürzen).
+- **Moodle:** Der Pfad wurde noch nicht im Testkurs getestet. Der Modus `direkt` mit Trennbeschriftungen (aus dem Absatz-Pfad) ist weiter ungeprüft.
+
 ## 8 Offene Punkte (Stand 15.11.2026, bitte zu Beginn eines neuen Themas die Lehrkraft danach fragen)
 
 - **Moodle-Testkurs:** Die Lehrkraft hat die Sicherungen des Absatz-Pfads im Testkurs eingespielt. Das Ergebnis ist hier noch nicht festgehalten. Ungetestet am BBZ waren: Textfelder als Trenner in der Kurssicherung, Modus `direkt`, die kleine Test-Sicherung (`<test-id>_moodle4.mbz`) und das Duplizieren von Lernpaketen. **Nachfragen und die Antwort hier eintragen.**

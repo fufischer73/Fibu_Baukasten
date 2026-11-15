@@ -78,6 +78,22 @@ Quelle: Lösungsvorschläge der Lehrkraft (Cornelsen, Industriekaufleute 1, Lern
 
 Quelle: Lösungsvorschläge der Lehrkraft (Cornelsen, Industriekaufleute 1, Lernfeld 5, Lernsituation 53) und prüfungsnahe Aufgaben (Absatz KSK). Belegt in `buchungsmuster.yaml`.
 
+### Anlagenwirtschaft: Kauf, Abschreibung, Verkauf (Anlagekonten 0530, 0700, 0830, 0840, 0860, 0870, Rolle ANLAGE)
+
+| Vorgang | Buchung |
+| --- | --- |
+| Kauf auf Ziel (auch Nebenkosten einzeln) | Anlagekonto und 2600 an 4400 |
+| Gutschrift (Mängelrüge) | 4400 an Anlagekonto und 2600 |
+| Rechnungsausgleich mit Skonto (Nettomethode) | 4400 an 2800, Anlagekonto und 2600 |
+| Rechnungsausgleich ohne Skonto | 4400 an 2800 |
+| Abschreibung (direkt, keine Unterkonten) | 6520 an Anlagekonto |
+| Abschluss | 8020 an 6520, 8010 an Anlagekonto (Buchwert) |
+| Verkauf auf Ziel | 2400 an 5410 und 4800 (Nettopreis auf 5410) |
+| Buchwertabgang | 6979 an Anlagekonto (zwei getrennte Sätze, Bruttomethode) |
+
+Quelle: Cornelsen LF 5 Kapitel 8 und Lernsituation 54 mit Lösungen, IHK-Aufgaben Anlagenwirtschaft mit Lösungen. Alle 16 Muster hat die Lehrkraft am 2026-11-15 bestätigt (Status „verifiziert“). Bei vier davon (Abschluss von 5410 und 6979 über das GuV-Konto, Gewinn auf das Eigenkapital, Verkauf per Bank) gab es keine Lösung, die Bestätigung kommt von der Lehrkraft.
+**Monatsregel (von der Lehrkraft festgelegt, belegt durch IHK 232401.6 und Lernsituation 11):** Kaufjahr: Kaufmonat zählt voll. Verkaufsjahr: nur bis zum Ende des Vormonats. Die Cornelsen-Regel (Verkaufsmonat zählt mit) gilt nicht.
+
 ## Typische Fehler (aus der Praxis)
 
 - **Brutto und Netto verwechseln.** Die Verbindlichkeit und die Forderung stehen brutto, Aufwand, Erlöse und Bestand netto.
@@ -91,6 +107,7 @@ Quelle: Lösungsvorschläge der Lehrkraft (Cornelsen, Industriekaufleute 1, Lern
 - **Skonto auf die Fracht rechnen**, obwohl der Beleg „Fracht nicht skontierbar“ sagt. Der Skonto gilt nur für den Warenwert.
 - **Weiterberechnete Kosten auf ein Aufwandskonto buchen.** Was der Kunde zahlt, gehört in die Umsatzerlöse.
 - **Den Sofortrabatt buchen.** Er steht schon in der Rechnung.
+- **Anlagen:** Umsatzsteuer oder Kreditzinsen in die Anschaffungskosten rechnen; Nebenkosten auf ein Aufwandskonto buchen; Skonto auf ein Erfolgskonto statt auf das Anlagekonto; im Kaufjahr zwölf Monate rechnen; beim Verkauf den Buchwertabgang (6979) vergessen oder den Bruttopreis auf 5410 buchen.
 - **Parameter-Raster:** Prozentsätze wie 2 % Skonto mit Umsatzsteuer führen zu Beträgen mit drei Nachkommastellen, wenn die Zahlen nicht auf ein passendes Raster gelegt werden (zum Beispiel Vielfache von 500). Das prüft `buchungspruefung.py`.
 
 ## Lernprotokoll
@@ -100,4 +117,5 @@ Quelle: Lösungsvorschläge der Lehrkraft (Cornelsen, Industriekaufleute 1, Lern
 | 2026-11-06 | Umsatzsteuer | Aufbau Check-Pfad, Buchungsaufgaben mit Zahllast und Erfolg, Tipps in zwei Stufen. |
 | 2026-11-09 | Beschaffung | 20 Muster gegen Lösungsvorschläge bestätigt, auch Abschluss (Verbrauch, Inventurbestand, Bestandsmehrung, Anfangsbestand über 8000). Steuerart-Frage entfällt, Zahllast nur gelegentlich. Skonto nur auf den Warenwert, wenn der Beleg es sagt. Gutschrift kann Rücksendung, Preisnachlass und gekürzte Bezugskosten enthalten. |
 | 2026-11-15 | Absatz | Sieben neue Muster belegt (Rücksendung, Nachlass, Skonto, Umbuchung, Fracht-, Verpackungs- und Provisionsrechnung). Kernunterscheidung ist „Ware zurück oder beim Kunden?“. Skonto nur auf den Warenwert, wenn der Beleg es sagt. Der Erfolg wirkt nur mit dem Nettobetrag. Prüfungsmaterial: „2 an [5;6]“ heißt Forderung an Umsatzerlöse und Umsatzsteuer. Fehler im Material gefunden (2300 statt 2800 Bank, falsche Verweise auf Arbeitsblätter), Lösungen immer gegenrechnen. |
+| 2026-11-15 | Anlagenwirtschaft | Zwölf Muster aus Cornelsen- und IHK-Lösungen, vier aus ergänzendem Material (ohne Lösung). Fehler im Material: Aufgabe 1b (S. 340) rechnet mit falschen Anschaffungskosten, „Alles klar?“ 3c/e und 4bb, AB 54.3. Verkaufsmonat: Cornelsen widerspricht IHK und Lernsituation 11. Die Lehrkraft hat entschieden: nur bis zum Vormonat, die Cornelsen-Regel gilt nicht. Degressiv: keine Lösung, Regel nicht bestätigt. Die Rolle ANLAGE fasst alle Anlagekonten zusammen. |
 | _(neues Thema)_ | | |
