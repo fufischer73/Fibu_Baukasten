@@ -47,7 +47,7 @@ def main(argv=None):
     except Fehler as e:
         melde_fehler_und_ende(e)
     namen = {"scorm": "Lernpakete", "assign": "Aufgaben", "h5pactivity": "H5P", "subsection": "Unterabschnitte",
-             "quiz": "Tests", "qbank": "Fragensammlung"}
+             "quiz": "Tests", "qbank": "Fragensammlung", "label": "Trenner"}
     frei = sum(1 for m in kurs.module.values() if m.get("review") == "freigegeben")
     print()
     print(f"✓ Fertig: {kurs.titel}  ({len(kurs.reihenfolge)} Module, {frei} freigegeben)")

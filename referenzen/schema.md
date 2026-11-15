@@ -301,7 +301,8 @@ Zahlenbereichs einmal nach (kein Teilen durch 0, sinnvolle Ergebnisse).
 ```yaml
 moodle:
   version: 4
-  unterabschnitte: stufen        # true (je Einheit ein Unterabschnitt) | einer (alles in einem) | stufen (ein Abschnitt, je Stufe ein Unterabschnitt)
+  unterabschnitte: stufen        # true (je Einheit ein Unterabschnitt) | einer (alles in einem) | stufen (ein Abschnitt, je Stufe ein Unterabschnitt) | flach (ein Abschnitt, EIN Unterabschnitt mit allem hintereinander)
+  trennbeschriftungen: true      # nur mit flach: vor jeder Stufe ein Textfeld als Trenner (Standard true)
   unterabschnitt_name: Übungs-Lernpfad Beschaffung
   start: false                   # kein Start-Lernpaket „Mein Lernpfad“
 ```

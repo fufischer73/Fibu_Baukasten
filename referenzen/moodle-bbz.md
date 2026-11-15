@@ -22,6 +22,8 @@ moodle:
   reihenfolge: frei
 ```
 
+**Alle Aktivitäten in einem einzigen Unterabschnitt:** `unterabschnitte: flach`. Dann entsteht ein Abschnitt mit einem Unterabschnitt, darin alle Lernpakete und Tests hintereinander (Stufe für Stufe). Mit `trennbeschriftungen: true` (Standard) steht vor jeder Stufe ein Textfeld als Trenner („🌱 Schritt für Schritt“, „🎯 Überprüfung“ …), mit `false` entfällt es. Die Klickanleitung beschreibt genau diese Reihenfolge. Die Trenner (Aktivität „Text- und Medienfeld“, englisch *Label*) in der Kurssicherung sind am BBZ noch nicht getestet: im Testkurs prüfen, sonst `trennbeschriftungen: false` und die Trenner von Hand anlegen.
+
 Mit `stufen` heißen die Unterabschnitte „Übungs-Lernpfad <Thema> – 🌱 Schritt für Schritt“ und „… – 🎯 Überprüfung“. Mit `einer` heißt der eine Unterabschnitt „Übungs-Lernpfad <Thema>“. Hat der Pfad nur eine Stufe, wird der Name nicht ergänzt.
 
 ## Empfohlener Weg: vorbereitete Unterabschnitte, nur Lernpakete einfügen
