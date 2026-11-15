@@ -160,6 +160,19 @@ def beschreibung(kurs, pakete, version, h5p_dateien=None, entwuerfe=False, hinwe
     return b
 
 
+def test_hinweis(b, version):
+    """Absatz zur fertigen Test-Aktivität (kleine Sicherung nur mit dem Test), falls der Kurs Tests hat."""
+    tests = [i for a in b["abschnitte"] for e in a["einheiten"] for i in e["inhalte"] if i.get("typ") == "test" and not i.get("klausur_ordner")]
+    if not tests:
+        return []
+    z = ["**Test als fertige Aktivität:** " + ", ".join(f"`{t['id']}_moodle{version}.mbz` („{t['titel']}“)" for t in tests) +
+         " enthält nur den Test mit allen Fragen und Einstellungen (Bewertung, Versuche, Abschluss). Einspielen: **Kurs › Mehr › "
+         "Wiederverwendung › Wiederherstellen** → Datei hochladen → „In diesen Kurs, Inhalte hinzufügen“. Der Test erscheint in einem "
+         "neuen Abschnitt und wird danach an die richtige Stelle (zum Beispiel in den Unterabschnitt) verschoben, der leere Abschnitt "
+         "gelöscht. Dann entfällt das Einrichten des Tests von Hand.", ""]
+    return z
+
+
 def anleitung(kurs, b, version, mbz_name):
     """Klickanleitung: derselbe Kurs von Hand."""
     namen = {}
@@ -191,6 +204,7 @@ def anleitung(kurs, b, version, mbz_name):
          f"**Alternative:** Kurssicherung wiederherstellen (**Kurs › Mehr › Wiederverwendung › Wiederherstellen** → "
          f"`{mbz_name}` → „In diesen Kurs, Inhalte hinzufügen“, nur **einmal**). Dabei entstehen die Unterabschnitte im "
          "ersten Abschnitt und müssen an den richtigen Ort verschoben werden.", "",
+         ] + test_hinweis(b, version) + [
          "## Vorbereitung", "",
          "- Kurs › Einstellungen › **Abschlussverfolgung: Ja**",
          "- Kursformat: Themen (Moodle 5 oder Moodle 4.5 mit Plugin: Unterabschnitte müssen verfügbar sein)", "",
@@ -301,6 +315,26 @@ def anleitung(kurs, b, version, mbz_name):
     return "\n".join(z) + "\n"
 
 
+def schreibe_nur_tests(kurs, b, sicherung_art, version):
+    """Je Test eine kleine Kurssicherung (.mbz) nur mit diesem Test und seinen Fragen: in Moodle über
+    „Wiederherstellen“ einspielbar, ohne den ganzen Kurs. Ergebnis: ausgabe/moodle/<test-id>_moodle<version>.mbz"""
+    import copy
+    ordner = kurs.ausgabe / "moodle"
+    for alt in ordner.glob(f"*_moodle{version}.mbz"):   # Reste früherer Tests entfernen, die es nicht mehr gibt
+        if alt.name.startswith("test-") or alt.name.startswith(f"{kurs.kurzname}-test"):
+            alt.unlink()
+    tests = [i for a in b["abschnitte"] for e in a["einheiten"] for i in e["inhalte"] if i.get("typ") == "test"]
+    for t in tests:
+        t = copy.deepcopy(t)
+        b2 = dict(kurs=dict(titel=f"{b['kurs']['titel']} (nur Test)", kurzname=f"{kurs.kurzname}-test", text=""),
+                  allgemein=dict(inhalte=[]), unterabschnitt_modus="keiner",
+                  abschnitte=[dict(id="test", titel=t["titel"], text="", reihenfolge="frei",
+                                   einheiten=[dict(titel=t["titel"], inhalte=[t])])])
+        s2 = mbz.Sicherung(b2, kurs.ordner, sicherung_art)
+        s2.baue()
+        mbz.schreibe_mbz(s2, ordner / f"{t['id']}_moodle{version}.mbz")
+
+
 def baue_kurs(kurs, version=None, entwuerfe=False, still=False):
     version = str(version or kurs.moodle.get("version", 5))
     if version not in ("4", "5"):
@@ -328,10 +362,12 @@ def baue_kurs(kurs, version=None, entwuerfe=False, still=False):
         b["trennbeschriftungen"] = bool(kurs.moodle.get("trennbeschriftungen", True))
         if kurs.moodle.get("unterabschnitt_name"):
             b["unterabschnitt_name"] = str(kurs.moodle["unterabschnitt_name"])
-    s = mbz.Sicherung(b, kurs.ordner, "4u" if version == "4" and kurs.moodle.get("unterabschnitte") else version)
+    sicherung_art = "4u" if version == "4" and kurs.moodle.get("unterabschnitte") else version
+    s = mbz.Sicherung(b, kurs.ordner, sicherung_art)
     s.baue()
     ziel = kurs.ausgabe / "moodle" / f"{kurs.kurzname}_moodle{version}.mbz"
     mbz.schreibe_mbz(s, ziel)
+    schreibe_nur_tests(kurs, b, sicherung_art, version)
     (kurs.ausgabe / "moodle" / f"ANLEITUNG_moodle{version}.md").write_text(anleitung(kurs, b, version, ziel.name), encoding="utf-8")
     typen = {}
     for a in s.activities:

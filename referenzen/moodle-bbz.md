@@ -37,6 +37,10 @@ Seit dem Absatz-Pfad ist das der Hauptweg (die Klickanleitung `ausgabe/moodle/AN
 
 Die Kurssicherung (`…_moodle4.mbz`) bleibt als Alternative. Der folgende Ablauf gilt für sie.
 
+## Test als fertige Aktivität (nur der Test, ohne den ganzen Kurs)
+
+`alles.py` und `moodle_kurs.py` erzeugen zu jedem Test eine kleine Kurssicherung `ausgabe/moodle/<test-id>_moodle4.mbz` (zum Beispiel `test-absatz_moodle4.mbz`). Sie enthält nur den Test, seine Fragen (mit Zufallsvarianten), Bewertung (Punkte je Frage), Versuche, Abschluss und Auswertung. Einspielen: *Kurs › Mehr › Wiederverwendung › Wiederherstellen › In diesen Kurs, Inhalte hinzufügen*. Der Test liegt danach in einem neuen Abschnitt und wird in den Unterabschnitt verschoben (der leere Abschnitt wird gelöscht). Am BBZ noch nicht getestet: im Testkurs ausprobieren.
+
 ## Ablauf der Übergabe mit der Kurssicherung
 
 1. **Testkurs:** neuen, leeren Kurs anlegen. *Mehr › Wiederverwendung › Wiederherstellen*, `…_moodle4.mbz` hochladen, „In diesen Kurs, Inhalte hinzufügen“. Kontrollieren: Abschnitt mit den Unterabschnitten, Lernpakete öffnen sich, Test zeigt Belege und Buchungssätze als Tabelle.

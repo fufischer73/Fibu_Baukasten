@@ -120,6 +120,9 @@ class Sicherung:
         self.sections.append(s0)
         for inh in self.b.get("allgemein", {}).get("inhalte", []):
             self.inhalt(inh, s0, insub=False)
+        if self.b.get("unterabschnitt_modus") == "keiner":   # z. B. Sicherung nur mit einem Test: Aktivität direkt im Abschnitt
+            self._baue_direkt(erste)
+            return
         if self.ziel.get("immer") and self.b.get("unterabschnitt_modus") == "stufen":
             self._baue_stufen(erste)
             self.weiter_links()
@@ -198,6 +201,16 @@ class Sicherung:
             if obj.get("delegated"):
                 obj["delegated"]["availability"] = obj["availability"]
         self.weiter_links()
+
+    def _baue_direkt(self, erste):
+        """Je Abschnitt die Aktivitäten ohne Unterabschnitte direkt in den Abschnitt (kleine Sicherungen, z. B. nur ein Test)."""
+        for i, a in enumerate(self.b["abschnitte"]):
+            s = dict(id=self.nid("section"), number=erste + i, name=a["titel"], summary=a.get("text", ""), sequence=[],
+                     availability=None, component=None, itemid=None, parentcmid=None)
+            self.sections.append(s)
+            for e in a.get("einheiten", []):
+                for inh in e.get("inhalte", []):
+                    self.inhalt(inh, s, insub=False)
 
     def _baue_flach(self, erste):
         """Ein einziger Abschnitt mit EINEM Unterabschnitt, darin alle Aktivitäten hintereinander (Stufen nacheinander).

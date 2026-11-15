@@ -54,6 +54,8 @@ def main(argv=None):
     print(f"  Web-Version:   {web / 'index.html'}")
     print(f"  Durchgeklickt: {bericht}" + (f"  – {len(probleme)} Problem(e)!" if probleme else "  – keine Probleme"))
     print(f"  Moodle {version}:      {ziel}  (" + ", ".join(f"{v} {namen.get(t, t)}" for t, v in sorted(typen.items())) + ")")
+    for tz in sorted(ziel.parent.glob(f"test-*_moodle{version}.mbz")):
+        print(f"  Test einzeln:  {tz}  (nur der Test mit Fragen, zum Einspielen per Wiederherstellen)")
     print(f"  Klickanleitung: {ziel.parent / f'ANLEITUNG_moodle{version}.md'}")
     if fragen:
         print(f"  Fragen (XML):  {', '.join(f.name for f in fragen)} in {fragen[0].parent}")
