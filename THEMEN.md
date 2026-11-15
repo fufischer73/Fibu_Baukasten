@@ -8,9 +8,9 @@ Diese Datei wird von `python3 skripte/themen.py --schreiben` erzeugt. Gepflegt w
 | Umsatzsteuer prüfen | – | gebaut (2026-11-06) | Umsatzsteuer- | 6 | 0 | Check-Pfad, erster Pfad des Baukastens. Lernfeld bitte ergänzen. |
 | Buchungen im Beschaffungsprozess | 5 | freigegeben (2026-11-09) | Fibu_Beschaffung | 21 | 0 | aufwands- und bestandsorientiert, Skonto, Gutschriften, Abschluss |
 | Absatzprozesse buchen | 5 | freigegeben (2026-11-15) | Absatz_Fibu | 7 | 0 | Förderstufe, Überprüfung, Abschlusstest, Nachschlagen, Hilfsblatt |
-| Anlagenwirtschaft: Abschreibungen und Anlagenverkauf | 5 | im Bau (2026-11-15) | Anlagenwirtschaft_Fibu | 0 | 16 | Anschaffungskosten, lineare, Leistungs- und degressive Abschreibung, Anlagenverkauf, digitale Wirtschaftsgüter |
+| Anlagenwirtschaft: Abschreibungen und Anlagenverkauf | 5 | im Bau (2026-11-15) | Anlagenwirtschaft_Fibu | 16 | 0 | Anschaffungskosten, lineare, Leistungs- und degressive Abschreibung, Anlagenverkauf, digitale Wirtschaftsgüter |
 
-**Gesamt:** 34 bestätigte Buchungsmuster, 16 offene (Status „neu“).
+**Gesamt:** 50 bestätigte Buchungsmuster, 0 offene (Status „neu“).
 
 ## So kommt ein neues Thema dazu
 

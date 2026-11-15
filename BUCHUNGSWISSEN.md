@@ -91,7 +91,7 @@ Quelle: Lösungsvorschläge der Lehrkraft (Cornelsen, Industriekaufleute 1, Lern
 | Verkauf auf Ziel | 2400 an 5410 und 4800 (Nettopreis auf 5410) |
 | Buchwertabgang | 6979 an Anlagekonto (zwei getrennte Sätze, Bruttomethode) |
 
-Quelle: Cornelsen LF 5 Kapitel 8 und Lernsituation 54 mit Lösungen, IHK-Aufgaben Anlagenwirtschaft mit Lösungen. Status der Muster: „neu“, bis die Lehrkraft sie bestätigt.
+Quelle: Cornelsen LF 5 Kapitel 8 und Lernsituation 54 mit Lösungen, IHK-Aufgaben Anlagenwirtschaft mit Lösungen. Alle 16 Muster hat die Lehrkraft am 2026-11-15 bestätigt (Status „verifiziert“). Bei vier davon (Abschluss von 5410 und 6979 über das GuV-Konto, Gewinn auf das Eigenkapital, Verkauf per Bank) gab es keine Lösung, die Bestätigung kommt von der Lehrkraft.
 **Monatsregel (von der Lehrkraft festgelegt, belegt durch IHK 232401.6 und Lernsituation 11):** Kaufjahr: Kaufmonat zählt voll. Verkaufsjahr: nur bis zum Ende des Vormonats. Die Cornelsen-Regel (Verkaufsmonat zählt mit) gilt nicht.
 
 ## Typische Fehler (aus der Praxis)
