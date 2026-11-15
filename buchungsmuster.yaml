@@ -1,0 +1,169 @@
+# Wissensspeicher des Fibu-Baukastens: Buchungsmuster, die geprüft sind.
+# muster: Rollen statt Kontonummern (BESTAND = 2000/2010/2020/2030/2280, AUFW = 6000/6010/6020/6030/6080, BEZUG_* = Unterkonto Bezugskosten,
+#         NACHL_* = Unterkonto Nachlässe, VST = 2600, UST = 4800, VERB = 4400, FORD = 2400, BANK = 2800, KASSE = 2880, EBK = 8000, SBK = 8010,
+#         GUV = 8020, ERLOES = 5000/5100 …; andere Konten stehen mit ihrer Nummer). S = Soll, H = Haben.
+# status: verifiziert (gegen Lösungsvorschläge oder Freigabe der Lehrkraft) | neu (noch nicht bestätigt)
+# Neue Themen: python3 skripte/buchungspruefung.py <ordner> --lernen trägt unbekannte Muster als „neu“ ein. Erst wenn die Lehrkraft sie
+# bestätigt hat (Lösungsvorschlag, Buch, Klassenarbeit), setzt man status: verifiziert und trägt name, technik und quelle ein.
+- muster: S:AUFW+VST > H:VERB
+  name: Werkstoffeinkauf auf Ziel
+  technik: aufwandsorientiert
+  quelle: LS 52 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 1 und 6
+  status: verifiziert
+  thema: beschaffung
+- muster: S:BESTAND+VST > H:VERB
+  name: Werkstoffeinkauf auf Ziel
+  technik: bestandsorientiert
+  quelle: LS 52 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 1 und 6
+  status: verifiziert
+  thema: beschaffung
+- muster: S:AUFW+BEZUG_A+VST > H:VERB
+  name: Einkauf mit Bezugskosten in der Rechnung
+  technik: aufwandsorientiert
+  quelle: LS 52 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 2
+  status: verifiziert
+  thema: beschaffung
+- muster: S:BESTAND+BEZUG_B+VST > H:VERB
+  name: Einkauf mit Bezugskosten in der Rechnung
+  technik: bestandsorientiert
+  quelle: LS 52 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 2
+  status: verifiziert
+  thema: beschaffung
+- muster: S:BEZUG_A+VST > H:VERB
+  name: Bezugskosten einzeln (Speditionsrechnung)
+  technik: aufwandsorientiert
+  quelle: Arbeitsblatt 52.3 (Lösung)
+  status: verifiziert
+  thema: beschaffung
+- muster: S:BEZUG_B+VST > H:VERB
+  name: Bezugskosten einzeln (Speditionsrechnung)
+  technik: bestandsorientiert
+  quelle: Arbeitsblatt 52.2 (Lösung) und Aufgabe 6 Nr. 3
+  status: verifiziert
+  thema: beschaffung
+- muster: S:VERB > H:AUFW+VST
+  name: Gutschrift nach Rücksendung (Menge und Wert sinken)
+  technik: aufwandsorientiert
+  quelle: LS 52 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 4b
+  status: verifiziert
+  thema: beschaffung
+- muster: S:VERB > H:BESTAND+VST
+  name: Gutschrift nach Rücksendung (Menge und Wert sinken)
+  technik: bestandsorientiert
+  quelle: Arbeitsblatt 52.2 und Aufgabe 6 Nr. 4
+  status: verifiziert
+  thema: beschaffung
+- muster: S:VERB > H:NACHL_A+VST
+  name: Preisnachlass (Mängelrüge, Bonus)
+  technik: aufwandsorientiert
+  quelle: LS 52 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 3b und 5
+  status: verifiziert
+  thema: beschaffung
+- muster: S:VERB > H:NACHL_B+VST
+  name: Preisnachlass (Mängelrüge, Bonus)
+  technik: bestandsorientiert
+  quelle: Arbeitsblatt 52.2 und Aufgabe 6 Nr. 5 und 6
+  status: verifiziert
+  thema: beschaffung
+- muster: S:VERB > H:BANK+NACHL_A+VST
+  name: Zahlung unter Abzug von Skonto (Nettomethode)
+  technik: aufwandsorientiert
+  quelle: LS 52 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 3c und 4c
+  status: verifiziert
+  thema: beschaffung
+- muster: S:VERB > H:BANK+NACHL_B+VST
+  name: Zahlung unter Abzug von Skonto (Nettomethode)
+  technik: bestandsorientiert
+  quelle: Arbeitsblatt 52.2 und Aufgabe 6 Nr. 7
+  status: verifiziert
+  thema: beschaffung
+- muster: S:VERB > H:AUFW+BEZUG_A+NACHL_A+VST
+  name: Gutschrift mit Rücksendung, Preisnachlass und gekürzten Bezugskosten
+  technik: aufwandsorientiert
+  quelle: Arbeitsblatt 52.1 Nr. 2
+  status: verifiziert
+  thema: beschaffung
+- muster: S:AUFW > H:BEZUG_A
+  name: Umbuchung des Bezugskostenkontos
+  technik: aufwandsorientiert
+  quelle: Arbeitsblatt 52.3
+  status: verifiziert
+  thema: beschaffung
+- muster: S:BESTAND > H:BEZUG_B
+  name: Umbuchung des Bezugskostenkontos
+  technik: bestandsorientiert
+  quelle: Arbeitsblatt 52.2
+  status: verifiziert
+  thema: beschaffung
+- muster: S:NACHL_A > H:AUFW
+  name: Umbuchung des Nachlasskontos
+  technik: aufwandsorientiert
+  quelle: Arbeitsblatt 52.3
+  status: verifiziert
+  thema: beschaffung
+- muster: S:NACHL_B > H:BESTAND
+  name: Umbuchung des Nachlasskontos
+  technik: bestandsorientiert
+  quelle: Arbeitsblatt 52.2
+  status: verifiziert
+  thema: beschaffung
+- muster: S:AUFW > H:BESTAND
+  name: Rohstoffverbrauch (bestandsorientiert) bzw. Bestandsminderung (aufwandsorientiert)
+  technik: beide
+  quelle: Arbeitsblatt 52.2 (Verbrauch); Bestandsminderung ist das gleiche Muster
+  status: verifiziert
+  thema: beschaffung
+- muster: S:BESTAND > H:AUFW
+  name: Bestandsmehrung
+  technik: aufwandsorientiert
+  quelle: Arbeitsblatt 52.3
+  status: verifiziert
+  thema: beschaffung
+- muster: S:SBK > H:BESTAND
+  name: Abschluss des Inventurbestands
+  technik: beide
+  quelle: Arbeitsblatt 52.2 und 52.3
+  status: verifiziert
+  thema: beschaffung
+- muster: S:BESTAND > H:EBK
+  name: Anfangsbestand
+  technik: beide
+  quelle: Arbeitsblatt 52.2 und 52.3
+  status: verifiziert
+  thema: beschaffung
+- muster: S:0700+VST > H:VERB
+  name: Kauf einer Maschine auf Ziel
+  technik: '-'
+  quelle: Pfad Umsatzsteuer, Modul U3
+  status: verifiziert
+  thema: umsatzsteuer
+- muster: S:6160+VST > H:BANK
+  name: Reparatur / Fremdinstandhaltung über Bank
+  technik: '-'
+  quelle: Pfad Umsatzsteuer, Test
+  status: verifiziert
+  thema: umsatzsteuer
+- muster: S:FORD > H:ERLOES+UST
+  name: Ausgangsrechnung auf Ziel
+  technik: '-'
+  quelle: Pfad Umsatzsteuer, Modul U3
+  status: verifiziert
+  thema: umsatzsteuer
+- muster: S:UST > H:VST
+  name: Verrechnung von Vorsteuer und Umsatzsteuer
+  technik: '-'
+  quelle: Pfad Umsatzsteuer, Modul U3
+  status: verifiziert
+  thema: umsatzsteuer
+- muster: S:UST > H:SBK
+  name: Passivierung der Zahllast
+  technik: '-'
+  quelle: Pfad Umsatzsteuer, Modul U3
+  status: verifiziert
+  thema: umsatzsteuer
+- muster: S:SBK > H:VST
+  name: Aktivierung des Vorsteuerüberhangs
+  technik: '-'
+  quelle: Pfad Umsatzsteuer, Modul U3
+  status: verifiziert
+  thema: umsatzsteuer

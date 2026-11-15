@@ -1,0 +1,126 @@
+# Kursbeschreibung – @@THEMA@@ (Industriekaufleute, BBZ, Moodle 4.5)
+# Aufbau und alle Felder: referenzen/schema.md. Alles mit @@ … @@ wird von neues_thema.py ersetzt.
+# Diese Vorlage ist ein lauffähiges Beispiel. Inhalte (Module, Belege, Fragen) sind BEISPIELE und werden ersetzt.
+
+titel: "@@THEMA@@"
+kurzname: @@KURZNAME@@
+ueberschrift: "@@THEMA@@ – dein Wissen im Check"
+untertitel: Du hast das Thema erarbeitet. Hier übst du an Belegen und prüfst, ob Verständnis, Berechnungen und Buchungssätze sitzen.
+badges: [Industriekaufleute, Lernfeld @@LERNFELD@@, ca. @@STUNDEN@@ Unterrichtsstunden]
+fusszeile: BBZ Rendsburg-Eckernförde
+
+einleitung: |
+  :::notiz 👉 Bevor du startest
+  1. Du hast das Thema schon erarbeitet. Dieser Pfad hilft dir beim Üben und prüft, was sitzt.
+  2. **Fällt dir das Thema schwer?** Beginne bei **🌱 Schritt für Schritt**. Dort lernst du in kleinen Schritten mit Beispielen und vielen Hilfen.
+  3. **Fühlst du dich sicher?** Gehe direkt zu **🎯 Überprüfung**.
+  4. Du arbeitest mit Belegen der **Wiesengrund Küchenmöbel GmbH**. Die Konten und das Unternehmen findest du in den Hilfen zum Aufklappen.
+  5. Jede Buchungsaufgabe sagt dir, ob du **aufwandsorientiert** oder **bestandsorientiert** buchst (wenn das Thema es braucht).
+  6. Zum Schluss wartet der **Abschlusstest**. Du darfst ihn wiederholen.
+  :::
+
+stufen:
+  - id: foerderung
+    name: Schritt für Schritt
+    icon: "🌱"
+    text: Das Thema in kleinen Schritten mit Beispielen, Hilfen und Merkzettel. Für alle, die noch Sicherheit brauchen.
+    module: [f1]
+  - id: pruefung
+    name: Überprüfung
+    icon: "🎯"
+    text: Belege lesen, rechnen und buchen wie in der Klassenarbeit.
+    module: [u1]
+
+# Kontenplan-Auszug der Lehrkraft; Nummern immer in Anführungszeichen (0700 wäre sonst eine Oktalzahl)
+kontenplan:
+  "0700": Anlagen und Maschinen
+  "0840": Fuhrpark
+  "0870": BGA
+  "2000": Rohstoffe
+  "2001": Bezugskosten Rohstoffe
+  "2002": Nachlässe Rohstoffe
+  "2010": Fremdbauteile
+  "2011": Bezugskosten Fremdbauteile
+  "2012": Nachlässe Fremdbauteile
+  "2020": Hilfsstoffe
+  "2021": Bezugskosten Hilfsstoffe
+  "2022": Nachlässe Hilfsstoffe
+  "2030": Betriebsstoffe
+  "2031": Bezugskosten Betriebsstoffe
+  "2032": Nachlässe Betriebsstoffe
+  "2100": Unfertige Erzeugnisse
+  "2200": Fertigerzeugnisse
+  "2280": Handelswaren
+  "2281": Bezugskosten Handelswaren
+  "2282": Nachlässe Handelswaren
+  "2400": Forderungen
+  "2600": Vorsteuer
+  "2800": Bank
+  "2880": Kasse
+  "3000": Eigenkapital
+  "3001": Privatkonto
+  "4250": Darlehen
+  "4400": Verbindlichkeiten a. L. L.
+  "4800": Umsatzsteuer
+  "5000": Umsatzerlöse Fertigerzeugnisse
+  "5100": Umsatzerlöse Waren
+  "5200": Bestandsveränderungen
+  "5401": Mieterträge
+  "5420": Entnahme von Gegenständen u. Leistungen
+  "5710": Zinserträge
+  "6000": Aufwendungen Rohstoffe
+  "6001": Bezugskosten Rohstoffe
+  "6002": Nachlässe Rohstoffe
+  "6010": Aufwendungen Fremdbauteile
+  "6011": Bezugskosten Fremdbauteile
+  "6012": Nachlässe Fremdbauteile
+  "6020": Aufwendungen Hilfsstoffe
+  "6021": Bezugskosten Hilfsstoffe
+  "6022": Nachlässe Hilfsstoffe
+  "6030": Aufwendungen Betriebsstoffe
+  "6031": Bezugskosten Betriebsstoffe
+  "6032": Nachlässe Betriebsstoffe
+  "6050": Aufwendungen für Energie
+  "6080": Aufwendungen Waren
+  "6081": Bezugskosten Waren
+  "6082": Nachlässe Waren
+  "6160": Fremdinstandhaltung
+  "6200": Löhne
+  "6300": Gehälter
+  "6700": Mietaufwendungen
+  "6800": Büromaterial
+  "6810": Fachliteratur
+  "6820": Porto, Telefon
+  "6850": Reisekosten
+  "6870": Werbung
+  "6900": Versicherungen
+  "7510": Zinsaufwendungen
+  "7700": Gewerbesteuer
+  "8000": EBK (Eröffnungsbilanzkonto)
+  "8010": SBK (Schlussbilanzkonto)
+  "8020": GuV-Konto
+
+moodle:
+  version: 4                    # BBZ-Moodle 4.5.12
+  unterabschnitte: stufen       # ein Abschnitt, darin je Stufe ein Unterabschnitt (Plugin „Unterabschnitt“ am BBZ)
+  unterabschnitt_name: "Übungs-Lernpfad @@THEMA@@"
+  start: false                  # kein Start-Lernpaket (der Pfad kommt in einen vorhandenen Kurs)
+  anordnung: true               # Fragetyp „Reihenfolge“ ab Moodle 4.4
+  freischaltung: offen          # beide Stufen sofort frei (niemand wird „eingestuft“)
+  reihenfolge: frei
+  # abschnitt: <Nummer>         # nur nötig, wenn die Abschnittsnummer bekannt ist; sonst Wiederherstellen und Unterabschnitt verschieben
+
+tests:
+  - id: test-@@KURZNAME@@
+    titel: "Abschlusstest: @@THEMA@@"
+    stufe: pruefung
+    fragen: test-@@KURZNAME@@
+    punkte: 20
+    versuche: 0
+    zeit: 0
+    pro_seite: 1
+    mischen: false
+    feedback: nachher
+    text: |
+      Belege lesen, Beträge berechnen und Buchungssätze bilden. Du darfst den Test wiederholen.
+      Die offene Frage bewertet deine Lehrkraft von Hand.

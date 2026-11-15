@@ -1,0 +1,69 @@
+# BEISPIELFRAGEN für den Abschlusstest – bitte durch Fragen zum neuen Thema ersetzen (Ziel: 12 bis 17 Fragen, 20 Punkte).
+# Mischung wie in der Prüfung: Buchungssatz mit Beleg (single_choice), Berechnung (zahl mit Parametern), Zuordnung, Sachverhalt, offene Frage.
+
+- id: @@KURZNAME@@-01
+  modul: u1
+  typ: single_choice
+  titel: Ausgangsrechnung buchen
+  review: entwurf
+  aufgabe: Die Wiesengrund Küchenmöbel GmbH stellt diese Ausgangsrechnung aus. Welcher Buchungssatz ist richtig?
+  beleg:
+    art: Rechnung
+    firma: Wiesengrund Küchenmöbel GmbH
+    firma_zeile: Küchenzeilen · Schränke · Arbeitsplatten
+    absender_zeile: Wiesengrund Küchenmöbel GmbH · Am Wiesengrund 8 · 24768 Rendsburg
+    empfaenger: [Möbelhaus Ostsee GmbH, Strandallee 3, 23560 Lübeck]
+    info:
+      - [Rechnungs-Nr., AR-2026-0190]
+      - [Rechnungsdatum, 15.06.2026]
+    spalten: [Pos., Bezeichnung, Menge, Einzelpreis, Gesamtpreis]
+    zeilen:
+      - ["1", "Küchenzeile Modell Fjord", "4 Stück", "3.500,00 €", "14.000,00 €"]
+    summen:
+      - ["Nettobetrag", "14.000,00 €"]
+      - ["+ 19 % Umsatzsteuer", "2.660,00 €"]
+      - ["Bruttobetrag", "16.660,00 €", fett]
+    bedingungen: "Zahlungsziel 30 Tage netto"
+    fuss: Wiesengrund Küchenmöbel GmbH · Beispielbeleg für den Unterricht
+  optionen:
+    - {text: "2400 Forderungen 16.660,00 € an 5000 Umsatzerlöse Fertigerzeugnisse 14.000,00 € und 4800 Umsatzsteuer 2.660,00 €", korrekt: true}
+    - {text: "2400 Forderungen 14.000,00 € an 5000 Umsatzerlöse Fertigerzeugnisse 14.000,00 €", korrekt: false, feedback: "Die Umsatzsteuer fehlt. Die Forderung steht brutto."}
+    - {text: "2400 Forderungen 16.660,00 € an 5000 Umsatzerlöse Fertigerzeugnisse 14.000,00 € und 2600 Vorsteuer 2.660,00 €", korrekt: false, feedback: "Beim Verkauf bekommst du Umsatzsteuer (4800), keine Vorsteuer."}
+    - {text: "5000 Umsatzerlöse Fertigerzeugnisse 14.000,00 € und 4800 Umsatzsteuer 2.660,00 € an 2400 Forderungen 16.660,00 €", korrekt: false, feedback: "Das ist andersherum. Die Forderung entsteht im Soll."}
+  erklaerung: Netto 14.000,00 € plus 19 % Umsatzsteuer 2.660,00 € ergibt brutto 16.660,00 €. Die Forderung steht im Soll, Erlöse und Umsatzsteuer im Haben.
+
+- id: @@KURZNAME@@-02
+  modul: u1
+  typ: zahl
+  titel: Umsatzsteuer berechnen
+  review: entwurf
+  aufgabe: "Der Nettobetrag einer Ausgangsrechnung beträgt {{n}} €. Die Umsatzsteuer beträgt 19 %. Wie hoch ist der Bruttobetrag?"
+  parameter:
+    n: {min: 2000, max: 10000, schritt: 500}
+  antworten:
+    - {id: brutto, label: Bruttobetrag, formel: "n * 1.19", runden: 2, toleranz: 0, einheit: "€"}
+  loesungsweg: "{{n}} € · 1,19 = {{brutto}} €"
+
+- id: @@KURZNAME@@-03
+  modul: u1
+  typ: zuordnung
+  titel: Konten und Seiten
+  review: entwurf
+  aufgabe: Ordne zu. Auf welcher Seite steht das Konto bei einer Ausgangsrechnung auf Ziel?
+  kategorien: [Soll, Haben]
+  elemente:
+    - {text: 2400 Forderungen, kategorie: Soll, feedback: "Die neue Forderung steht im Soll."}
+    - {text: 5000 Umsatzerlöse, kategorie: Haben, feedback: "Erträge stehen im Haben."}
+    - {text: 4800 Umsatzsteuer, kategorie: Haben, feedback: "Die Umsatzsteuer ist eine Verbindlichkeit gegenüber dem Finanzamt und steht im Haben."}
+  erklaerung: Die Forderung steht im Soll, Erlöse und Umsatzsteuer stehen im Haben.
+
+- id: @@KURZNAME@@-04
+  modul: u1
+  typ: offen
+  titel: Begründung
+  review: entwurf
+  aufgabe: Begründe in zwei bis drei Sätzen, warum die Forderung bei einer Ausgangsrechnung mit dem Bruttobetrag gebucht wird.
+  musterloesung: Der Kunde muss uns den Rechnungsbetrag einschließlich Umsatzsteuer zahlen. Deshalb entsteht eine Forderung über den Bruttobetrag. Die Umsatzsteuer geben wir später an das Finanzamt weiter.
+  checkliste: [Kunde zahlt auch die Umsatzsteuer genannt, Forderung über Bruttobetrag genannt, Weiterleitung der Umsatzsteuer an das Finanzamt genannt]
+  punkte: 4
+  zeilen: 8
