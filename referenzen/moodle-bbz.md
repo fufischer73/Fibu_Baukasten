@@ -22,22 +22,19 @@ moodle:
   reihenfolge: frei
 ```
 
+**Abfrage vor dem Bau:** Arbeitet die Lehrkraft in einem **vorhandenen Unterabschnitt**? Moodle kennt **keine Unterabschnitte in Unterabschnitten**. Dann `unterabschnitte: direkt`: Die Sicherung legt einen Abschnitt mit allen Aktivitäten **ohne Unterabschnitt** an (mit Trennern), und die Lehrkraft verschiebt die Aktivitäten in ihren Unterabschnitt. Sonst `flach` (ein Abschnitt mit einem Unterabschnitt) oder `stufen` (je Stufe ein Unterabschnitt).
+
 **Alle Aktivitäten in einem einzigen Unterabschnitt:** `unterabschnitte: flach`. Dann entsteht ein Abschnitt mit einem Unterabschnitt, darin alle Lernpakete und Tests hintereinander (Stufe für Stufe). Mit `trennbeschriftungen: true` (Standard) steht vor jeder Stufe ein Textfeld als Trenner („🌱 Schritt für Schritt“, „🎯 Überprüfung“ …), mit `false` entfällt es. Die Klickanleitung beschreibt genau diese Reihenfolge. Die Trenner (Aktivität „Text- und Medienfeld“, englisch *Label*) in der Kurssicherung sind am BBZ noch nicht getestet: im Testkurs prüfen, sonst `trennbeschriftungen: false` und die Trenner von Hand anlegen.
 
 Mit `stufen` heißen die Unterabschnitte „Übungs-Lernpfad <Thema> – 🌱 Schritt für Schritt“ und „… – 🎯 Überprüfung“. Mit `einer` heißt der eine Unterabschnitt „Übungs-Lernpfad <Thema>“. Hat der Pfad nur eine Stufe, wird der Name nicht ergänzt.
 
-## Empfohlener Weg: vorbereitete Unterabschnitte, nur Lernpakete einfügen
+## Empfohlener Weg: alles fertig vorbereitet (Kurssicherung)
 
-Seit dem Absatz-Pfad ist das der Hauptweg (die Klickanleitung `ausgabe/moodle/ANLEITUNG_moodle4.md` beschreibt ihn): Abschnitt und Unterabschnitte im Zielkurs selbst anlegen, dann die Lernpakete als Aktivitäten einfügen. Es muss nichts aus dem ersten Abschnitt verschoben und kein versteckter Unterabschnitt gezählt werden.
+Die Lehrkraft bevorzugt, dass alles fertig vorbereitet ist (Entscheidung vom 15.11.2026): Die Kurssicherung `ausgabe/moodle/<kurzname>_moodle4.mbz` enthält den ganzen Pfad. Einspielen mit *Kurs › Mehr › Wiederverwendung › Wiederherstellen › In diesen Kurs, Inhalte hinzufügen* (vorher den Kurs sichern, nur **einmal**). Danach den Unterabschnitt an die richtige Stelle **verschieben** und den leeren Abschnitt löschen. Spätere Änderungen: nur die **Lernpakete tauschen** (Paketdatei im vorhandenen Lernpaket), nie erneut wiederherstellen. Die Klickanleitung `ANLEITUNG_moodle4.md` nennt diesen Weg zuerst.
 
-1. Das erste Lernpaket vollständig einrichten (Einstellungen in der Klickanleitung).
-2. Im Kurs **duplizieren** und bei jedem Duplikat Namen ändern und die ZIP aus `download/lernpakete/` austauschen (Einstellungen › Paketdatei). Erst im Testkurs ausprobieren.
-3. Den Abschlusstest von Hand einrichten (Fragen-XML) oder aus der Sicherung nur den Test wiederherstellen (Schritt „Schema“, nur den Test ankreuzen).
-4. Änderungen später: nur die Paketdatei tauschen.
+**Alternative: von Hand einrichten.** Abschnitt und Unterabschnitte selbst anlegen, nur die Lernpakete als Aktivitäten einfügen (erstes Lernpaket einrichten, dann duplizieren und die ZIP austauschen). Das spart das Verschieben, kostet aber die Einrichtung jeder Aktivität. Den Test dann per Fragen-XML oder über die kleine Test-Sicherung einspielen. Das Duplizieren wurde am BBZ noch nicht getestet.
 
-Die Kurssicherung (`…_moodle4.mbz`) bleibt als Alternative. Der folgende Ablauf gilt für sie.
-
-## Test als fertige Aktivität (nur der Test, ohne den ganzen Kurs)
+## Nur den Test aktualisieren (nur der Test, ohne den ganzen Kurs)
 
 `alles.py` und `moodle_kurs.py` erzeugen zu jedem Test eine kleine Kurssicherung `ausgabe/moodle/<test-id>_moodle4.mbz` (zum Beispiel `test-absatz_moodle4.mbz`). Sie enthält nur den Test, seine Fragen (mit Zufallsvarianten), Bewertung (Punkte je Frage), Versuche, Abschluss und Auswertung. Einspielen: *Kurs › Mehr › Wiederverwendung › Wiederherstellen › In diesen Kurs, Inhalte hinzufügen*. Der Test liegt danach in einem neuen Abschnitt und wird in den Unterabschnitt verschoben (der leere Abschnitt wird gelöscht). Am BBZ noch nicht getestet: im Testkurs ausprobieren.
 

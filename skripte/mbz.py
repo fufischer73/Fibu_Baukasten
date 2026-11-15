@@ -131,6 +131,10 @@ class Sicherung:
             self._baue_flach(erste)
             self.weiter_links()
             return
+        if self.b.get("unterabschnitt_modus") == "direkt":   # keine Unterabschnitte: alle Aktivitäten direkt in EINEM Abschnitt
+            self._baue_flach(erste, unterabschnitt=False)
+            self.weiter_links()
+            return
         # erst alle Abschnitte anlegen (Nummern 1..n), Unterabschnitte danach nummerieren (so macht es Moodle)
         oben = []
         for i, a in enumerate(self.b["abschnitte"], 1):
@@ -212,18 +216,24 @@ class Sicherung:
                 for inh in e.get("inhalte", []):
                     self.inhalt(inh, s, insub=False)
 
-    def _baue_flach(self, erste):
+    def _baue_flach(self, erste, unterabschnitt=True):
         """Ein einziger Abschnitt mit EINEM Unterabschnitt, darin alle Aktivitäten hintereinander (Stufen nacheinander).
+        Mit unterabschnitt=False (Modus „direkt“) liegen die Aktivitäten direkt im Abschnitt, ohne Unterabschnitt: für Lehrkräfte,
+        die in einem vorhandenen Unterabschnitt arbeiten (Moodle kennt keine Unterabschnitte in Unterabschnitten) und die
+        Aktivitäten von dort aus verschieben.
         Mit trennbeschriftungen (Standard) steht vor jeder Stufe eine Beschriftung (Textfeld) als Trenner."""
         name = self.b.get("unterabschnitt_name") or self.b["kurs"]["titel"]
         s = dict(id=self.nid("section"), number=erste, name=name, summary="", sequence=[], availability=None,
                  component=None, itemid=None, parentcmid=None)
         self.sections.append(s)
-        sub = self.aktivitaet("subsection", s, dict(name=name), insub=False)
-        ds = dict(id=self.nid("section"), number=erste + 1, name=name, summary="", sequence=[], availability=None,
-                  component="mod_subsection", itemid=sub["instanceid"], parentcmid=sub["moduleid"])
-        sub["delegated"] = ds
-        self.sections.append(ds)
+        if unterabschnitt:
+            sub = self.aktivitaet("subsection", s, dict(name=name), insub=False)
+            ds = dict(id=self.nid("section"), number=erste + 1, name=name, summary="", sequence=[], availability=None,
+                      component="mod_subsection", itemid=sub["instanceid"], parentcmid=sub["moduleid"])
+            sub["delegated"] = ds
+            self.sections.append(ds)
+        else:
+            ds = s
         verzoegert = []
         vorige_haupt = None
         for a in self.b["abschnitte"]:

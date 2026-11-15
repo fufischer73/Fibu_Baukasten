@@ -165,11 +165,11 @@ def test_hinweis(b, version):
     tests = [i for a in b["abschnitte"] for e in a["einheiten"] for i in e["inhalte"] if i.get("typ") == "test" and not i.get("klausur_ordner")]
     if not tests:
         return []
-    z = ["**Test als fertige Aktivität:** " + ", ".join(f"`{t['id']}_moodle{version}.mbz` („{t['titel']}“)" for t in tests) +
-         " enthält nur den Test mit allen Fragen und Einstellungen (Bewertung, Versuche, Abschluss). Einspielen: **Kurs › Mehr › "
-         "Wiederverwendung › Wiederherstellen** → Datei hochladen → „In diesen Kurs, Inhalte hinzufügen“. Der Test erscheint in einem "
-         "neuen Abschnitt und wird danach an die richtige Stelle (zum Beispiel in den Unterabschnitt) verschoben, der leere Abschnitt "
-         "gelöscht. Dann entfällt das Einrichten des Tests von Hand.", ""]
+    z = ["**Nur den Test aktualisieren:** " + ", ".join(f"`{t['id']}_moodle{version}.mbz` („{t['titel']}“)" for t in tests) +
+         " enthält nur den Test mit allen Fragen und Einstellungen (Bewertung, Versuche, Abschluss). Nützlich, wenn sich nur der Test "
+         "ändert: den alten Test samt seinen Fragen in Moodle löschen, dann diese Datei einspielen (**Wiederherstellen › In diesen "
+         "Kurs, Inhalte hinzufügen**). Der Test erscheint in einem neuen Abschnitt und wird an die richtige Stelle verschoben, der "
+         "leere Abschnitt gelöscht.", ""]
     return z
 
 
@@ -192,19 +192,30 @@ def anleitung(kurs, b, version, mbz_name):
                 teile.append(f"„{namen[r]}“ abgeschlossen")
         return " **oder** ".join(teile)
 
-    z = [f"# {kurs.titel} – Moodle-Kurs von Hand einrichten", "",
-         "**Empfohlener Weg:** Abschnitt und Unterabschnitte im Zielkurs selbst anlegen und nur die Lernpakete (und den Test) "
-         "als Aktivitäten einfügen. So muss nichts verschoben und kein Unterabschnitt gezählt werden. Bei Änderungen "
-         "tauschst du später nur die Paketdatei im vorhandenen Lernpaket aus (Einstellungen › Paketdatei), der Fortschritt "
-         "der Schüler:innen bleibt, solange die Modul-IDs gleich bleiben.", "",
-         "**Tipp zum Zeitsparen:** Das erste Lernpaket vollständig einrichten (Einstellungen siehe unten), dann im Kurs "
-         "**duplizieren** (Drei-Punkte-Menü › Duplizieren), den Namen ändern und die ZIP austauschen. Bitte zuerst im "
-         "Testkurs ausprobieren. Den Test entweder von Hand einrichten (Fragen-XML importieren) oder aus der Sicherung "
-         "wiederherstellen und im Schritt „Schema“ nur den Test ankreuzen.", "",
-         f"**Alternative:** Kurssicherung wiederherstellen (**Kurs › Mehr › Wiederverwendung › Wiederherstellen** → "
-         f"`{mbz_name}` → „In diesen Kurs, Inhalte hinzufügen“, nur **einmal**). Dabei entstehen die Unterabschnitte im "
-         "ersten Abschnitt und müssen an den richtigen Ort verschoben werden.", "",
-         ] + test_hinweis(b, version) + [
+    z = [f"# {kurs.titel} – Moodle-Kurs einrichten", "",
+         f"**Empfohlener Weg: alles fertig vorbereitet.** Die Kurssicherung `{mbz_name}` enthält den ganzen Pfad (Lernpakete, Test mit "
+         "Fragen, Abschluss- und Freischaltungs-Einstellungen). Einspielen: **Kurs › Mehr › Wiederverwendung › Wiederherstellen** → "
+         "Datei hochladen → „In diesen Kurs, Inhalte hinzufügen“. Vorher den Zielkurs **sichern**. Wiederherstellen nur **einmal**.", "",
+         ("Danach liegt ein neuer Abschnitt mit **allen Aktivitäten direkt darin** (ohne Unterabschnitt) im Kurs. Moodle erlaubt keine "
+            "Unterabschnitte in Unterabschnitten. Arbeitest du in einem Unterabschnitt, **verschiebe die Aktivitäten dorthin** "
+            "(Drag & Drop oder Drei-Punkte-Menü › Verschieben) und lösche den leeren Abschnitt. Prüfe ein Lernpaket und den Test."
+            if kurs.moodle.get("unterabschnitte") == "direkt" else
+            "Danach liegt der neue Abschnitt (mit dem Unterabschnitt bzw. den Unterabschnitten des Pfads) im Kurs. **Verschiebe** den "
+            "Unterabschnitt an die richtige Stelle (Drei-Punkte-Menü › Verschieben) und lösche den leeren Abschnitt. Prüfe ein Lernpaket "
+            "und den Test."), "",
+         "**Änderungen später:** Nur die **Paketdatei** im vorhandenen Lernpaket austauschen (Einstellungen › Paketdatei, ZIP aus "
+         "`lernpakete/`). Der Fortschritt der Schüler:innen bleibt, solange die Modul-IDs gleich bleiben. **Nicht erneut "
+         "wiederherstellen.**", "",
+         ]
+    z += test_hinweis(b, version)
+    z += ["## Alternative: von Hand einrichten", "",
+          "Falls Wiederherstellen nicht erlaubt ist oder du die Aktivitäten selbst anlegen willst: Abschnitt und Unterabschnitte im "
+          "Zielkurs selbst anlegen und nur die Lernpakete (und den Test) als Aktivitäten einfügen. So muss kein Unterabschnitt gezählt "
+          "werden.", "",
+          "**Tipp zum Zeitsparen:** Das erste Lernpaket vollständig einrichten (Einstellungen siehe unten), dann im Kurs "
+          "**duplizieren** (Drei-Punkte-Menü › Duplizieren), den Namen ändern und die ZIP austauschen. Bitte zuerst im Testkurs "
+          "ausprobieren.", ""]
+    z += [
          "## Vorbereitung", "",
          "- Kurs › Einstellungen › **Abschlussverfolgung: Ja**",
          "- Kursformat: Themen (Moodle 5 oder Moodle 4.5 mit Plugin: Unterabschnitte müssen verfügbar sein)", "",
@@ -264,12 +275,19 @@ def anleitung(kurs, b, version, mbz_name):
 
     modus = kurs.moodle.get("unterabschnitte") if version == "4" else None
     basis = kurs.moodle.get("unterabschnitt_name") or kurs.titel
-    if modus == "flach":
-        # EIN Unterabschnitt, alle Aktivitäten hintereinander, vor jeder Stufe eine Beschriftung als Trenner
+    if modus in ("flach", "direkt"):
+        # alle Aktivitäten hintereinander, vor jeder Stufe eine Beschriftung als Trenner
         mit_trenner = bool(kurs.moodle.get("trennbeschriftungen", True)) and len(b["abschnitte"]) > 1
-        z += [f"## Abschnitt „{basis}“ mit einem Unterabschnitt", "",
-              f"Lege **einen Abschnitt** an und darin **einen Unterabschnitt** namens **{basis}**. Alle Aktivitäten kommen "
-              "**in dieser Reihenfolge** in diesen einen Unterabschnitt:", ""]
+        if modus == "flach":
+            z += [f"## Abschnitt „{basis}“ mit einem Unterabschnitt", "",
+                  f"Lege **einen Abschnitt** an und darin **einen Unterabschnitt** namens **{basis}**. Alle Aktivitäten kommen "
+                  "**in dieser Reihenfolge** in diesen einen Unterabschnitt:", ""]
+        else:
+            z += [f"## Alle Aktivitäten in einem Abschnitt „{basis}“ (ohne Unterabschnitt)", "",
+                  "Moodle erlaubt keine Unterabschnitte in Unterabschnitten. Arbeitest du in einem **vorhandenen Unterabschnitt**, "
+                  "kommen die Aktivitäten **direkt dorthin**, in dieser Reihenfolge. Die Kurssicherung legt sie zunächst in einem "
+                  f"eigenen Abschnitt „{basis}“ ab, aus dem du sie in deinen Unterabschnitt verschiebst (Drag & Drop oder "
+                  "Drei-Punkte-Menü › Verschieben). Danach den leeren Abschnitt löschen:", ""]
         vorige = None
         for a in b["abschnitte"]:
             if mit_trenner:
@@ -357,7 +375,7 @@ def baue_kurs(kurs, version=None, entwuerfe=False, still=False):
     if not b["abschnitte"]:
         raise Fehler("Kein Modul ist freigegeben – in Moodle käme ein leerer Kurs an. "
                      "Module freigeben (review: freigegeben) oder zum Testen --entwuerfe nutzen.")
-    if kurs.moodle.get("unterabschnitte") in ("einer", "stufen", "flach"):
+    if kurs.moodle.get("unterabschnitte") in ("einer", "stufen", "flach", "direkt"):
         b["unterabschnitt_modus"] = kurs.moodle["unterabschnitte"]
         b["trennbeschriftungen"] = bool(kurs.moodle.get("trennbeschriftungen", True))
         if kurs.moodle.get("unterabschnitt_name"):

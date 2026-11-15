@@ -50,6 +50,11 @@ stufen:
 moodle:
   version: 4                    # BBZ-Moodle 4.5.12
   unterabschnitte: stufen       # ein Abschnitt, darin je Stufe ein Unterabschnitt (Plugin „Unterabschnitt“ am BBZ)
+  # Abfrage bei der Lehrkraft: Arbeitet sie in einem VORHANDENEN Unterabschnitt? Moodle kennt keine Unterabschnitte in Unterabschnitten.
+  #   direkt  = keine Unterabschnitte, alle Aktivitäten direkt in einem Abschnitt (zum Verschieben in den vorhandenen Unterabschnitt)
+  #   flach   = ein Abschnitt mit EINEM Unterabschnitt, darin alles hintereinander
+  #   stufen  = ein Abschnitt, je Stufe ein Unterabschnitt
+  # trennbeschriftungen: true   # bei direkt und flach: vor jeder Stufe ein Textfeld als Trenner
   unterabschnitt_name: "Übungs-Lernpfad @@THEMA@@"
   start: false                  # kein Start-Lernpaket (der Pfad kommt in einen vorhandenen Kurs)
   anordnung: true               # Fragetyp „Reihenfolge“ ab Moodle 4.4

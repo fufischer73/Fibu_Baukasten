@@ -80,7 +80,7 @@ Nur das fragen, was fehlt. Typische Fragen, jeweils mit Vorschlag:
 4. Wie viele Module in welcher Stufe? Wie viel Zeit?
 5. Welche Hilfsmittel der Lehrkraft sollen als Hilfsseite hinein (zum Beispiel das Skonto-Schema)?
 6. Wo scheitern schwache Schüler:innen? (Für die Förderstufe.)
-7. Moodle erst später.
+7. **Moodle** (erst kurz vor der Übergabe, spätestens bei Schritt 8): **Arbeitest du in einem vorhandenen Unterabschnitt?** Dann `unterabschnitte: direkt` (die Aktivitäten kommen direkt in einen Abschnitt, aus dem du sie in deinen Unterabschnitt verschiebst, denn Moodle kennt keine Unterabschnitte in Unterabschnitten). Oder soll ein **Abschnitt mit Unterabschnitt(en)** entstehen: `flach` (ein Unterabschnitt mit allem) oder `stufen` (je Stufe ein Unterabschnitt)? Dazu: **Trennbeschriftungen** (Textfelder vor jeder Stufe) ja oder nein?
 
 Lege danach das Gerüst an: `python3 skripte/neues_thema.py <ordner> --thema "<Thema>"`.
 
@@ -113,7 +113,7 @@ Die Lehrkraft testet die Web-Version und die Moodle-Datei im Testkurs. Gib ihr e
 
 ### 8 Moodle übergeben
 
-Siehe `referenzen/moodle-bbz.md`. **Hauptweg:** Abschnitt und Unterabschnitte im Zielkurs selbst anlegen, Lernpakete einfügen (erstes einrichten, dann duplizieren), bei Änderungen nur die Paketdatei tauschen. **Alternative:** Kurssicherung wiederherstellen und Unterabschnitte verschieben. **Nie zweimal wiederherstellen.**
+Siehe `referenzen/moodle-bbz.md`. **Hauptweg (Wunsch der Lehrkraft):** alles fertig vorbereitet (Struktur nach der Abfrage aus dem Interview: `direkt`, `flach` oder `stufen`): Kurssicherung `<kurzname>_moodle4.mbz` im Testkurs, dann im echten Kurs wiederherstellen (**einmal**), Unterabschnitt verschieben, leeren Abschnitt löschen. Bei Änderungen nur Lernpakete tauschen, nur einen geänderten Test über `<test-id>_moodle4.mbz` einspielen. **Alternative:** Aktivitäten von Hand anlegen (erstes Lernpaket einrichten, duplizieren). **Nie zweimal wiederherstellen.**
 
 ### 9 Wissen sichern
 
