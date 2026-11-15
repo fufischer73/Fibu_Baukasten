@@ -179,3 +179,33 @@
   quelle: LS 53 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 1d, 2, 4g, 4h und 5b; Arbeitsblatt 53.2 und 53.4; Lehrbuch S. 433 und 434
   status: verifiziert
   thema: absatz
+- muster: S:BANK+ERLBER+UST > H:FORD
+  name: Zahlungseingang unter Abzug von Skonto (Nettomethode)
+  technik: '-'
+  quelle: LS 53 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Arbeitsblatt 53.1, 53.2 und 53.4, Aufgabe 1e, 3 und 5c; Lehrbuch S. 435; prüfungsnahe Aufgabe 242502.3 ([3;5;7] an 1)
+  status: verifiziert
+  thema: absatz
+- muster: S:ERLOES > H:ERLBER
+  name: Umbuchung der Erlösberichtigungen am Periodenende
+  technik: '-'
+  quelle: LS 53 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Arbeitsblatt 53.1 und 53.2; Lehrbuch S. 434 und 435
+  status: verifiziert
+  thema: absatz
+- muster: S:FRACHT+VST > H:VERB
+  name: Eingangsrechnung der Spedition für Transport an Kunden (Vertriebskosten)
+  technik: '-'
+  quelle: LS 53 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 4d; Lehrbuch S. 432
+  status: verifiziert
+  thema: absatz
+- muster: S:VERPACK+VST > H:VERB
+  name: Eingangsrechnung für Verpackungsmaterial (Vertriebskosten)
+  technik: '-'
+  quelle: LS 53 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 4c; Lehrbuch S. 432 (dort bar über 2880)
+  status: verifiziert
+  thema: absatz
+- muster: S:PROVISION+VST > H:VERB
+  name: Eingangsrechnung des Vertreters für vermittelte Verkäufe (Vertriebsprovision)
+  technik: '-'
+  quelle: LS 53 Lösungsvorschläge (Cornelsen, Industriekaufleute 1, Lernfeld 5), Aufgabe 4e
+  status: verifiziert
+  thema: absatz

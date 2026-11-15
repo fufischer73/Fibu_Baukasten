@@ -234,6 +234,7 @@ YAML an jedem Komma. Enthält ein Text ein Komma, den Text in Anführungszeichen
 Eine Liste von Fragen. `modul` ordnet sie einer Kategorie zu (sonst Kategorie = Dateiname).
 Gemeinsame Felder: `id` (eindeutig, wird Moodle-ID-Nummer), `modul`, `typ`, `titel`, `aufgabe` (Markdown,
 Bilder als `![Alt](material/bild.png)`), `erklaerung` (Feedback), `review`, `niveau` (1–3).
+`punkte` (optional, Standard 1) gewichtet Auswahl-, Zuordnungs-, Reihenfolge- und offene Fragen (Moodle: Standardpunkte). Rechenfragen und Lückentexte zählen je Feld 1 Punkt.
 
 ```yaml
 - id: t-01

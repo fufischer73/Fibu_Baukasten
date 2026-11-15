@@ -231,7 +231,7 @@ def q_choice(a, ordner):
     return frage("multichoice",
                  kopf(a) + fragetext_el(qt, bilder, ordner) + "\n" +
                  feedback_el(feedback_text(a, fb_bilder), fb_bilder, ordner) + "\n" +
-                 "<defaultgrade>1</defaultgrade><penalty>0.3333333</penalty><hidden>0</hidden>\n" +
+                 f"<defaultgrade>{a.get('punkte', 1)}</defaultgrade><penalty>0.3333333</penalty><hidden>0</hidden>\n" +
                  f"<single>{'true' if einzeln else 'false'}</single>\n"
                  f"<shuffleanswers>{'true' if a.get('mischen', True) else 'false'}</shuffleanswers>\n"
                  "<answernumbering>abc</answernumbering><showstandardinstruction>1</showstandardinstruction>\n" +
@@ -257,7 +257,7 @@ def q_zuordnung(a, ordner):
     return frage("matching",
                  kopf(a) + fragetext_el(md(a["aufgabe"], bilder) + beleg_teil(a), bilder, ordner) + "\n" +
                  feedback_el(fb, fb_bilder, ordner) + "\n" +
-                 "<defaultgrade>1</defaultgrade><penalty>0.3333333</penalty><hidden>0</hidden>\n"
+                 f"<defaultgrade>{a.get('punkte', 1)}</defaultgrade><penalty>0.3333333</penalty><hidden>0</hidden>\n"
                  "<shuffleanswers>true</shuffleanswers>\n" +
                  text_el("correctfeedback", "") + text_el("partiallycorrectfeedback", "") +
                  text_el("incorrectfeedback", "") + "<shownumcorrect/>\n" +
@@ -272,7 +272,7 @@ def q_reihenfolge(a, ordner):
     return frage("ordering",
                  kopf(a) + fragetext_el(md(a["aufgabe"], bilder) + beleg_teil(a), bilder, ordner) + "\n" +
                  feedback_el(feedback_text(a, fb_bilder), fb_bilder, ordner) + "\n" +
-                 "<defaultgrade>1</defaultgrade><penalty>0.3333333</penalty><hidden>0</hidden>\n"
+                 f"<defaultgrade>{a.get('punkte', 1)}</defaultgrade><penalty>0.3333333</penalty><hidden>0</hidden>\n"
                  "<layouttype>VERTICAL</layouttype><selecttype>ALL</selecttype><selectcount>0</selectcount>\n"
                  "<gradingtype>ABSOLUTE_POSITION</gradingtype><showgrading>SHOW</showgrading>"
                  "<numberingstyle>none</numberingstyle>\n" +
