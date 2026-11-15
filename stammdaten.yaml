@@ -27,6 +27,7 @@ lieferanten:
   - {name: "Büroausstattung Ostsee GmbH", strasse: "Marktplatz 6", plz_ort: "24376 Kappeln", liefert: "Büromöbel, Kopierer und Büromaschinen", kreditor: "44110", gruppe: anlagen}
   - {name: "IT-Systemhaus Nord GmbH", strasse: "Technologiestraße 2", plz_ort: "24106 Kiel", liefert: "Computer und Software", kreditor: "44120", gruppe: anlagen}
   - {name: "Lagertechnik Brinkmann GmbH", strasse: "Industriekamp 11", plz_ort: "24534 Neumünster", liefert: "Regale und Lagereinrichtung", kreditor: "44130", gruppe: anlagen}
+  - {name: "Tankstelle Förde-Energie", strasse: "Hamburger Straße 120", plz_ort: "24768 Rendsburg", liefert: "Kraftstoff (Betriebsstoff, kein Anlagegut)", kreditor: "44150", gruppe: anlagen}
   - {name: "Notariat Lorenz und Kruse", strasse: "Königstraße 5", plz_ort: "24768 Rendsburg", liefert: "Beurkundung beim Grundstückskauf", kreditor: "44140", gruppe: anlagen}
 
 # Debitoren (Sammelkonto 2400)
