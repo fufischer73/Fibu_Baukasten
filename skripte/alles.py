@@ -47,13 +47,15 @@ def main(argv=None):
     except Fehler as e:
         melde_fehler_und_ende(e)
     namen = {"scorm": "Lernpakete", "assign": "Aufgaben", "h5pactivity": "H5P", "subsection": "Unterabschnitte",
-             "quiz": "Tests", "qbank": "Fragensammlung"}
+             "quiz": "Tests", "qbank": "Fragensammlung", "label": "Trenner"}
     frei = sum(1 for m in kurs.module.values() if m.get("review") == "freigegeben")
     print()
     print(f"✓ Fertig: {kurs.titel}  ({len(kurs.reihenfolge)} Module, {frei} freigegeben)")
     print(f"  Web-Version:   {web / 'index.html'}")
     print(f"  Durchgeklickt: {bericht}" + (f"  – {len(probleme)} Problem(e)!" if probleme else "  – keine Probleme"))
     print(f"  Moodle {version}:      {ziel}  (" + ", ".join(f"{v} {namen.get(t, t)}" for t, v in sorted(typen.items())) + ")")
+    for tz in sorted(ziel.parent.glob(f"test-*_moodle{version}.mbz")):
+        print(f"  Test einzeln:  {tz}  (nur der Test mit Fragen, zum Einspielen per Wiederherstellen)")
     print(f"  Klickanleitung: {ziel.parent / f'ANLEITUNG_moodle{version}.md'}")
     if fragen:
         print(f"  Fragen (XML):  {', '.join(f.name for f in fragen)} in {fragen[0].parent}")

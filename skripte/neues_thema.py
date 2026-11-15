@@ -49,12 +49,29 @@ def main(argv=None):
             p.write_text(t, encoding="utf-8")
         if "@@KURZNAME@@" in p.name:
             p.rename(p.with_name(p.name.replace("@@KURZNAME@@", kurz)))
+    # Gemeinsame Stammdaten (Lieferanten, Dienstleister, Kunden) und Kontenübersicht aus dem zentralen Kontenplan
+    unternehmen = ziel / "seiten" / "unternehmen.md"
+    if unternehmen.exists():
+        import stammdaten
+        unternehmen.write_text(unternehmen.read_text(encoding="utf-8").replace("@@STAMMDATEN@@", stammdaten.tabellen().rstrip("\n")),
+                               encoding="utf-8")
+    try:
+        import kontenuebersicht
+        seite, _ = kontenuebersicht.erzeuge(ziel)
+        (ziel / "seiten" / "kontenuebersicht.md").write_text(seite, encoding="utf-8")
+    except Exception as e:   # die Vorlage-Kontenübersicht bleibt dann stehen
+        print(f"! Kontenübersicht nicht erzeugt: {e}")
     print(f"✓ Neues Thema „{a.thema}“ angelegt: {ziel}  (kurzname: {kurz})")
     print("  Nächste Schritte:")
-    print(f"   1. Material abfragen und lesen (MATERIAL-CHECKLISTE.md), Interview, Gliederung mit Zusage der Lehrkraft")
-    print(f"   2. Beispielmodule ersetzen: {ziel}/module/f1.md (Schritt für Schritt) und u1.md (Überprüfung), Fragen in fragen/")
-    print(f"   3. python3 skripte/pruefen.py {ziel}  und  python3 skripte/buchungspruefung.py {ziel}")
-    print(f"   4. python3 skripte/alles.py {ziel} --entwuerfe")
+    print(f"   1. Material abfragen und lesen (MATERIAL-CHECKLISTE.md). Kontenabgleich: python3 skripte/kontenpruefung.py --liste <Konten aus dem Material>")
+    print(f"      Buchungssätze aus den Lösungen: python3 skripte/wissen_aufnehmen.py aufnahme.yaml (Vorlage: vorlage-aufnahme.yaml)")
+    print(f"      Interview, Gliederung mit Zusage der Lehrkraft")
+    print(f"   2. Beispielmodule ersetzen: {ziel}/module/f1.md (Schritt für Schritt), u1.md (Überprüfung), n1.md (Nachschlagen), Fragen in fragen/,")
+    print(f"      PRUEFUNGSBEZUG.md ausfüllen")
+    print(f"   3. python3 skripte/pruefen.py {ziel}  (prüft auch Kontenplan und Stammdaten)  und  python3 skripte/buchungspruefung.py {ziel}")
+    print(f"   4. Kontenübersicht neu erzeugen, wenn sich die Konten ändern: python3 skripte/kontenuebersicht.py {ziel} --schreiben")
+    print(f"   5. python3 skripte/alles.py {ziel} --entwuerfe")
+    print(f"   6. Themenübersicht pflegen: themen.yaml, dann python3 skripte/themen.py --schreiben")
 
 
 if __name__ == "__main__":

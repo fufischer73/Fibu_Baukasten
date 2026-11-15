@@ -32,6 +32,13 @@ const fs = require('fs');
           }
         }
       }
+      if (pl.ausw && pl.ausw.length) {
+        const blk = await c.$$('.ue-auswirkung');
+        for (let k = 0; k < pl.ausw.length && k < blk.length; k++) {
+          await (await blk[k].$('select.ue-konto')).selectOption(pl.ausw[k][0]);
+          if (pl.ausw[k][1] != null) await (await blk[k].$('input.ue-betrag')).fill(fmt(pl.ausw[k][1]));
+        }
+      }
       const btns = await c.$$('button');
       let pr = null;
       for (const bt of btns) if ((await bt.innerText()).trim() === 'Prüfen') pr = bt;

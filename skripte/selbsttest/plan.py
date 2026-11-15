@@ -1,5 +1,5 @@
 """Plan für den Selbsttest: liest die gebauten Seiten (ausgabe/web) und berechnet für jede Rechen- und Buchungsaufgabe die
-Musterlösung mit den Startwerten. Aufgaben mit Zahllast, Erfolg oder Steuerart werden ausgelassen.
+Musterlösung mit den Startwerten. Aufgaben mit Steuerart werden ausgelassen; Zahllast und Erfolg werden mitgelöst.
   python3 plan.py <ordner> <plans.json>"""
 import re, json, sys, glob
 from pathlib import Path
@@ -18,9 +18,14 @@ for f in sorted(glob.glob(str(ordner / 'ausgabe' / 'web' / '*.html'))):
         d = json.loads(b.replace('\\u003c', '<'))
         v = {k: (x.get('start') if x.get('start') is not None else x['von']) for k, x in (d.get('parameter') or {}).items()}
         item = None
-        if d['typ'] == 'buchung' and not any(d.get(k) for k in ('steuerart', 'zahllast', 'erfolg')):
+        if d['typ'] == 'buchung' and not d.get('steuerart'):
             sat = d.get('saetze') or [{'soll': d['soll'], 'haben': d['haben']}]
-            item = {'typ': 'buchung', 'saetze': [
+            ausw = []
+            for k in ('zahllast', 'erfolg'):   # Reihenfolge wie in der Seite: erst Zahllast, dann Erfolg
+                if d.get(k):
+                    r = d[k]['richtung']
+                    ausw.append([r, None if r == 'gleich' else round(B.formel_wert(str(d[k]['betrag']), v), 2)])
+            item = {'typ': 'buchung', 'ausw': ausw, 'saetze': [
                 {'soll': [(z['konto'], round(B.formel_wert(str(z['betrag']), v), 2)) for z in s['soll']],
                  'haben': [(z['konto'], round(B.formel_wert(str(z['betrag']), v), 2)) for z in s['haben']]} for s in sat]}
         elif d['typ'] == 'rechnen':

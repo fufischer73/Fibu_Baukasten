@@ -29,17 +29,6 @@ In allen Aufgaben arbeitest du in der Buchhaltung der **Wiesengrund Küchenmöbe
 | **Arbeitnehmervertretung** | Betriebsrat, Jugend- und Auszubildendenvertretung |
 | **Arbeitstage / Arbeitszeit** | Montag bis Freitag, 8 Stunden im Einschichtbetrieb |
 
-## Lieferanten in den Aufgaben
-
-| Lieferant | Liefert | Kreditor |
-| --- | --- | --- |
-| Holzwerk Nordmark GmbH, Flensburg | Rohstoffe | 44010 |
-| Fronttechnik Hansen GmbH, Kiel | Fremdbauteile | 44020 |
-| Klebstoffe Reimers GmbH, Lübeck | Hilfsstoffe | 44030 |
-| Öl-Kontor Elbe GmbH, Hamburg | Betriebsstoffe | 44040 |
-| Küchenzubehör Bergmann KG, Neumünster | Handelswaren | 44050 |
-| Nord-Express Spedition GmbH, Rendsburg | Fracht | 44060 |
-
-Die Kreditorennummern stehen nur auf den Belegen. Gebucht wird in den Aufgaben auf dem Sammelkonto **4400 Verbindlichkeiten a. L. L.**
+@@STAMMDATEN@@
 
 Die Umsatzsteuer beträgt 19 %, wenn nichts anderes dasteht.

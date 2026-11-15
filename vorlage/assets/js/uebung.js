@@ -227,7 +227,8 @@
     }
     if (b.spalten && b.spalten.length) {
       var rechts = b.spalten.map(function (_, i) {
-        return (b.zeilen || []).length > 0 && b.zeilen.every(function (z) { return belegRechts(z[i]); });
+        var leer = function (x) { return String(x == null ? "" : x).trim() === ""; };
+        return (b.zeilen || []).some(function (z) { return !leer(z[i]); }) && b.zeilen.every(function (z) { return leer(z[i]) || belegRechts(z[i]); });
       });
       var wrap = h("div", "beleg-tabelle");
       var t = h("table", "beleg-pos");

@@ -1,6 +1,6 @@
 # Fibu-Baukasten
 
-Baukasten für **Übungs- und Überprüfungspfade zur Finanzbuchhaltung** (Industriekaufleute, BBZ Rendsburg-Eckernförde). Aus Markdown und YAML entstehen eine **Web-Version** und ein **Moodle-Kurs** (Moodle 4.5 mit Unterabschnitt-Plugin) mit Belegen, Buchungssätzen, Förderstufe und Abschlusstest. Fertige Beispiele: „Umsatzsteuer prüfen“ und „Buchungen im Beschaffungsprozess“.
+Baukasten für **Übungs- und Überprüfungspfade zur Finanzbuchhaltung** (Industriekaufleute, BBZ Rendsburg-Eckernförde). Aus Markdown und YAML entstehen eine **Web-Version** und ein **Moodle-Kurs** (Moodle 4.5 mit Unterabschnitt-Plugin) mit Belegen, Buchungssätzen, Förderstufe und Abschlusstest. Fertige Beispiele: „Umsatzsteuer prüfen“, „Buchungen im Beschaffungsprozess“ und „Absatzprozesse buchen“ (Übersicht: `THEMEN.md`).
 
 Das Paket ist eigenständig. Es enthält die Werkzeuge des Lernpfad-Baukastens von Dennis (`dclausen01`, MIT) als eigene Kopie mit Erweiterungen, **ohne das Original zu verändern** (siehe `NOTICE.md`).
 
@@ -19,15 +19,27 @@ Das Paket ist eigenständig. Es enthält die Werkzeuge des Lernpfad-Baukastens v
 | 🎯 **Überprüfung** | 3 bis 4 Module wie in der Klassenarbeit: Belege, Buchungssätze (aufwands- oder bestandsorientiert), Berechnungen, Sachverhalte, Parallelaufgaben |
 | **Abschlusstest** | 12 bis 17 Fragen, 20 Punkte, als Moodle-Test und Web-Seite |
 | **Hilfen** | Unternehmen, Kontenübersicht, Merkzettel und Schemata als aufklappbare Kästen im Modul |
+| 📚 **Nachschlagen** (optional) | Ein Modul ohne Aufgaben mit allen Hilfen und einem Hilfsblatt zum Ausdrucken (DOCX) |
 
 ## Das Gedächtnis des Baukastens
 
-Der Baukasten **lernt die Buchungstechnik immer besser**:
+Der Baukasten **lernt**, indem Wissen in Dateien steht, die jeder neue Chat zuerst liest. Claude behält nichts von einem Chat zum nächsten, die Dateien schon.
 
-- `buchungsmuster.yaml`: alle Buchungsmuster, die gegen Lösungsvorschläge der Lehrkraft **verifiziert** sind (derzeit 27 aus Beschaffung und Umsatzsteuer).
-- `skripte/buchungspruefung.py <ordner> --lernen`: rechnet jede Aufgabe mit Zufallszahlen durch, meldet Rechenfehler und **neue Muster**, die noch bestätigt werden müssen.
-- `BUCHUNGSWISSEN.md`: Regeln, typische Fehler, Lernprotokoll.
-- `ERKENNTNISSE.md`: Zusammenarbeit, Didaktik, Technik, Moodle.
+| Datei oder Skript | Wofür |
+| --- | --- |
+| `buchungsmuster.yaml` | alle Buchungsmuster, **verifiziert** gegen Lösungsvorschläge der Lehrkraft (Quelle und Status je Muster) |
+| `rollen.yaml` | Rollen der Konten in den Mustern (VST, FORD, ERLOES …), Datenbasis der Prüfung |
+| `kontenplan.yaml` | **zentraler Kontenplan** (Schulplan der Lehrkraft, ergänzt um Konten aus Lösungen und IKR) |
+| `stammdaten.yaml` | gemeinsame Kunden, Lieferanten und Dienstleister des Modellunternehmens (Namen, Anschriften, Nummern) |
+| `THEMEN.md` / `themen.yaml` | Themenübersicht mit Stand und Zahl der bestätigten Muster |
+| `BUCHUNGSWISSEN.md`, `ERKENNTNISSE.md` | Regeln, typische Fehler, Lernprotokoll, Erfahrungen aus allen Pfaden |
+| `skripte/buchungspruefung.py` | rechnet jede Aufgabe mit Zufallszahlen durch, meldet Rechenfehler und **neue Muster** |
+| `skripte/wissen_aufnehmen.py` | nimmt Buchungssätze aus Material auf, **ohne einen Pfad zu bauen**; meldet Neues, **Widersprüche**, fehlende Konten, Soll ≠ Haben |
+| `skripte/kontenpruefung.py` | prüft, ob alle Konten eines Pfads (oder Materials) im Kontenplan stehen; nimmt neue Konten auf |
+| `skripte/kontenuebersicht.py` | erzeugt die Seite „Kontenübersicht“ aus den verwendeten Konten |
+| `skripte/stammdaten.py` | Tabellen für „Unternehmen“, nächste Nummer, Abgleich der Belege mit den Stammdaten |
+
+Jedes neue Muster und jedes neue Konto braucht die **Bestätigung der Lehrkraft**. Was nicht belegt ist, bleibt „neu“ bzw. „nicht bestätigt“.
 
 ## Aufbau
 

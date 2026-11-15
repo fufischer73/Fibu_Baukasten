@@ -234,6 +234,7 @@ YAML an jedem Komma. Enthält ein Text ein Komma, den Text in Anführungszeichen
 Eine Liste von Fragen. `modul` ordnet sie einer Kategorie zu (sonst Kategorie = Dateiname).
 Gemeinsame Felder: `id` (eindeutig, wird Moodle-ID-Nummer), `modul`, `typ`, `titel`, `aufgabe` (Markdown,
 Bilder als `![Alt](material/bild.png)`), `erklaerung` (Feedback), `review`, `niveau` (1–3).
+`punkte` (optional, Standard 1) gewichtet Auswahl-, Zuordnungs-, Reihenfolge- und offene Fragen (Moodle: Standardpunkte). Rechenfragen und Lückentexte zählen je Feld 1 Punkt.
 
 ```yaml
 - id: t-01
@@ -300,7 +301,8 @@ Zahlenbereichs einmal nach (kein Teilen durch 0, sinnvolle Ergebnisse).
 ```yaml
 moodle:
   version: 4
-  unterabschnitte: stufen        # true (je Einheit ein Unterabschnitt) | einer (alles in einem) | stufen (ein Abschnitt, je Stufe ein Unterabschnitt)
+  unterabschnitte: stufen        # true (je Einheit ein Unterabschnitt) | einer (alles in einem) | stufen (ein Abschnitt, je Stufe ein Unterabschnitt) | flach (ein Abschnitt, EIN Unterabschnitt mit allem hintereinander) | direkt (ein Abschnitt, alle Aktivitäten OHNE Unterabschnitt, zum Verschieben in einen vorhandenen Unterabschnitt)
+  trennbeschriftungen: true      # nur mit flach und direkt: vor jeder Stufe ein Textfeld als Trenner (Standard true)
   unterabschnitt_name: Übungs-Lernpfad Beschaffung
   start: false                   # kein Start-Lernpaket „Mein Lernpfad“
 ```

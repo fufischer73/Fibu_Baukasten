@@ -120,8 +120,19 @@ class Sicherung:
         self.sections.append(s0)
         for inh in self.b.get("allgemein", {}).get("inhalte", []):
             self.inhalt(inh, s0, insub=False)
+        if self.b.get("unterabschnitt_modus") == "keiner":   # z. B. Sicherung nur mit einem Test: Aktivität direkt im Abschnitt
+            self._baue_direkt(erste)
+            return
         if self.ziel.get("immer") and self.b.get("unterabschnitt_modus") == "stufen":
             self._baue_stufen(erste)
+            self.weiter_links()
+            return
+        if self.ziel.get("immer") and self.b.get("unterabschnitt_modus") == "flach":
+            self._baue_flach(erste)
+            self.weiter_links()
+            return
+        if self.b.get("unterabschnitt_modus") == "direkt":   # keine Unterabschnitte: alle Aktivitäten direkt in EINEM Abschnitt
+            self._baue_flach(erste, unterabschnitt=False)
             self.weiter_links()
             return
         # erst alle Abschnitte anlegen (Nummern 1..n), Unterabschnitte danach nummerieren (so macht es Moodle)
@@ -194,6 +205,58 @@ class Sicherung:
             if obj.get("delegated"):
                 obj["delegated"]["availability"] = obj["availability"]
         self.weiter_links()
+
+    def _baue_direkt(self, erste):
+        """Je Abschnitt die Aktivitäten ohne Unterabschnitte direkt in den Abschnitt (kleine Sicherungen, z. B. nur ein Test)."""
+        for i, a in enumerate(self.b["abschnitte"]):
+            s = dict(id=self.nid("section"), number=erste + i, name=a["titel"], summary=a.get("text", ""), sequence=[],
+                     availability=None, component=None, itemid=None, parentcmid=None)
+            self.sections.append(s)
+            for e in a.get("einheiten", []):
+                for inh in e.get("inhalte", []):
+                    self.inhalt(inh, s, insub=False)
+
+    def _baue_flach(self, erste, unterabschnitt=True):
+        """Ein einziger Abschnitt mit EINEM Unterabschnitt, darin alle Aktivitäten hintereinander (Stufen nacheinander).
+        Mit unterabschnitt=False (Modus „direkt“) liegen die Aktivitäten direkt im Abschnitt, ohne Unterabschnitt: für Lehrkräfte,
+        die in einem vorhandenen Unterabschnitt arbeiten (Moodle kennt keine Unterabschnitte in Unterabschnitten) und die
+        Aktivitäten von dort aus verschieben.
+        Mit trennbeschriftungen (Standard) steht vor jeder Stufe eine Beschriftung (Textfeld) als Trenner."""
+        name = self.b.get("unterabschnitt_name") or self.b["kurs"]["titel"]
+        s = dict(id=self.nid("section"), number=erste, name=name, summary="", sequence=[], availability=None,
+                 component=None, itemid=None, parentcmid=None)
+        self.sections.append(s)
+        if unterabschnitt:
+            sub = self.aktivitaet("subsection", s, dict(name=name), insub=False)
+            ds = dict(id=self.nid("section"), number=erste + 1, name=name, summary="", sequence=[], availability=None,
+                      component="mod_subsection", itemid=sub["instanceid"], parentcmid=sub["moduleid"])
+            sub["delegated"] = ds
+            self.sections.append(ds)
+        else:
+            ds = s
+        verzoegert = []
+        vorige_haupt = None
+        for a in self.b["abschnitte"]:
+            erste_einheit = True
+            if self.b.get("trennbeschriftungen", True) and len(self.b["abschnitte"]) > 1:
+                text = f"<h4>{a['titel']}</h4>" + (a.get("text") or "")
+                lab = self.inhalt(dict(typ="beschriftung", id=f"trenn-{a.get('id') or len(self.ids)}", titel=a["titel"], text=text), ds)
+                if a.get("freischalten_nach") and lab is not None:
+                    verzoegert.append((lab, a["freischalten_nach"]))
+            for e in a.get("einheiten", []):
+                ref = e.get("freischalten_nach") or (a.get("freischalten_nach") if erste_einheit else None) or \
+                    (vorige_haupt if a.get("reihenfolge", "nacheinander") == "nacheinander" else None)
+                erste_einheit = False
+                for j, inh in enumerate(e.get("inhalte", [])):
+                    akt = self.inhalt(inh, ds)
+                    if akt is None:
+                        continue
+                    if ref:
+                        verzoegert.append((akt, ref))
+                    if j == 0 and inh.get("abschluss") is not False:
+                        vorige_haupt = inh["id"]
+        for obj, ref in verzoegert:
+            obj["availability"] = self.bedingung(ref)
 
     def _baue_stufen(self, erste):
         """Ein einziger Abschnitt, darin je Stufe ein Unterabschnitt (z. B. „Schritt für Schritt“ und „Überprüfung“)."""
@@ -319,6 +382,9 @@ class Sicherung:
             akt["maxfiles"] = inh.get("dateien", 1)
             akt["raster"] = self.raster(inh)
             self.note(akt, akt["grade"])
+        elif typ == "beschriftung":
+            # Textfeld als Trenner (z. B. „🌱 Schritt für Schritt“ über den Modulen einer Stufe); keine Bewertung, kein Abschluss
+            akt = self.aktivitaet("label", ds, dict(name=inh["titel"], intro=inh.get("text", "")), completion=0, insub=insub)
         elif typ == "test":
             akt = self.aktivitaet("quiz", ds, dict(name=inh["titel"], intro=inh.get("text", "")),
                                   completion=2, completiongradeitemnumber=0, insub=insub)
@@ -369,7 +435,7 @@ class Sicherung:
     def weiter_links(self):
         """In Aufgaben und H5P einen Link zurück in den Pfad setzen (Moodle zeigt dort kein „Weiter“).
         Die Links sind als Moodle-Platzhalter geschrieben; Moodle rechnet sie beim Wiederherstellen um."""
-        reihe = [a for a in self.activities if a["modname"] not in ("subsection", "qbank") and a["sectionnumber"] != 0]
+        reihe = [a for a in self.activities if a["modname"] not in ("subsection", "qbank", "label") and a["sectionnumber"] != 0]
         for i, a in enumerate(reihe):
             if a["modname"] == "scorm":
                 continue
@@ -602,6 +668,15 @@ def subsection_xml(a):
     <name>{x(a['name'])}</name>
     <timemodified>{NOW}</timemodified>
   </subsection>""")
+
+
+def label_xml(a):
+    return activity_wrap(a, f"""  <label id="{a['instanceid']}">
+    <name>{x(a['name'])}</name>
+    <intro>{x(a.get('intro') or '')}</intro>
+    <introformat>1</introformat>
+    <timemodified>{NOW}</timemodified>
+  </label>""")
 
 
 def grading_xml(a):
@@ -994,7 +1069,7 @@ def schreibe_mbz(k, ziel):
     for a in k.activities:
         d = f"activities/{a['modname']}_{a['moduleid']}/"
         add(d + "module.xml", module_xml(dict(a, version=k.ziel["version"])))
-        schreiber = {"scorm": scorm_xml, "h5pactivity": h5p_xml, "assign": assign_xml, "subsection": subsection_xml,
+        schreiber = {"scorm": scorm_xml, "h5pactivity": h5p_xml, "assign": assign_xml, "subsection": subsection_xml, "label": label_xml,
                      "quiz": lambda a: moodle_test.quiz_xml(a, k.pool, k.ziel["qbank"], NOW),
                      "qbank": lambda a: moodle_test.qbank_xml(a, NOW)}
         add(d + a["modname"] + ".xml", schreiber[a["modname"]](a))

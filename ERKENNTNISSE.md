@@ -1,6 +1,6 @@
 # Erkenntnisse aus den bisherigen Fibu-Pfaden
 
-Zusammengeführt aus „Umsatzsteuer prüfen“ (06.11.2026) und „Buchungen im Beschaffungsprozess“ (09.11.2026). Lies das **vor dem Interview** zu einem neuen Thema und ergänze es **nach** jedem Thema.
+Zusammengeführt aus „Umsatzsteuer prüfen“ (06.11.2026), „Buchungen im Beschaffungsprozess“ (09.11.2026) und „Absatzprozesse buchen“ (15.11.2026). Lies das **vor dem Interview** zu einem neuen Thema und ergänze es **nach** jedem Thema.
 
 ## 1 Zusammenarbeit mit der Lehrkraft
 
@@ -70,3 +70,48 @@ Siehe `referenzen/moodle-bbz.md`. Kurz:
 6. Lehrkraft testet, Änderungen, Freigabe auf Ansage.
 7. Moodle: Testkurs, echter Kurs, Lernpakete austauschen.
 8. Wissen sichern: `buchungsmuster.yaml`, BUCHUNGSWISSEN.md (Lernprotokoll), ERKENNTNISSE.md ergänzen.
+
+## 7 Erkenntnisse aus dem Absatz-Pfad (15.11.2026)
+
+### Zusammenarbeit und Material
+- **Lernfeld nicht raten.** Der erste Vorschlag (LF 6) war falsch, es war LF 5. Nachfragen oder aus dem Material ablesen.
+- **Scans lesen.** Lernsituation und Lösungen kamen als Scan-PDF. Mit `pdftoppm -r 80 -png` Seite für Seite in Bilder umwandeln und ansehen, `pdftotext` liefert dort nichts. Zahlen der Lösungen immer nachrechnen (Beträge, Rundung).
+- **Fehler im Material der Lehrkraft** offen melden: „2300 Bank“ statt 2800 in einer Ergänzungsseite, falsche Verweise auf Arbeitsblätter, abweichende Lösungen in prüfungsnahen Aufgaben, unterschiedliche Skontoregeln (mal auf alles, mal nur auf den Warenwert).
+- **Gegenstand zuerst festlegen**, mit Ja- und Nein-Liste (Mahnwesen, Verjährung, Pflichtangaben UStG, Anlagenverkauf blieben draußen). Danach die Gliederung. Hilfsmittel, die die Lehrkraft nicht hat, selbst vorschlagen (Korrekturschema, Skonto-Schema, Merkzettel).
+- **Kontenübersicht abgleichen:** Fehlende Konten aus Lehrbuch, Aufgaben und Lösungen sammeln (hier 5001, 5101, 6040, 6140, 6150) und Bezeichnungen aus dem Kontenrahmen der Lehrkraft übernehmen.
+- **Freigabe:** Auch „stelle alles fertig, so dass es ohne Entwurf ist“ wurde als Freigabe gewertet. Im Zweifel einmal nachfragen.
+
+### Didaktik
+- **Kernunterscheidung im Absatz:** Kommt die Ware zurück (5000/5100) oder bleibt sie beim Kunden (5001/5101)? Sie steht im Merkzettel, im Korrekturschema, in jedem Modul und im Test.
+- **Prüfungsstil statt Nachbau:** Das Konten-Ankreuzen der Prüfung wird nicht übernommen. Stattdessen **Buchungssatz bilden** mit denselben Ablenkern, dazu Multiple Choice „Welche Aussage trifft zu?“. Eine Datei `PRUEFUNGSBEZUG.md` hält fest, welche Prüfungsaufgabenart wo vorkommt.
+- **Förderstufe:** Zuordnung mit einer dritten Kategorie „wird nicht gebucht“ (Sofortrabatt). Pro Modul ein Block „So fragt die Prüfung“. Ein Fall, vier Teilaufgaben, dann „Jetzt du“.
+- **Erfolg und Zahllast** gelegentlich (Frage nach Richtung und Betrag), nie in der Förderstufe. Nur der Nettobetrag wirkt auf den Erfolg, die Umsatzsteuer nicht.
+- **Stufe „Nachschlagen“** (Modul ohne Aufgaben mit allen Hilfsseiten) und **DOCX-Hilfsblatt** zum Ausdrucken: Die Seitenleiste im Moodle-Lernpaket wird nicht gefunden, ein eigenes Modul schon.
+- **T-Konten** als einen Block `konten` in der Überprüfung. Er muss ausgeglichen sein: Salden (zum GuV-Konto, zur Schlussbilanz) werden vorgegeben, wenn dafür keine Lösung der Lehrkraft vorliegt.
+
+### Technik
+- **Belege auf dem Handy:** höchstens 3 bis 4 Spalten. Spalte „Pos.“ weglassen, Menge und Rabatt in die Bezeichnung („3 Stück Küchenzeile, 10 % Rabatt“), kurze Zeilentitel („Verpackung“ statt „Verpackungskosten“). Leere Zellen in Zahlenspalten sind jetzt erlaubt.
+- **Raster:** 19 % Umsatzsteuer und Prozentsätze führen schnell zu drei Nachkommastellen. Preise in Zehnerschritten, Mengen in Fünferschritten, Nettobeträge als ganze Euro. Die Umsatzsteuer auf einen Bonus darf kaufmännisch gerundet werden, dann in der Aufgabe sagen.
+- **Rechenfragen im Test mit Beleg und festen Zahlen:** `typ: zahl` darf ohne `parameter:` stehen (dann eine Antwort, kein Zufall) und kann einen `beleg:` tragen. Das ist näher an der Prüfung als Zufallszahlen. Zufallszahlen eignen sich eher für Übungen. Auch Multiple-Choice-Sachverhalte profitieren von einem Beleg (hier Frage 8 und 9 im Absatz-Test).
+- **Punkte je Testfrage:** optionales Feld `punkte` (Auswahl, Zuordnung, Reihenfolge, offen). Standard ist 1. Rechenfragen zählen je Feld 1.
+- **Selbsttest** löst jetzt auch Aufgaben mit Zahllast und Erfolg. Aufgaben mit Steuerart lässt er aus.
+- **Browser-Test in Python:** `pip install playwright`, der vorhandene Browser unter `/opt/pw-browsers` wird genutzt.
+- **YAML:** In `falsch_text`, `text` usw. immer Anführungszeichen, wenn „: “ vorkommt. Skripte und Erzeugungshilfen nicht in `material/` ablegen (wird in alle Pakete kopiert), sondern in `werkzeuge/`.
+- **Mehrere Belege** in einer Aufgabe gehen als Liste unter `beleg:` (Rechnung und Kontoauszug).
+
+### Kontenplan, Stammdaten, Wissensaufnahme (Beschlüsse vom 15.11.2026)
+- **Zentraler Kontenplan** (`kontenplan.yaml`): Der **Schulplan** der Lehrkraft gilt, der IKR ergänzt nur. Neue Konten werden erst nach der Bestätigung eingetragen (Status „neu“, dann „verifiziert“). Beim Material und bei jedem Bau wird geprüft, ob Konten fehlen (`kontenpruefung.py`, läuft auch in `pruefen.py`). Im Absatz fehlten zuerst fünf Konten, und eine handgeschriebene Kontenübersicht hatte drei Konten vergessen, die in Aufgaben vorkamen.
+- **Gemeinsame Stammdaten** (`stammdaten.yaml`): Im Absatz stand die Spedition mit einer anderen Straße als in der Beschaffung. Neue Firmen kommen zuerst in die Stammdaten, `stammdaten.py --pruefen` gleicht die Belege ab.
+- **Wissen aufnehmen ohne Pfad** (`wissen_aufnehmen.py`): Widersprüche zu bestätigten Mustern werden gemeldet, nichts wird gespeichert, bevor die Lehrkraft entschieden hat. Die Rollen der Konten stehen in `rollen.yaml`, nicht mehr im Code.
+- **Themenübersicht** (`THEMEN.md`) zeigt den Stand je Thema und die Zahl der bestätigten Muster.
+
+### Moodle
+- **Hauptweg am BBZ (Wunsch der Lehrkraft, 15.11.2026):** alles fertig vorbereiten. Kurssicherung `.mbz` einmal wiederherstellen, Unterabschnitt verschieben, leeren Abschnitt löschen. Die Lehrkraft hat beide Wege ausprobiert und das Vorbereitete bevorzugt, weil das Einrichten jeder Aktivität von Hand und das spätere Austauschen mühsamer ist. Änderungen später: nur Lernpakete (Paketdatei) tauschen. Nur ein geänderter Test: kleine Test-Sicherung `<test-id>_moodle4.mbz` (alten Test samt Fragen vorher löschen). Von Hand einrichten bleibt Alternative; Duplizieren der Lernpakete am BBZ ungetestet. **Moodle kennt keine Unterabschnitte in Unterabschnitten:** Arbeitet die Lehrkraft in einem vorhandenen Unterabschnitt, muss die Sicherung die Aktivitäten ohne eigenen Unterabschnitt liefern (`unterabschnitte: direkt`). Das wird im Interview abgefragt (SKILL.md, Frage 7).
+
+## 8 Offene Punkte (Stand 15.11.2026, bitte zu Beginn eines neuen Themas die Lehrkraft danach fragen)
+
+- **Moodle-Testkurs:** Die Lehrkraft hat die Sicherungen des Absatz-Pfads im Testkurs eingespielt. Das Ergebnis ist hier noch nicht festgehalten. Ungetestet am BBZ waren: Textfelder als Trenner in der Kurssicherung, Modus `direkt`, die kleine Test-Sicherung (`<test-id>_moodle4.mbz`) und das Duplizieren von Lernpaketen. **Nachfragen und die Antwort hier eintragen.**
+- **Pull Request:** Die Erweiterungen aus dem Absatz-Pfad liegen auf dem Branch `claude/modest-sagan-7c000q` (Pull Request #1). Solange er nicht in `main` ist, im Startprompt den Branch nennen. Danach kann der Absatz-Pfad seine Kopie des Kontenplans aus der `kurs.yaml` entfernen.
+- **Themenübersicht:** Das Lernfeld des Umsatzsteuer-Pfads fehlt in `themen.yaml`. Neue Themen dort eintragen und `python3 skripte/themen.py --schreiben` ausführen.
+- **Kontenplan:** Er enthält derzeit nur den Schulplan (71 Konten, davon 0700, 0840 und 0870 für Anlagen). Für neue Themen werden fehlende Konten (zum Beispiel Abschreibungen) mit `kontenpruefung.py --liste` abgeglichen und der Lehrkraft vorgelegt.
+- **Moodle-Struktur:** Vor dem Bau fragen, ob die Lehrkraft in einem vorhandenen Unterabschnitt arbeitet (`direkt`) oder ob ein Abschnitt mit Unterabschnitt(en) entstehen soll (`flach`, `stufen`). Hauptweg ist die fertige Kurssicherung.

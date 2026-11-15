@@ -367,7 +367,36 @@ class Pruefer:
         self.fragen()
         self.tests()
         self.zugang()
+        self.konten_und_stammdaten()
+        self.belege()
         return not self.fehler
+
+    def konten_und_stammdaten(self):
+        """Kontenplan: Stehen alle verwendeten Konten im zentralen Plan? Stammdaten: Stimmen Firmen und Anschriften der Belege?"""
+        try:
+            import kontenpruefung
+            import stammdaten
+        except Exception as e:   # nie am Zusatzcheck scheitern
+            self.h("kontenpruefung", f"übersprungen ({e})")
+            return
+        ordner = self.k.ordner
+        fehler, hinweise, _ = kontenpruefung.pruefe_pfad(ordner)
+        for x in fehler:
+            self.f("Kontenplan", x + ". Der Lehrkraft vorlegen und mit kontenpruefung.py --aufnehmen eintragen")
+        for x in hinweise:
+            self.h("Kontenplan", x)
+        for x in stammdaten.pruefe_pfad(ordner):
+            self.h("Stammdaten", x)
+
+    def belege(self):
+        """Belege mit mehr als 4 Spalten sind auf dem Handy zu eng (Empfehlung: höchstens 4, „Pos.“ weglassen)."""
+        for sub, muster in (("module", "*.md"), ("fragen", "*.yaml")):
+            for f in sorted((self.k.ordner / sub).glob(muster)):
+                for nr, z in enumerate(f.read_text(encoding="utf-8").split("\n"), 1):
+                    m = re.match(r"^\s*(?:-\s*)?spalten:\s*\[(.*)\]\s*$", z)
+                    if m and len([s for s in m.group(1).split(",") if s.strip()]) > 4:
+                        self.h(f"{sub}/{f.name}", f"Zeile {nr}: Beleg mit mehr als 4 Spalten ist auf dem Handy zu eng "
+                                                   "(Empfehlung: „Pos.“ weglassen, Menge und Rabatt in die Bezeichnung)")
 
 
 def pruefe(ordner, still=False):

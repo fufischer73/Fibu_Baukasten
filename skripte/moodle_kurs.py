@@ -14,6 +14,8 @@ Aufbau des Kurses (alles aus kurs.yaml und den Modulköpfen):
     je Stufe         ein Abschnitt; darin je Modul das Lernpaket, ggf. H5P-Kurz-Check (nur Moodle 5, h5p: true)
                      und die Abgabe (abgabe:), beim Meilenstein mit Bewertungsraster (raster:)
                      Moodle 5: jedes Modul als Unterabschnitt; Moodle 4: alles untereinander
+                     Moodle 4.5 mit Plugin (moodle.unterabschnitte): true | einer | stufen | flach (alles in EINEM Unterabschnitt, mit
+                     moodle.trennbeschriftungen ein Textfeld als Trenner vor jeder Stufe)
 Tests (tests: in kurs.yaml): Aktivität „Test“ mit den Fragen aus fragen/*.yaml, hinter dem Modul (nach:)
                      bzw. am Ende der Stufe (stufe:) – Details in moodle_test.py
 Freischaltung (moodle: in kurs.yaml):
@@ -21,6 +23,7 @@ Freischaltung (moodle: in kurs.yaml):
     freischaltung: einstufung   Stufe frei nach Abgabe des Meilensteins der vorigen Stufe ODER bestandenem
                                 Einstufungstest (Modell A) | offen: alle Stufen sofort (Modell B)
 """
+import re
 import sys
 
 from bausteine import Uebersetzer
@@ -102,7 +105,7 @@ def beschreibung(kurs, pakete, version, h5p_dateien=None, entwuerfe=False, hinwe
 
     vorige_stufe_ende = None  # was die nächste Stufe freischaltet (Meilenstein-Abgabe bzw. letztes Lernpaket)
     for s in kurs.stufen:
-        a = dict(titel=f"{s.get('icon', '')} {s['name']}".strip(), text=f"<p>{u.inline(s.get('text', ''))}</p>" if s.get("text") else "",
+        a = dict(id=s["id"], titel=f"{s.get('icon', '')} {s['name']}".strip(), text=f"<p>{u.inline(s.get('text', ''))}</p>" if s.get("text") else "",
                  reihenfolge=mo.get("reihenfolge", "nacheinander"), einheiten=[])
         if mo.get("freischaltung", "einstufung") == "einstufung" and b["abschnitte"]:
             bed = [r for r in (vorige_stufe_ende, {"id": einstufung.get(s["id"]), "mindestens": bestehen}
@@ -157,6 +160,19 @@ def beschreibung(kurs, pakete, version, h5p_dateien=None, entwuerfe=False, hinwe
     return b
 
 
+def test_hinweis(b, version):
+    """Absatz zur fertigen Test-Aktivität (kleine Sicherung nur mit dem Test), falls der Kurs Tests hat."""
+    tests = [i for a in b["abschnitte"] for e in a["einheiten"] for i in e["inhalte"] if i.get("typ") == "test" and not i.get("klausur_ordner")]
+    if not tests:
+        return []
+    z = ["**Nur den Test aktualisieren:** " + ", ".join(f"`{t['id']}_moodle{version}.mbz` („{t['titel']}“)" for t in tests) +
+         " enthält nur den Test mit allen Fragen und Einstellungen (Bewertung, Versuche, Abschluss). Nützlich, wenn sich nur der Test "
+         "ändert: den alten Test samt seinen Fragen in Moodle löschen, dann diese Datei einspielen (**Wiederherstellen › In diesen "
+         "Kurs, Inhalte hinzufügen**). Der Test erscheint in einem neuen Abschnitt und wird an die richtige Stelle verschoben, der "
+         "leere Abschnitt gelöscht.", ""]
+    return z
+
+
 def anleitung(kurs, b, version, mbz_name):
     """Klickanleitung: derselbe Kurs von Hand."""
     namen = {}
@@ -176,11 +192,30 @@ def anleitung(kurs, b, version, mbz_name):
                 teile.append(f"„{namen[r]}“ abgeschlossen")
         return " **oder** ".join(teile)
 
-    z = [f"# {kurs.titel} – Moodle-Kurs von Hand einrichten", "",
-         "Normalerweise geht es schneller mit der Kurssicherung:",
-         f"**Kurs › Mehr › Wiederverwendung › Wiederherstellen** → `{mbz_name}` hochladen → „In diesen Kurs, "
-         "Inhalte hinzufügen“ → durchklicken. Diese Anleitung ist die Rückfallebene, falls Wiederherstellen "
-         "nicht erlaubt ist.", "",
+    z = [f"# {kurs.titel} – Moodle-Kurs einrichten", "",
+         f"**Empfohlener Weg: alles fertig vorbereitet.** Die Kurssicherung `{mbz_name}` enthält den ganzen Pfad (Lernpakete, Test mit "
+         "Fragen, Abschluss- und Freischaltungs-Einstellungen). Einspielen: **Kurs › Mehr › Wiederverwendung › Wiederherstellen** → "
+         "Datei hochladen → „In diesen Kurs, Inhalte hinzufügen“. Vorher den Zielkurs **sichern**. Wiederherstellen nur **einmal**.", "",
+         ("Danach liegt ein neuer Abschnitt mit **allen Aktivitäten direkt darin** (ohne Unterabschnitt) im Kurs. Moodle erlaubt keine "
+            "Unterabschnitte in Unterabschnitten. Arbeitest du in einem Unterabschnitt, **verschiebe die Aktivitäten dorthin** "
+            "(Drag & Drop oder Drei-Punkte-Menü › Verschieben) und lösche den leeren Abschnitt. Prüfe ein Lernpaket und den Test."
+            if kurs.moodle.get("unterabschnitte") == "direkt" else
+            "Danach liegt der neue Abschnitt (mit dem Unterabschnitt bzw. den Unterabschnitten des Pfads) im Kurs. **Verschiebe** den "
+            "Unterabschnitt an die richtige Stelle (Drei-Punkte-Menü › Verschieben) und lösche den leeren Abschnitt. Prüfe ein Lernpaket "
+            "und den Test."), "",
+         "**Änderungen später:** Nur die **Paketdatei** im vorhandenen Lernpaket austauschen (Einstellungen › Paketdatei, ZIP aus "
+         "`lernpakete/`). Der Fortschritt der Schüler:innen bleibt, solange die Modul-IDs gleich bleiben. **Nicht erneut "
+         "wiederherstellen.**", "",
+         ]
+    z += test_hinweis(b, version)
+    z += ["## Alternative: von Hand einrichten", "",
+          "Falls Wiederherstellen nicht erlaubt ist oder du die Aktivitäten selbst anlegen willst: Abschnitt und Unterabschnitte im "
+          "Zielkurs selbst anlegen und nur die Lernpakete (und den Test) als Aktivitäten einfügen. So muss kein Unterabschnitt gezählt "
+          "werden.", "",
+          "**Tipp zum Zeitsparen:** Das erste Lernpaket vollständig einrichten (Einstellungen siehe unten), dann im Kurs "
+          "**duplizieren** (Drei-Punkte-Menü › Duplizieren), den Namen ändern und die ZIP austauschen. Bitte zuerst im Testkurs "
+          "ausprobieren.", ""]
+    z += [
          "## Vorbereitung", "",
          "- Kurs › Einstellungen › **Abschlussverfolgung: Ja**",
          "- Kursformat: Themen (Moodle 5 oder Moodle 4.5 mit Plugin: Unterabschnitte müssen verfügbar sein)", "",
@@ -198,60 +233,124 @@ def anleitung(kurs, b, version, mbz_name):
     for inh in b["allgemein"]["inhalte"]:
         z.append(f"- Lernpaket **{inh['titel']}** – `lernpakete/{inh['datei'].name}`")
     z.append("")
+    def posten(inh, einr, vor=""):
+        """Zeilen der Anleitung für eine Aktivität (Lernpaket, H5P, Test, Klausur, Aufgabe, Beschriftung)."""
+        out = []
+        if inh["typ"] == "beschriftung":
+            kurz = re.sub(r"<[^>]+>", " ", inh.get("text") or "")
+            kurz = " ".join(kurz.split())
+            out.append(f"{einr}- Text- und Medienfeld (als Trenner, früher „Textfeld“ oder „Beschriftung“) **{inh['titel']}**" + (f" – Text: „{kurz}“" if kurz and kurz != inh["titel"] else ""))
+        elif inh["typ"] == "lernpaket":
+            out.append(f"{einr}- Lernpaket **{inh['titel']}** – `lernpakete/{inh['datei'].name}`{vor}")
+        elif inh["typ"] == "h5p":
+            out.append(f"{einr}- H5P **{inh['titel']}** – `{inh['datei'].name}`{vor}")
+        elif inh["typ"] == "test":
+            n = sum(1 for g in inh["gruppen"])
+            if inh.get("klausur_ordner"):
+                out.append(f"{einr}- Klausur **{inh['titel']}**{vor} – {n} Aufgaben, Bewertung {inh['punkte']:g} Punkte, "
+                           f"{inh.get('zeit', 0)} Minuten, 1 Versuch. Von Hand ist das viel Arbeit: besser die Klausur "
+                           f"einzeln bauen (`klausur.py bauen {inh['klausur_ordner']}`) und als eigene Sicherung "
+                           "wiederherstellen. Aufgaben, Punkte und Notenschlüssel stehen in den Lehrkraft-Unterlagen.")
+                return out
+            out.append(f"{einr}- Test **{inh['titel']}**{vor} – {n} Fragen aus `fragen/` (Moodle-XML importieren, "
+                       "dann in den Test einfügen; Rechenaufgaben mit Varianten als Zufallsfrage aus ihrer Kategorie), "
+                       f"Bewertung {inh.get('punkte', 10)} Punkte"
+                       + (f", bestanden ab {inh['bestehen']} %, Abschluss: „Bestehensgrenze erreichen“" if inh.get("bestehen")
+                          else ", Abschluss: „Bewertung erhalten“")
+                       + (f", {inh['versuche']} Versuch(e)" if inh.get("versuche") else ", Versuche unbegrenzt")
+                       + (f", Zeitbegrenzung {inh['zeit']} Minuten" if inh.get("zeit") else "")
+                       + (", Frageverhalten „Direkte Auswertung“" if inh.get("feedback") == "sofort"
+                          else ", Frageverhalten „Spätere Auswertung“"))
+        else:
+            out.append(f"{einr}- Aufgabe **{inh['titel']}**{vor} – Dateiabgabe, höchstens {inh['dateien']} Datei(en)"
+                       + (f", Dateitypen {inh['dateitypen']}" if inh["dateitypen"] else "") + f", {inh['punkte']} Punkte, "
+                       "Abschluss: „Abgabe erforderlich“")
+            if inh.get("text_md"):
+                out.append(f"{einr}  Beschreibung: " + inh["text_md"].replace("\n", " "))
+            if inh.get("raster"):
+                out.append(f"{einr}  Bewertungsmethode **Bewertungsraster** mit diesen Kriterien:")
+                for k in inh["raster"]["kriterien"]:
+                    out.append(f"{einr}  - {k['kriterium']}: " + " · ".join(f"{t} ({p} P.)" for t, p in k["stufen"]))
+        return out
+
+    modus = kurs.moodle.get("unterabschnitte") if version == "4" else None
+    basis = kurs.moodle.get("unterabschnitt_name") or kurs.titel
+    if modus in ("flach", "direkt"):
+        # alle Aktivitäten hintereinander, vor jeder Stufe eine Beschriftung als Trenner
+        mit_trenner = bool(kurs.moodle.get("trennbeschriftungen", True)) and len(b["abschnitte"]) > 1
+        if modus == "flach":
+            z += [f"## Abschnitt „{basis}“ mit einem Unterabschnitt", "",
+                  f"Lege **einen Abschnitt** an und darin **einen Unterabschnitt** namens **{basis}**. Alle Aktivitäten kommen "
+                  "**in dieser Reihenfolge** in diesen einen Unterabschnitt:", ""]
+        else:
+            z += [f"## Alle Aktivitäten in einem Abschnitt „{basis}“ (ohne Unterabschnitt)", "",
+                  "Moodle erlaubt keine Unterabschnitte in Unterabschnitten. Arbeitest du in einem **vorhandenen Unterabschnitt**, "
+                  "kommen die Aktivitäten **direkt dorthin**, in dieser Reihenfolge. Die Kurssicherung legt sie zunächst in einem "
+                  f"eigenen Abschnitt „{basis}“ ab, aus dem du sie in deinen Unterabschnitt verschiebst (Drag & Drop oder "
+                  "Drei-Punkte-Menü › Verschieben). Danach den leeren Abschnitt löschen:", ""]
+        vorige = None
+        for a in b["abschnitte"]:
+            if mit_trenner:
+                z += posten(dict(typ="beschriftung", titel=a["titel"], text=a.get("text", "")), "  ")
+            if a.get("freischalten_nach"):
+                z.append(f"  - Voraussetzung für die folgenden Aktivitäten (Einschränkung: Aktivitätsabschluss bzw. Bewertung): {bed(a['freischalten_nach'])}.")
+            for e in a["einheiten"]:
+                vor = f" – Voraussetzung: {bed(vorige)}" if vorige and a["reihenfolge"] == "nacheinander" else ""
+                for inh in e["inhalte"]:
+                    z += posten(inh, "  ", vor)
+                vorige = e["inhalte"][0]["id"]
+        z.append("")
+        if mit_trenner:
+            z += ["**Trenner:** Das „Text- und Medienfeld“ legst du über *Aktivität oder Material hinzufügen* an (je nach Moodle-Version heißt es "
+                  "„Text- und Medienfeld“, „Textfeld“ oder „Beschriftung“, englisch *Label*). Schreibe die Überschrift hinein. Es hat keine "
+                  "weiteren Einstellungen und keinen Abschluss.", ""]
+        return "\n".join(z) + "\n"
+    if modus == "stufen" and len(b["abschnitte"]) > 1:
+        z += [f"## Abschnitt „{basis}“", "", "Ein Abschnitt, darin je Stufe ein Unterabschnitt:", ""]
     for a in b["abschnitte"]:
-        z += [f"## Abschnitt „{a['titel']}“", ""]
+        if modus != "stufen" or len(b["abschnitte"]) == 1:
+            z += [f"## Abschnitt „{a['titel']}“", ""]
+        else:
+            z += [f"### Unterabschnitt „{basis} – {a['titel']}“", ""]
         if a.get("freischalten_nach"):
             z += [f"Voraussetzung am Abschnitt (Einschränkung: Aktivitätsabschluss bzw. Bewertung, verknüpft mit „mindestens eine“): "
                   f"{bed(a['freischalten_nach'])}.", ""]
         vorige = None
-        modus = kurs.moodle.get("unterabschnitte") if version == "4" else None
         einer = modus in ("einer", "stufen")
-        if modus == "einer":
-            z.append(f"- Unterabschnitt **{kurs.moodle.get('unterabschnitt_name') or kurs.titel}** (darin alles Folgende)")
-        elif modus == "stufen":
-            basis = kurs.moodle.get("unterabschnitt_name") or kurs.titel
-            z.append(f"- Unterabschnitt **{basis} – {a['titel']}** (darin alles Folgende)" if len(b["abschnitte"]) > 1 else f"- Unterabschnitt **{basis}** (darin alles Folgende)")
+        unter_ueberschrift = modus == "stufen" and len(b["abschnitte"]) > 1   # Unterabschnitt steht als Überschrift, Aktivitäten ohne Einrückung
+        if modus == "einer" or (modus == "stufen" and len(b["abschnitte"]) == 1):
+            z.append(f"- Unterabschnitt **{basis}** (darin alles Folgende)")
         for e in a["einheiten"]:
             sub = (version == "5" and len(e["inhalte"]) > 1) or (version == "4" and bool(kurs.moodle.get("unterabschnitte")))
             if sub and not einer:
                 z.append(f"- Unterabschnitt **{e['titel']}**" + (f" – Voraussetzung: {bed(vorige)}" if vorige and a["reihenfolge"] == "nacheinander" else ""))
             for inh in e["inhalte"]:
-                einr = "  " if sub else ""
+                einr = "" if unter_ueberschrift else ("  " if sub else "")
                 vor = f" – Voraussetzung: {bed(vorige)}" if not sub and vorige and a["reihenfolge"] == "nacheinander" else ""
-                if inh["typ"] == "lernpaket":
-                    z.append(f"{einr}- Lernpaket **{inh['titel']}** – `lernpakete/{inh['datei'].name}`{vor}")
-                elif inh["typ"] == "h5p":
-                    z.append(f"{einr}- H5P **{inh['titel']}** – `{inh['datei'].name}`{vor}")
-                elif inh["typ"] == "test":
-                    n = sum(1 for g in inh["gruppen"])
-                    if inh.get("klausur_ordner"):
-                        z.append(f"{einr}- Klausur **{inh['titel']}**{vor} – {n} Aufgaben, Bewertung {inh['punkte']:g} Punkte, "
-                                 f"{inh.get('zeit', 0)} Minuten, 1 Versuch. Von Hand ist das viel Arbeit: besser die Klausur "
-                                 f"einzeln bauen (`klausur.py bauen {inh['klausur_ordner']}`) und als eigene Sicherung "
-                                 "wiederherstellen. Aufgaben, Punkte und Notenschlüssel stehen in den Lehrkraft-Unterlagen.")
-                        continue
-                    z.append(f"{einr}- Test **{inh['titel']}**{vor} – {n} Fragen aus `fragen/` (Moodle-XML importieren, "
-                             "dann in den Test einfügen; Rechenaufgaben mit Varianten als Zufallsfrage aus ihrer Kategorie), "
-                             f"Bewertung {inh.get('punkte', 10)} Punkte"
-                             + (f", bestanden ab {inh['bestehen']} %, Abschluss: „Bestehensgrenze erreichen“" if inh.get("bestehen")
-                                else ", Abschluss: „Bewertung erhalten“")
-                             + (f", {inh['versuche']} Versuch(e)" if inh.get("versuche") else ", Versuche unbegrenzt")
-                             + (f", Zeitbegrenzung {inh['zeit']} Minuten" if inh.get("zeit") else "")
-                             + (", Frageverhalten „Direkte Auswertung“" if inh.get("feedback") == "sofort"
-                                else ", Frageverhalten „Spätere Auswertung“"))
-                else:
-                    z.append(f"{einr}- Aufgabe **{inh['titel']}**{vor} – Dateiabgabe, höchstens {inh['dateien']} Datei(en)"
-                             + (f", Dateitypen {inh['dateitypen']}" if inh["dateitypen"] else "") + f", {inh['punkte']} Punkte, "
-                             "Abschluss: „Abgabe erforderlich“")
-                    if inh.get("text_md"):
-                        z.append(f"{einr}  Beschreibung: " + inh["text_md"].replace("\n", " "))
-                    if inh.get("raster"):
-                        z.append(f"{einr}  Bewertungsmethode **Bewertungsraster** mit diesen Kriterien:")
-                        for k in inh["raster"]["kriterien"]:
-                            z.append(f"{einr}  - {k['kriterium']}: " + " · ".join(f"{t} ({p} P.)" for t, p in k["stufen"]))
+                z += posten(inh, einr, vor)
             vorige = e["inhalte"][0]["id"]
         z.append("")
     return "\n".join(z) + "\n"
+
+
+def schreibe_nur_tests(kurs, b, sicherung_art, version):
+    """Je Test eine kleine Kurssicherung (.mbz) nur mit diesem Test und seinen Fragen: in Moodle über
+    „Wiederherstellen“ einspielbar, ohne den ganzen Kurs. Ergebnis: ausgabe/moodle/<test-id>_moodle<version>.mbz"""
+    import copy
+    ordner = kurs.ausgabe / "moodle"
+    for alt in ordner.glob(f"*_moodle{version}.mbz"):   # Reste früherer Tests entfernen, die es nicht mehr gibt
+        if alt.name.startswith("test-") or alt.name.startswith(f"{kurs.kurzname}-test"):
+            alt.unlink()
+    tests = [i for a in b["abschnitte"] for e in a["einheiten"] for i in e["inhalte"] if i.get("typ") == "test"]
+    for t in tests:
+        t = copy.deepcopy(t)
+        b2 = dict(kurs=dict(titel=f"{b['kurs']['titel']} (nur Test)", kurzname=f"{kurs.kurzname}-test", text=""),
+                  allgemein=dict(inhalte=[]), unterabschnitt_modus="keiner",
+                  abschnitte=[dict(id="test", titel=t["titel"], text="", reihenfolge="frei",
+                                   einheiten=[dict(titel=t["titel"], inhalte=[t])])])
+        s2 = mbz.Sicherung(b2, kurs.ordner, sicherung_art)
+        s2.baue()
+        mbz.schreibe_mbz(s2, ordner / f"{t['id']}_moodle{version}.mbz")
 
 
 def baue_kurs(kurs, version=None, entwuerfe=False, still=False):
@@ -276,14 +375,17 @@ def baue_kurs(kurs, version=None, entwuerfe=False, still=False):
     if not b["abschnitte"]:
         raise Fehler("Kein Modul ist freigegeben – in Moodle käme ein leerer Kurs an. "
                      "Module freigeben (review: freigegeben) oder zum Testen --entwuerfe nutzen.")
-    if kurs.moodle.get("unterabschnitte") in ("einer", "stufen"):
+    if kurs.moodle.get("unterabschnitte") in ("einer", "stufen", "flach", "direkt"):
         b["unterabschnitt_modus"] = kurs.moodle["unterabschnitte"]
+        b["trennbeschriftungen"] = bool(kurs.moodle.get("trennbeschriftungen", True))
         if kurs.moodle.get("unterabschnitt_name"):
             b["unterabschnitt_name"] = str(kurs.moodle["unterabschnitt_name"])
-    s = mbz.Sicherung(b, kurs.ordner, "4u" if version == "4" and kurs.moodle.get("unterabschnitte") else version)
+    sicherung_art = "4u" if version == "4" and kurs.moodle.get("unterabschnitte") else version
+    s = mbz.Sicherung(b, kurs.ordner, sicherung_art)
     s.baue()
     ziel = kurs.ausgabe / "moodle" / f"{kurs.kurzname}_moodle{version}.mbz"
     mbz.schreibe_mbz(s, ziel)
+    schreibe_nur_tests(kurs, b, sicherung_art, version)
     (kurs.ausgabe / "moodle" / f"ANLEITUNG_moodle{version}.md").write_text(anleitung(kurs, b, version, ziel.name), encoding="utf-8")
     typen = {}
     for a in s.activities:
@@ -302,7 +404,7 @@ def main(argv=None):
     except Fehler as e:
         melde_fehler_und_ende(e)
     namen = {"scorm": "Lernpakete", "assign": "Aufgaben", "h5pactivity": "H5P", "subsection": "Unterabschnitte",
-             "quiz": "Tests", "qbank": "Fragensammlung"}
+             "quiz": "Tests", "qbank": "Fragensammlung", "label": "Trenner (Text- und Medienfelder)"}
     print(f"✓ Moodle-Kurs: {ziel}  ({ziel.stat().st_size // 1024} KB)")
     print("  " + ", ".join(f"{v} {namen.get(t, t)}" for t, v in sorted(typen.items())))
     print(f"  Klickanleitung: {ziel.parent / f'ANLEITUNG_moodle{ziel.stem[-1]}.md'}")

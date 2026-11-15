@@ -1,0 +1,8 @@
+# Themenübersicht des Fibu-Baukastens. Pflege: bei jedem neuen Thema einen Eintrag ergänzen, Stand nachziehen.
+# Danach  python3 skripte/themen.py --schreiben  (erzeugt THEMEN.md und zählt die bestätigten Muster je Thema aus buchungsmuster.yaml).
+# stand: offen | material (Material liegt vor) | im_bau | gebaut | freigegeben
+# thema (in buchungsmuster.yaml) muss zur id passen.
+themen:
+  - {id: umsatzsteuer, titel: "Umsatzsteuer prüfen", lernfeld: "", repository: "Umsatzsteuer-", stand: gebaut, datum: "2026-11-06", hinweis: "Check-Pfad, erster Pfad des Baukastens. Lernfeld bitte ergänzen."}
+  - {id: beschaffung, titel: "Buchungen im Beschaffungsprozess", lernfeld: "5", repository: "Fibu_Beschaffung", stand: freigegeben, datum: "2026-11-09", hinweis: "aufwands- und bestandsorientiert, Skonto, Gutschriften, Abschluss"}
+  - {id: absatz, titel: "Absatzprozesse buchen", lernfeld: "5", repository: "Absatz_Fibu", stand: freigegeben, datum: "2026-11-15", hinweis: "Förderstufe, Überprüfung, Abschlusstest, Nachschlagen, Hilfsblatt"}

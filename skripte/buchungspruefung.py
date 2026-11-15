@@ -28,12 +28,26 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import bausteine as B  # noqa: E402
 
-ROLLEN = [  # Kontonummer-Muster → Rolle im Buchungssatz (IKR, Werkstoffkonten mit Unterkonten)
+ROLLEN_DATEI = Path(__file__).resolve().parent.parent / "rollen.yaml"
+_ROLLEN_NOTFALL = [  # nur falls rollen.yaml fehlt
     (r"2(000|010|020|030|280)", "BESTAND"), (r"2(001|011|021|031|281)", "BEZUG_B"), (r"2(002|012|022|032|282)", "NACHL_B"),
     (r"6(000|010|020|030|080)", "AUFW"), (r"6(001|011|021|031|081)", "BEZUG_A"), (r"6(002|012|022|032|082)", "NACHL_A"),
     (r"2600", "VST"), (r"4800", "UST"), (r"4400", "VERB"), (r"2400", "FORD"), (r"2800", "BANK"), (r"2880", "KASSE"),
-    (r"8000", "EBK"), (r"8010", "SBK"), (r"8020", "GUV"), (r"5[01]\d\d", "ERLOES"),
+    (r"8000", "EBK"), (r"8010", "SBK"), (r"8020", "GUV"), (r"5(001|101)", "ERLBER"), (r"5[01]\d\d", "ERLOES"),
 ]
+
+
+def lade_rollen():
+    """Kontonummer-Muster → Rolle aus rollen.yaml (die erste passende Zeile gewinnt)."""
+    if ROLLEN_DATEI.exists():
+        daten = yaml.safe_load(ROLLEN_DATEI.read_text(encoding="utf-8")) or {}
+        liste = [(str(r["muster"]), str(r["rolle"])) for r in daten.get("rollen") or []]
+        if liste:
+            return liste
+    return _ROLLEN_NOTFALL
+
+
+ROLLEN = lade_rollen()
 
 
 def rolle(nr):
@@ -196,9 +210,10 @@ def main(argv=None):
     for k, w in sorted(b.offen.items()):
         print(f"  · offen (status: neu) {k}  ({w[0]})")
     if a.lernen and b.neu:
-        muster = list(muster or []) + [{"muster": k, "name": "", "quelle": w[0], "status": "neu", "thema": ordner.name}
-                                       for k, w in sorted(b.neu.items())]
-        mfile.write_text(yaml.safe_dump(muster, allow_unicode=True, sort_keys=False), encoding="utf-8")
+        neue = [{"muster": k, "name": "", "quelle": w[0], "status": "neu", "thema": ordner.name} for k, w in sorted(b.neu.items())]
+        # anhängen statt die ganze Datei neu zu schreiben: So bleiben Kommentare und Formatierung erhalten
+        alt = mfile.read_text(encoding="utf-8").rstrip("\n") + "\n" if mfile.exists() else ""
+        mfile.write_text(alt + yaml.safe_dump(neue, allow_unicode=True, sort_keys=False), encoding="utf-8")
         print(f"  → {len(b.neu)} neue Muster in {mfile} eingetragen (status: neu)")
     if b.fehler:
         print(f"✗ {len(b.fehler)} Fehler")
