@@ -11,7 +11,7 @@ Nicht alles ist Pflicht. Die Spalte „Pflicht“ sagt, ohne was Claude **nicht*
 | 3 | **Lernsituationen und Arbeitsblätter** (Aufgabenblätter, die im Unterricht gemacht wurden) | ja | Zeigt, welche Geschäftsfälle und Aufgabenarten schon vorkommen, und womit die Schüler:innen vertraut sind. |
 | 4 | **Lösungen** zu den Lernsituationen, Arbeitsblättern und Aufgaben (Lösungsvorschläge des Verlags oder eigene) | ja | Belegt die richtigen Buchungssätze und Beträge. **Ohne Lösungen markiert Claude alle Buchungssätze als „nicht bestätigt“.** |
 | 5 | **Prüfungsnahe Aufgaben** (alte Klassenarbeiten, Kammer- oder Abschlussprüfungsaufgaben, Probearbeiten), möglichst mit Lösungen | ja | Zeigt, wie abgefragt wird (Konten ankreuzen, Sachverhalt beurteilen, Beträge berechnen). Wird nicht nachgebaut, nur als Stilvorlage genutzt. |
-| 6 | **Kontenplan / Kontenübersicht**, wie er im Unterricht gilt (auch Ergänzungen für das Thema) | ja | Alle Kontonummern und -bezeichnungen im Pfad stammen von hier. |
+| 6 | **Kontenplan / Kontenübersicht**, wie er im Unterricht gilt (auch Ergänzungen für das Thema), möglichst auch der **Industriekontenrahmen** (IKR) und Hinweise zu Bilanz und GuV | ja | Der Baukasten hat einen zentralen Kontenplan (`kontenplan.yaml`). Claude gleicht die Konten aus deinem Material damit ab und legt dir fehlende Konten zur Bestätigung vor. Es gilt dein Schulplan, der IKR ergänzt nur. |
 | 7 | **Hinweise zum Thema**: Was ist Gegenstand, was **nicht**? (zum Beispiel „HGB § 255 gehört in eine andere Lernsituation“) | ja | Vermeidet Aufgaben, die nicht zum Unterricht gehören. |
 | 8 | **Broschüre, Skript, Folien oder Merkblätter** der Lehrkraft, falls vorhanden | nein | Formulierungen und Eselsbrücken der Lehrkraft werden übernommen. |
 | 9 | **Hilfsmittel, die ihr im Unterricht nutzt** (Schemata, Tabellen, Merkzettel; zum Beispiel das Skonto-Schema) | nein | Kommen als Hilfsseite oder Hilfsblatt in den Pfad. |
@@ -21,6 +21,11 @@ Nicht alles ist Pflicht. Die Spalte „Pflicht“ sagt, ohne was Claude **nicht*
 | 13 | **Moodle**: Zielkurs, Abschnitt oder Unterabschnitt, in den der Pfad kommt; Testkurs vorhanden? | später | Wird erst vor der Übergabe geklärt, siehe `referenzen/moodle-bbz.md`. |
 
 ## So gibst du das Material weiter
+
+- **Scans:** Bild-PDFs werden Seite für Seite als Bilder gelesen. Gut lesbare Seiten sind besser als schräge Fotos.
+- **Prüfungsnahe Aufgaben:** Bitte mit Lösungen und ohne Kürzungen. Claude hält in `PRUEFUNGSBEZUG.md` fest, welche Aufgabenart wo im Pfad vorkommt.
+- **Gegenstand:** Nenne, was zur Klassenarbeit gehört und was nicht (Ja-/Nein-Liste). Claude schlägt eine Liste vor, du bestätigst.
+- **Wissen ohne Pfad:** Du kannst Material (Lösungen) auch nur zum **Aufnehmen** des Buchungswissens geben, ohne einen Pfad zu bauen (siehe `STARTPROMPT.md`).
 
 - **Im Chat hochladen:** PDFs, Word-Dateien (DOCX) und Bilder können direkt in den Chat gezogen werden.
 - **Lösungen getrennt kennzeichnen:** zum Beispiel Dateiname „LS52_Loesungen.pdf“.

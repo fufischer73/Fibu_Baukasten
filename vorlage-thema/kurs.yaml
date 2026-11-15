@@ -17,6 +17,7 @@ einleitung: |
   4. Du arbeitest mit Belegen der **Wiesengrund Küchenmöbel GmbH**. Die Konten und das Unternehmen findest du in den Hilfen zum Aufklappen.
   5. Jede Buchungsaufgabe sagt dir, ob du **aufwandsorientiert** oder **bestandsorientiert** buchst (wenn das Thema es braucht).
   6. Zum Schluss wartet der **Abschlusstest**. Du darfst ihn wiederholen.
+  7. Unter **📚 Nachschlagen** findest du alle Hilfen.
   :::
 
 stufen:
@@ -30,75 +31,21 @@ stufen:
     icon: "🎯"
     text: Belege lesen, rechnen und buchen wie in der Klassenarbeit.
     module: [u1]
+  - id: nachschlagen
+    name: Nachschlagen
+    icon: "📚"
+    text: Hilfen, Schemata und ein Hilfsblatt zum Ausdrucken. Ohne Aufgaben, jederzeit erreichbar.
+    module: [n1]
 
-# Kontenplan-Auszug der Lehrkraft; Nummern immer in Anführungszeichen (0700 wäre sonst eine Oktalzahl)
-kontenplan:
-  "0700": Anlagen und Maschinen
-  "0840": Fuhrpark
-  "0870": BGA
-  "2000": Rohstoffe
-  "2001": Bezugskosten Rohstoffe
-  "2002": Nachlässe Rohstoffe
-  "2010": Fremdbauteile
-  "2011": Bezugskosten Fremdbauteile
-  "2012": Nachlässe Fremdbauteile
-  "2020": Hilfsstoffe
-  "2021": Bezugskosten Hilfsstoffe
-  "2022": Nachlässe Hilfsstoffe
-  "2030": Betriebsstoffe
-  "2031": Bezugskosten Betriebsstoffe
-  "2032": Nachlässe Betriebsstoffe
-  "2100": Unfertige Erzeugnisse
-  "2200": Fertigerzeugnisse
-  "2280": Handelswaren
-  "2281": Bezugskosten Handelswaren
-  "2282": Nachlässe Handelswaren
-  "2400": Forderungen
-  "2600": Vorsteuer
-  "2800": Bank
-  "2880": Kasse
-  "3000": Eigenkapital
-  "3001": Privatkonto
-  "4250": Darlehen
-  "4400": Verbindlichkeiten a. L. L.
-  "4800": Umsatzsteuer
-  "5000": Umsatzerlöse Fertigerzeugnisse
-  "5100": Umsatzerlöse Waren
-  "5200": Bestandsveränderungen
-  "5401": Mieterträge
-  "5420": Entnahme von Gegenständen u. Leistungen
-  "5710": Zinserträge
-  "6000": Aufwendungen Rohstoffe
-  "6001": Bezugskosten Rohstoffe
-  "6002": Nachlässe Rohstoffe
-  "6010": Aufwendungen Fremdbauteile
-  "6011": Bezugskosten Fremdbauteile
-  "6012": Nachlässe Fremdbauteile
-  "6020": Aufwendungen Hilfsstoffe
-  "6021": Bezugskosten Hilfsstoffe
-  "6022": Nachlässe Hilfsstoffe
-  "6030": Aufwendungen Betriebsstoffe
-  "6031": Bezugskosten Betriebsstoffe
-  "6032": Nachlässe Betriebsstoffe
-  "6050": Aufwendungen für Energie
-  "6080": Aufwendungen Waren
-  "6081": Bezugskosten Waren
-  "6082": Nachlässe Waren
-  "6160": Fremdinstandhaltung
-  "6200": Löhne
-  "6300": Gehälter
-  "6700": Mietaufwendungen
-  "6800": Büromaterial
-  "6810": Fachliteratur
-  "6820": Porto, Telefon
-  "6850": Reisekosten
-  "6870": Werbung
-  "6900": Versicherungen
-  "7510": Zinsaufwendungen
-  "7700": Gewerbesteuer
-  "8000": EBK (Eröffnungsbilanzkonto)
-  "8010": SBK (Schlussbilanzkonto)
-  "8020": GuV-Konto
+# Kontenplan: kommt automatisch aus kontenplan.yaml im Baukasten (Schulplan der Lehrkraft, ergänzt um Konten aus Lösungen und IKR).
+# Hier nur eintragen, was für dieses Thema abweicht oder fehlt (Nummern immer in Anführungszeichen, 0700 wäre sonst eine Oktalzahl):
+# kontenplan:
+#   "5001": Erlösberichtigungen f. eigene Erzeugnisse
+# Fehlende Konten besser zentral aufnehmen: python3 skripte/kontenpruefung.py --aufnehmen 5001="…" --quelle "…"
+#
+# Kurzer Satz „Wofür?“ zu Konten für die erzeugte Kontenübersicht (python3 skripte/kontenuebersicht.py <ordner> --schreiben):
+# konten_hinweise:
+#   "5000": Verkauf von Erzeugnissen. Hier wird auch die Rücksendung gebucht.
 
 moodle:
   version: 4                    # BBZ-Moodle 4.5.12

@@ -10,7 +10,7 @@ Hier steht, was der Baukasten über Buchungstechnik **sicher** weiß, und wie er
    - rechnet jede Aufgabe mit vielen Zufallszahlen durch (Soll gleich Haben, höchstens zwei Nachkommastellen, nie null oder negativ),
    - prüft die richtigen Testantworten,
    - meldet **NEUE Muster**, die noch nicht in `buchungsmuster.yaml` stehen.
-4. **Neue Muster eintragen:** `--lernen` schreibt sie mit `status: neu` in die Musterdatei.
+4. **Neue Muster eintragen:** `--lernen` hängt sie mit `status: neu` an die Musterdatei an. Ohne Pfad geht es mit `skripte/wissen_aufnehmen.py` (siehe `SKILL.md`, „Wissen aufnehmen“): Es nimmt Buchungssätze aus Material auf, meldet **Widersprüche** zu bestätigten Mustern und prüft Soll = Haben. Die Rollen der Konten (VST, FORD, ERLOES …) stehen in `rollen.yaml`.
 5. **Bestätigen lassen:** Die Lehrkraft bestätigt anhand von Lösungsvorschlag, Buch oder Klassenarbeit. Dann setzt Claude `status: verifiziert` und trägt Name, Technik und Quelle ein.
 6. **Nach dem Thema:** Neue Erkenntnisse in den Abschnitt „Lernprotokoll“ unten schreiben (Fehler, die aufgefallen sind, Regeln, Besonderheiten der Lehrkraft).
 

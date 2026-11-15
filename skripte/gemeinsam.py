@@ -69,6 +69,15 @@ class Kurs:
         k = lies_yaml(self.ordner / "kurs.yaml")
         if not k:
             raise Fehler(f"Keine kurs.yaml in {self.ordner} gefunden.")
+        # Zentraler Kontenplan (kontenplan.yaml im Baukasten); ein kontenplan: in der kurs.yaml ergänzt oder überschreibt ihn.
+        try:
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            from konten import plan_dict
+            zentral = plan_dict()
+        except Exception:   # nie am Kontenplan scheitern: dann gilt nur die kurs.yaml
+            zentral = {}
+        if zentral or k.get("kontenplan"):
+            k["kontenplan"] = {**zentral, **{str(a): str(b) for a, b in (k.get("kontenplan") or {}).items()}}
         self.k = k
         self.titel = k.get("titel", "Lernpfad")
         self.kurzname = k.get("kurzname") or slug(self.titel)

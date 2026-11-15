@@ -1,0 +1,85 @@
+# Zentraler Kontenplan des Fibu-Baukastens (Schulplan der Lehrkraft, ergänzt um Konten aus Lösungen und dem Industriekontenrahmen).
+#
+# So wird er benutzt:
+# - Alle Lernpfade laden ihn automatisch. Ein `kontenplan:` in der kurs.yaml ist nur noch für Ergänzungen oder Abweichungen nötig
+#   (dort Eingetragenes überschreibt diese Datei).
+# - Bei jedem neuen Lerninhalt prüft `python3 skripte/kontenpruefung.py <ordner>`, ob alle verwendeten Konten hier stehen.
+#   Für Konten aus Material: `python3 skripte/kontenpruefung.py --liste 5001 5101 …`.
+# - Neue Konten: `python3 skripte/kontenpruefung.py --aufnehmen 5001="Name" --quelle "…"` (Status „neu“), nach Bestätigung durch die
+#   Lehrkraft `--bestaetigen 5001` (Status „verifiziert“).
+#
+# Regeln: Die Bezeichnungen des SCHULPLANS gelten. Der Industriekontenrahmen (IKR) ergänzt nur fehlende Konten.
+# Abweichende Schreibweisen aus Lösungen oder alten Pfaden stehen unter `alias`.
+# art: bestand | erfolg | abschluss. status: verifiziert (Lehrkraft, Lösungsvorschläge oder Kontenrahmen) | neu (noch nicht bestätigt).
+konten:
+  - {nr: "0700", name: "Anlagen und Maschinen", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "0840", name: "Fuhrpark", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "0870", name: "BGA", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2000", name: "Rohstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2001", name: "Bezugskosten Rohstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2002", name: "Nachlässe Rohstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2010", name: "Fremdbauteile", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2011", name: "Bezugskosten Fremdbauteile", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2012", name: "Nachlässe Fremdbauteile", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2020", name: "Hilfsstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2021", name: "Bezugskosten Hilfsstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2022", name: "Nachlässe Hilfsstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2030", name: "Betriebsstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2031", name: "Bezugskosten Betriebsstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2032", name: "Nachlässe Betriebsstoffe", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2100", name: "Unfertige Erzeugnisse", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2200", name: "Fertigerzeugnisse", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2280", name: "Handelswaren", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2281", name: "Bezugskosten Handelswaren", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2282", name: "Nachlässe Handelswaren", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2400", name: "Forderungen a. L. L.", art: bestand, alias: ["Forderungen"], quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2600", name: "Vorsteuer", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2800", name: "Bank", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "2880", name: "Kasse", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "3000", name: "Eigenkapital", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "3001", name: "Privatkonto", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "4250", name: "Darlehen", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "4400", name: "Verbindlichkeiten a. L. L.", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "4800", name: "Umsatzsteuer", art: bestand, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "5000", name: "Umsatzerlöse f. eigene Erzeugnisse", art: erfolg, alias: ["Umsatzerlöse Fertigerzeugnisse"], quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "5001", name: "Erlösberichtigungen f. eigene Erzeugnisse", art: erfolg, quelle: "IKR (Winklers 2012), Lernsituation 53 (Cornelsen)", status: verifiziert}
+  - {nr: "5100", name: "Umsatzerlöse f. Waren", art: erfolg, alias: ["Umsatzerlöse Waren"], quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "5101", name: "Erlösberichtigungen f. Waren", art: erfolg, quelle: "IKR (Winklers 2012), Lernsituation 53 (Cornelsen)", status: verifiziert}
+  - {nr: "5200", name: "Bestandsveränderungen", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "5401", name: "Mieterträge", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "5420", name: "Entnahme von Gegenständen u. Leistungen", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "5710", name: "Zinserträge", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6000", name: "Aufwendungen Rohstoffe", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6001", name: "Bezugskosten Rohstoffe", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6002", name: "Nachlässe Rohstoffe", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6010", name: "Aufwendungen Fremdbauteile", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6011", name: "Bezugskosten Fremdbauteile", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6012", name: "Nachlässe Fremdbauteile", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6020", name: "Aufwendungen Hilfsstoffe", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6021", name: "Bezugskosten Hilfsstoffe", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6022", name: "Nachlässe Hilfsstoffe", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6030", name: "Aufwendungen Betriebsstoffe", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6031", name: "Bezugskosten Betriebsstoffe", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6032", name: "Nachlässe Betriebsstoffe", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6040", name: "Aufwendungen für Verpackungsmaterial", art: erfolg, quelle: "IKR (Winklers 2012), Lernsituation 53 (Cornelsen)", status: verifiziert}
+  - {nr: "6050", name: "Aufwendungen für Energie", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6080", name: "Aufwendungen Waren", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6081", name: "Bezugskosten Waren", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6082", name: "Nachlässe Waren", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6140", name: "Frachten und Fremdlager", art: erfolg, quelle: "IKR (Winklers 2012), Lernsituation 53 (Cornelsen)", status: verifiziert}
+  - {nr: "6150", name: "Vertriebsprovisionen", art: erfolg, quelle: "IKR (Winklers 2012), Lernsituation 53 (Cornelsen)", status: verifiziert}
+  - {nr: "6160", name: "Fremdinstandhaltung", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6200", name: "Löhne", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6300", name: "Gehälter", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6700", name: "Mietaufwendungen", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6800", name: "Büromaterial", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6810", name: "Fachliteratur", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6820", name: "Porto, Telefon", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6850", name: "Reisekosten", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6870", name: "Werbung", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "6900", name: "Versicherungen", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "7510", name: "Zinsaufwendungen", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "7700", name: "Gewerbesteuer", art: erfolg, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "8000", name: "EBK (Eröffnungsbilanzkonto)", art: abschluss, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "8010", name: "SBK (Schlussbilanzkonto)", art: abschluss, quelle: "Schulplan (Lehrkraft)", status: verifiziert}
+  - {nr: "8020", name: "GuV-Konto", art: abschluss, quelle: "Schulplan (Lehrkraft)", status: verifiziert}

@@ -98,5 +98,11 @@ Siehe `referenzen/moodle-bbz.md`. Kurz:
 - **YAML:** In `falsch_text`, `text` usw. immer Anführungszeichen, wenn „: “ vorkommt. Skripte und Erzeugungshilfen nicht in `material/` ablegen (wird in alle Pakete kopiert), sondern in `werkzeuge/`.
 - **Mehrere Belege** in einer Aufgabe gehen als Liste unter `beleg:` (Rechnung und Kontoauszug).
 
+### Kontenplan, Stammdaten, Wissensaufnahme (Beschlüsse vom 15.11.2026)
+- **Zentraler Kontenplan** (`kontenplan.yaml`): Der **Schulplan** der Lehrkraft gilt, der IKR ergänzt nur. Neue Konten werden erst nach der Bestätigung eingetragen (Status „neu“, dann „verifiziert“). Beim Material und bei jedem Bau wird geprüft, ob Konten fehlen (`kontenpruefung.py`, läuft auch in `pruefen.py`). Im Absatz fehlten zuerst fünf Konten, und eine handgeschriebene Kontenübersicht hatte drei Konten vergessen, die in Aufgaben vorkamen.
+- **Gemeinsame Stammdaten** (`stammdaten.yaml`): Im Absatz stand die Spedition mit einer anderen Straße als in der Beschaffung. Neue Firmen kommen zuerst in die Stammdaten, `stammdaten.py --pruefen` gleicht die Belege ab.
+- **Wissen aufnehmen ohne Pfad** (`wissen_aufnehmen.py`): Widersprüche zu bestätigten Mustern werden gemeldet, nichts wird gespeichert, bevor die Lehrkraft entschieden hat. Die Rollen der Konten stehen in `rollen.yaml`, nicht mehr im Code.
+- **Themenübersicht** (`THEMEN.md`) zeigt den Stand je Thema und die Zahl der bestätigten Muster.
+
 ### Moodle
 - **Hauptweg am BBZ:** Abschnitt und Unterabschnitte im Zielkurs selbst anlegen, nur die Lernpakete einfügen, das erste Lernpaket einrichten und **duplizieren**, ZIP austauschen. Spätere Änderungen: nur die Paketdatei tauschen. Die Sicherung bleibt Alternative. Nur den Test aus der Sicherung wiederherstellen (Schritt „Schema“) wurde noch nicht am BBZ getestet.

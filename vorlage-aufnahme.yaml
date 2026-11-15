@@ -1,0 +1,15 @@
+# Vorlage für skripte/wissen_aufnehmen.py: Buchungssätze aus Material (Lösungen, Aufgaben, Lehrbuch).
+# Claude füllt sie nach dem Lesen des Materials aus. Je Satz ein Eintrag. Kontonummern immer in Anführungszeichen.
+#
+#   python3 skripte/wissen_aufnehmen.py aufnahme.yaml              prüfen
+#   python3 skripte/wissen_aufnehmen.py aufnahme.yaml --eintragen  nach der Bestätigung der Lehrkraft eintragen
+quelle: "Lösungsvorschläge zu Lernsituation XX (Verlag, Lernfeld Y)"   # Standardquelle für alle Sätze
+thema: beispielthema                                                   # optional: Thema, zu dem das Wissen gehört
+saetze:
+  - name: "Kauf einer Maschine auf Ziel"       # Vorgang in Worten. Derselbe Vorgang soll immer gleich heißen.
+    technik: "-"                               # aufwandsorientiert | bestandsorientiert | beide | -
+    soll: ["0700", "2600"]
+    haben: ["4400"]
+    betraege: {soll: [10000, 1900], haben: [11900]}   # optional: für die Probe Soll = Haben
+    # quelle: "Aufgabe 3a"                    # optional: überschreibt die Standardquelle
+    # bestaetigt: true                        # optional: die Lehrkraft hat diesen Satz bestätigt

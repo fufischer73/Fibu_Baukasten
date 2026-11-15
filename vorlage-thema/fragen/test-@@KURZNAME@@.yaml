@@ -1,11 +1,15 @@
 # BEISPIELFRAGEN für den Abschlusstest – bitte durch Fragen zum neuen Thema ersetzen (Ziel: 12 bis 17 Fragen, 20 Punkte).
 # Mischung wie in der Prüfung: Buchungssatz mit Beleg (single_choice), Berechnung (zahl mit Parametern), Zuordnung, Sachverhalt, offene Frage.
+# Punkte: Standard ist 1 je Frage. Mit `punkte: 2` zählt eine Auswahl-, Zuordnungs- oder offene Frage doppelt. Bewährte Verteilung (Absatz):
+# 4 Buchungssätze mit Beleg je 2, 3 Berechnungen je 1, 5 Sachverhalte je 1, 1 Zuordnung 2, 1 offene Frage 2 = 14 Fragen, 20 Punkte.
+# Belege: höchstens 4 Spalten (Handy), „Pos.“ weglassen, Menge und Rabatt in die Bezeichnung.
 
 - id: @@KURZNAME@@-01
   modul: u1
   typ: single_choice
   titel: Ausgangsrechnung buchen
   review: entwurf
+  punkte: 2
   aufgabe: Die Wiesengrund Küchenmöbel GmbH stellt diese Ausgangsrechnung aus. Welcher Buchungssatz ist richtig?
   beleg:
     art: Rechnung
@@ -16,9 +20,9 @@
     info:
       - [Rechnungs-Nr., AR-2026-0190]
       - [Rechnungsdatum, 15.06.2026]
-    spalten: [Pos., Bezeichnung, Menge, Einzelpreis, Gesamtpreis]
+    spalten: [Bezeichnung, Einzelpreis, Gesamtpreis]
     zeilen:
-      - ["1", "Küchenzeile Modell Fjord", "4 Stück", "3.500,00 €", "14.000,00 €"]
+      - ["4 Stück Küchenzeile Modell Fjord", "3.500,00 €", "14.000,00 €"]
     summen:
       - ["Nettobetrag", "14.000,00 €"]
       - ["+ 19 % Umsatzsteuer", "2.660,00 €"]
