@@ -92,7 +92,7 @@ Quelle: Lösungsvorschläge der Lehrkraft (Cornelsen, Industriekaufleute 1, Lern
 | Buchwertabgang | 6979 an Anlagekonto (zwei getrennte Sätze, Bruttomethode) |
 
 Quelle: Cornelsen LF 5 Kapitel 8 und Lernsituation 54 mit Lösungen, IHK-Aufgaben Anlagenwirtschaft mit Lösungen. Status der Muster: „neu“, bis die Lehrkraft sie bestätigt.
-**Monatsregel (Angabe der Lehrkraft):** Kaufjahr: Kaufmonat zählt voll. Verkaufsjahr: nur bis zum Ende des Vormonats (das Cornelsen-Lehrbuch rechnet den Verkaufsmonat mit).
+**Monatsregel (von der Lehrkraft festgelegt, belegt durch IHK 232401.6 und Lernsituation 11):** Kaufjahr: Kaufmonat zählt voll. Verkaufsjahr: nur bis zum Ende des Vormonats. Die Cornelsen-Regel (Verkaufsmonat zählt mit) gilt nicht.
 
 ## Typische Fehler (aus der Praxis)
 
@@ -117,5 +117,5 @@ Quelle: Cornelsen LF 5 Kapitel 8 und Lernsituation 54 mit Lösungen, IHK-Aufgabe
 | 2026-11-06 | Umsatzsteuer | Aufbau Check-Pfad, Buchungsaufgaben mit Zahllast und Erfolg, Tipps in zwei Stufen. |
 | 2026-11-09 | Beschaffung | 20 Muster gegen Lösungsvorschläge bestätigt, auch Abschluss (Verbrauch, Inventurbestand, Bestandsmehrung, Anfangsbestand über 8000). Steuerart-Frage entfällt, Zahllast nur gelegentlich. Skonto nur auf den Warenwert, wenn der Beleg es sagt. Gutschrift kann Rücksendung, Preisnachlass und gekürzte Bezugskosten enthalten. |
 | 2026-11-15 | Absatz | Sieben neue Muster belegt (Rücksendung, Nachlass, Skonto, Umbuchung, Fracht-, Verpackungs- und Provisionsrechnung). Kernunterscheidung ist „Ware zurück oder beim Kunden?“. Skonto nur auf den Warenwert, wenn der Beleg es sagt. Der Erfolg wirkt nur mit dem Nettobetrag. Prüfungsmaterial: „2 an [5;6]“ heißt Forderung an Umsatzerlöse und Umsatzsteuer. Fehler im Material gefunden (2300 statt 2800 Bank, falsche Verweise auf Arbeitsblätter), Lösungen immer gegenrechnen. |
-| 2026-11-15 | Anlagenwirtschaft | Zwölf Muster aus Cornelsen- und IHK-Lösungen, vier aus ergänzendem Material (ohne Lösung). Fehler im Material: Aufgabe 1b (S. 340) rechnet mit falschen Anschaffungskosten, „Alles klar?“ 3c/e und 4bb, AB 54.3. Verkaufsmonat: Lehrbuch und IHK/LS 11 widersprechen sich, die Lehrkraft entscheidet (Vormonat). Degressiv: keine Lösung, Regel nicht bestätigt. Die Rolle ANLAGE fasst alle Anlagekonten zusammen. |
+| 2026-11-15 | Anlagenwirtschaft | Zwölf Muster aus Cornelsen- und IHK-Lösungen, vier aus ergänzendem Material (ohne Lösung). Fehler im Material: Aufgabe 1b (S. 340) rechnet mit falschen Anschaffungskosten, „Alles klar?“ 3c/e und 4bb, AB 54.3. Verkaufsmonat: Cornelsen widerspricht IHK und Lernsituation 11. Die Lehrkraft hat entschieden: nur bis zum Vormonat, die Cornelsen-Regel gilt nicht. Degressiv: keine Lösung, Regel nicht bestätigt. Die Rolle ANLAGE fasst alle Anlagekonten zusammen. |
 | _(neues Thema)_ | | |

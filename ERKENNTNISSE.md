@@ -111,15 +111,15 @@ Siehe `referenzen/moodle-bbz.md`. Kurz:
 ## 9 Erkenntnisse aus dem Anlagen-Pfad (15.11.2026)
 
 ### Zusammenarbeit und Material
-- **Widersprüche zwischen Quellen sofort melden und entscheiden lassen.** Beim Verkaufsmonat rechnet das Lehrbuch anders als die IHK-Lösung und das ergänzende Material. Die Lehrkraft hat die steuerliche Regel (bis zum Vormonat) festgelegt, die Randtage (Verkauf am Monatsersten oder -letzten) habe ich bis dahin gemieden.
+- **Widersprüche zwischen Quellen sofort melden und entscheiden lassen.** Beim Verkaufsmonat rechnet das Lehrbuch anders als die IHK-Lösung und das ergänzende Material. Die Lehrkraft hat die steuerliche Regel (bis zum Vormonat) festgelegt und die Cornelsen-Regel ausdrücklich verworfen (IHK und ein anderes Schulbuch rechnen anders). Bis zur Entscheidung habe ich Randtage (Verkauf am Monatsersten oder -letzten) gemieden. Wenn Cornelsen-Lösungen im Verkaufsjahr abweichen, steht ein Hinweis im Pfad.
 - **Lösungen nachrechnen lohnt sich:** Gefunden wurden vier Fehler (Aufgabe 1b mit falschen Anschaffungskosten, ein Tippfehler ,89 statt ,80 mit Folgefehlern, ein falscher Haben-Betrag, die Zuordnung 8 bei AB 54.3). Der Cornelsen-Unterschied zeigt sich auch beim Verkaufsjahr.
 - **Ergänzendes Material (hier Lernsituation 11) ist kein Maßstab:** Es hat keine Lösungen. Daraus abgeleitete Muster (Abschluss über das GuV-Konto, Gewinn auf das Eigenkapital) bleiben „neu“.
 - **Gliederung und Konten gleichzeitig vorlegen:** Mit Voreinstellungen (degressiv, digitale Wirtschaftsgüter, Gegenstand) spart das eine Runde. Ein Satz „Passt das so?“ genügt.
-- **Fremde Grafiken nicht übernehmen:** Der Abschreibungskreislauf stammt von N. Böing (nboeing.de). Der Pfad hat eine eigene SVG-Grafik und eigene Übungen, die Quelle steht in `quellen.yaml`.
+- **Abschreibungskreislauf:** Erst gewünscht (Material von N. Böing, nboeing.de, eigene SVG-Grafik und Reihenfolge-Übung gebaut), dann von der Lehrkraft wieder herausgenommen: Er kommt später im Lernfeld Finanzierung. Gegenstand mit der Lehrkraft festlegen, bevor Zusatzwünsche gebaut werden. Die SVG-Idee und der Aufbau stehen in der Git-Historie des Anlagen-Pfads.
 
 ### Didaktik
 - **Eine degressive Aufgabe** mit Wechsel zur linearen Abschreibung ist als Einzelaufgabe möglich: Der Satz wird vorgegeben, so braucht es kein Gesetz. Die Regel bleibt „nicht bestätigt“.
-- **Reihenfolge-Übung** (`typ: reihenfolge`) funktioniert in Modulen und im Test für Abläufe wie den Abschreibungskreislauf.
+- **Reihenfolge-Übung** (`typ: reihenfolge`) funktioniert in Modulen und im Test für Abläufe (im Anlagen-Pfad zuerst für den Abschreibungskreislauf gebaut, später entfernt).
 - **Direktabschreibung:** Die Technik-Frage (aufwands- oder bestandsorientiert) entfällt bei Anlagen.
 
 ### Technik
