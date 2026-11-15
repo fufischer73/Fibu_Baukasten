@@ -107,3 +107,11 @@ Siehe `referenzen/moodle-bbz.md`. Kurz:
 
 ### Moodle
 - **Hauptweg am BBZ (Wunsch der Lehrkraft, 15.11.2026):** alles fertig vorbereiten. Kurssicherung `.mbz` einmal wiederherstellen, Unterabschnitt verschieben, leeren Abschnitt löschen. Die Lehrkraft hat beide Wege ausprobiert und das Vorbereitete bevorzugt, weil das Einrichten jeder Aktivität von Hand und das spätere Austauschen mühsamer ist. Änderungen später: nur Lernpakete (Paketdatei) tauschen. Nur ein geänderter Test: kleine Test-Sicherung `<test-id>_moodle4.mbz` (alten Test samt Fragen vorher löschen). Von Hand einrichten bleibt Alternative; Duplizieren der Lernpakete am BBZ ungetestet. **Moodle kennt keine Unterabschnitte in Unterabschnitten:** Arbeitet die Lehrkraft in einem vorhandenen Unterabschnitt, muss die Sicherung die Aktivitäten ohne eigenen Unterabschnitt liefern (`unterabschnitte: direkt`). Das wird im Interview abgefragt (SKILL.md, Frage 7).
+
+## 8 Offene Punkte (Stand 15.11.2026, bitte zu Beginn eines neuen Themas die Lehrkraft danach fragen)
+
+- **Moodle-Testkurs:** Die Lehrkraft hat die Sicherungen des Absatz-Pfads im Testkurs eingespielt. Das Ergebnis ist hier noch nicht festgehalten. Ungetestet am BBZ waren: Textfelder als Trenner in der Kurssicherung, Modus `direkt`, die kleine Test-Sicherung (`<test-id>_moodle4.mbz`) und das Duplizieren von Lernpaketen. **Nachfragen und die Antwort hier eintragen.**
+- **Pull Request:** Die Erweiterungen aus dem Absatz-Pfad liegen auf dem Branch `claude/modest-sagan-7c000q` (Pull Request #1). Solange er nicht in `main` ist, im Startprompt den Branch nennen. Danach kann der Absatz-Pfad seine Kopie des Kontenplans aus der `kurs.yaml` entfernen.
+- **Themenübersicht:** Das Lernfeld des Umsatzsteuer-Pfads fehlt in `themen.yaml`. Neue Themen dort eintragen und `python3 skripte/themen.py --schreiben` ausführen.
+- **Kontenplan:** Er enthält derzeit nur den Schulplan (71 Konten, davon 0700, 0840 und 0870 für Anlagen). Für neue Themen werden fehlende Konten (zum Beispiel Abschreibungen) mit `kontenpruefung.py --liste` abgeglichen und der Lehrkraft vorgelegt.
+- **Moodle-Struktur:** Vor dem Bau fragen, ob die Lehrkraft in einem vorhandenen Unterabschnitt arbeitet (`direkt`) oder ob ein Abschnitt mit Unterabschnitt(en) entstehen soll (`flach`, `stufen`). Hauptweg ist die fertige Kurssicherung.
